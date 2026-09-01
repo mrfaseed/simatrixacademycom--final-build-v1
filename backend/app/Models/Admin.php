@@ -1,0 +1,1 @@
+<?php namespace App\Models; use Illuminate\Database\Eloquent\Model; class Admin extends Model {public $timestamps=false;protected $guarded=[];protected $hidden=['password_hash'];protected $casts=['created_at'=>'datetime'];}

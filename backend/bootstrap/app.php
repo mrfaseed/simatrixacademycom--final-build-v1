@@ -1,0 +1,3 @@
+<?php
+use App\Http\Middleware\JwtAuth; use Illuminate\Foundation\Application; use Illuminate\Foundation\Configuration\{Exceptions,Middleware};
+return Application::configure(basePath:dirname(__DIR__))->withRouting(api:__DIR__.'/../routes/api.php',health:'/up')->withMiddleware(function(Middleware $m){$m->alias(['jwt'=>JwtAuth::class]);$m->append(\Illuminate\Http\Middleware\HandleCors::class);})->withExceptions(fn(Exceptions $e)=>null)->create();
