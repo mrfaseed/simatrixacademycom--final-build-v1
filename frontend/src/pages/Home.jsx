@@ -294,7 +294,7 @@ export default function Home() {
   const mainRef = useRef(null);
 
   useSeo({
-    title: "Simatrix Academy | Build Skills That Lead to Tech Careers",
+    title: "Test Test",
     description: "Learn practical technology skills through mentor-led training, projects, career guidance and placement assistance at Simatrix Academy.",
     canonical: "/",
     jsonLd: { "@context": "https://schema.org", "@type": "EducationalOrganization", name: "Simatrix Academy", url: typeof window !== "undefined" ? window.location.origin : "" },
