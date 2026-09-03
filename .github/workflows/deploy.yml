@@ -1,0 +1,71 @@
+name: Deploy to Hostinger
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Build Frontend
+        env:
+          VITE_API_URL: https://webapi.simatrixacademy.com
+        run: |
+          cd frontend
+          npm install
+          npm run build
+
+      - name: Clean Old Frontend Assets on Hostinger
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOSTINGER_HOST }}
+          username: ${{ secrets.HOSTINGER_USER }}
+          password: ${{ secrets.HOSTINGER_PASSWORD }}
+          port: 65002
+          script: |
+            rm -rf domains/simatrixacademy.com/public_html/assets
+            rm -rf domains/simatrixacademy.com/public_html/logos
+
+      - name: Upload Frontend
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.HOSTINGER_HOST }}
+          username: ${{ secrets.HOSTINGER_USER }}
+          password: ${{ secrets.HOSTINGER_PASSWORD }}
+          port: 65002
+          source: "frontend/dist"
+          target: "domains/simatrixacademy.com/public_html"
+          strip_components: 2
+
+      - name: Upload Backend
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.HOSTINGER_HOST }}
+          username: ${{ secrets.HOSTINGER_USER }}
+          password: ${{ secrets.HOSTINGER_PASSWORD }}
+          port: 65002
+          source: "backend"
+          target: "domains/simatrixacademy.com/public_html/webapi"
+          strip_components: 1
+
+      - name: Setup Backend on Server
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOSTINGER_HOST }}
+          username: ${{ secrets.HOSTINGER_USER }}
+          password: ${{ secrets.HOSTINGER_PASSWORD }}
+          port: 65002
+          script: |
+            cd domains/simatrixacademy.com/public_html/webapi
+            composer install --optimize-autoloader --no-dev
+            php artisan migrate --force
