@@ -27,13 +27,24 @@ export const isLocalhost = () => {
 export function cfImageUrl(src, options = {}) {
   if (!src || typeof src !== "string") return "";
 
-  // Bypass data URIs and blob URLs
-  if (src.startsWith("data:") || src.startsWith("blob:")) {
+  // Bypass data URIs, blob URLs, and SVGs unless specifically requested
+  if (src.startsWith("data:") || src.startsWith("blob:") || (src.endsWith(".svg") && !options.transformSvg)) {
     return src;
   }
 
-  // In local development, return the raw local src so local Vite dev server doesn't 404
-  const forceCf = options.forceCloudflare ?? (import.meta.env.VITE_FORCE_CF_IMAGES === "true");
+  // Prevent double-prefixing if the URL is already a Cloudflare transform URL
+  if (src.includes("/cdn-cgi/image/")) {
+    const match = src.match(/\/cdn-cgi\/image\/[^/]+?\/(.+)$/);
+    if (match) {
+      src = match[1];
+    } else {
+      return src;
+    }
+  }
+
+  // In local development, return the raw local src so local Vite dev server doesn't 404,
+  // UNLESS forceCloudflare is explicitly set (in which case we proxy via live domain)
+  const forceCf = options.forceCloudflare ?? (import.meta.env?.VITE_FORCE_CF_IMAGES === "true");
   if (isLocalhost() && !forceCf) {
     return src;
   }
@@ -56,6 +67,7 @@ export function cfImageUrl(src, options = {}) {
   if (metadata) params.push(`metadata=${metadata}`);
 
   const transformPrefix = `/cdn-cgi/image/${params.join(",")}`;
+  const originPrefix = (forceCf && isLocalhost()) ? "https://simatrixacademy.com" : "";
 
   // If external absolute URL
   if (/^https?:\/\//i.test(src)) {
@@ -67,17 +79,17 @@ export function cfImageUrl(src, options = {}) {
         parsed.hostname.endsWith(".simatrixacademy.com")
       ) {
         const cleanPath = parsed.pathname.startsWith("/") ? parsed.pathname.slice(1) : parsed.pathname;
-        return `${transformPrefix}/${cleanPath}${parsed.search}`;
+        return `${originPrefix}${transformPrefix}/${cleanPath}${parsed.search}`;
       }
     } catch {
       // ignore
     }
-    return `${transformPrefix}/${src}`;
+    return `${originPrefix}${transformPrefix}/${src}`;
   }
 
   // Clean local relative path
   const cleanPath = src.startsWith("/") ? src.slice(1) : src;
-  return `${transformPrefix}/${cleanPath}`;
+  return `${originPrefix}${transformPrefix}/${cleanPath}`;
 }
 
 /**
@@ -95,7 +107,7 @@ export function cfSrcSet(src, widths = [360, 640, 768, 1024, 1280], options = {}
   if (!src) return undefined;
 
   // On localhost without forceCloudflare, skip srcSet to let browser load local raw src
-  const forceCf = options.forceCloudflare ?? (import.meta.env.VITE_FORCE_CF_IMAGES === "true");
+  const forceCf = options.forceCloudflare ?? (import.meta.env?.VITE_FORCE_CF_IMAGES === "true");
   if (isLocalhost() && !forceCf) {
     return undefined;
   }

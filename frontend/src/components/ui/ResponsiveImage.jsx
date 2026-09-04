@@ -30,6 +30,11 @@ export const ResponsiveImage = forwardRef(function ResponsiveImage(
     format = "auto",
     fit = "cover",
     priority = false,
+    fetchPriority,
+    loading,
+    decoding = "async",
+    width,
+    height,
     className = "",
     fallbackSrc,
     forceCloudflare = false,
@@ -42,6 +47,9 @@ export const ResponsiveImage = forwardRef(function ResponsiveImage(
 
   if (!src) return null;
 
+  const effectiveFetchPriority = fetchPriority || (priority ? "high" : "auto");
+  const effectiveLoading = loading || (priority ? "eager" : "lazy");
+
   // If there was an error loading the Cloudflare transformed URL, fallback gracefully to raw src
   if (hasError) {
     return (
@@ -49,16 +57,19 @@ export const ResponsiveImage = forwardRef(function ResponsiveImage(
         ref={ref}
         src={fallbackSrc || src}
         alt={alt}
+        width={width}
+        height={height}
         className={className}
-        loading={priority ? "eager" : "lazy"}
-        decoding="async"
+        loading={effectiveLoading}
+        decoding={decoding}
+        fetchPriority={effectiveFetchPriority}
         {...props}
       />
     );
   }
 
-  // Calculate standard single src for fallback / default
-  const defaultWidth = widths && widths.length ? widths[Math.min(1, widths.length - 1)] : undefined;
+  // Calculate default single src width
+  const defaultWidth = width || (widths && widths.length ? widths[Math.min(2, widths.length - 1)] : undefined);
   const transformedSrc = cfImageUrl(src, {
     width: defaultWidth,
     quality,
@@ -81,10 +92,12 @@ export const ResponsiveImage = forwardRef(function ResponsiveImage(
       srcSet={srcSetString}
       sizes={srcSetString ? sizes : undefined}
       alt={alt}
+      width={width}
+      height={height}
       className={className}
-      loading={priority ? "eager" : "lazy"}
-      decoding="async"
-      fetchPriority={priority ? "high" : "auto"}
+      loading={effectiveLoading}
+      decoding={decoding}
+      fetchPriority={effectiveFetchPriority}
       onError={(e) => {
         setHasError(true);
         if (onError) onError(e);
