@@ -146,7 +146,7 @@ export default function Footer() {
             </li>
             <li className="flex items-center gap-3">
               <ContactIcon icon="ti-mail" />
-              <a href={`mailto:${email}`} className="transition hover:text-white">
+              <a href="info@simatrixacademy.com" className="transition hover:text-white">
                 {email}
               </a>
             </li>
