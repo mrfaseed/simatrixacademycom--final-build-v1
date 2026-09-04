@@ -2,43 +2,34 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { api, mediaUrl } from "../api/client";
 import { icon } from "../lib/icons";
-import { Spinner } from "../components/ui";
+import { Spinner, ResponsiveImage } from "../components/ui";
 import EnquiryForm from "../components/EnquiryForm";
 import { useSeo } from "../lib/useSeo";
 import avatar1 from "../assets/avatar1.png";
 import avatar2 from "../assets/avatar2.png";
 import avatar3 from "../assets/avatar3.png";
 
-const HERO_SLIDES = [
+const HERO_BANNERS = [
   {
-    eyebrow: "September 1–30 limited-time offer",
-    title: "Get 20% off Full Stack and AI courses.",
-    text: "Build in-demand development and artificial intelligence skills through practical training, projects and mentor support.",
-    quote: "The right skills today create stronger opportunities tomorrow.",
-    theme: "campus",
-    primary: { label: "Explore eligible courses", to: "/courses" },
-    secondary: { label: "Get free guidance", action: "enquiry" },
-    benefits: ["20% course offer", "Full Stack & AI tracks", "September enrolment"],
+    id: "banner-offer-20",
+    src: "/banner/REF1.png",
+    alt: "September Special Offer: Get 20% OFF Full Stack & AI Courses with hands-on projects and expert mentors",
+    to: "/courses",
+    title: "Get 20% OFF Full Stack & AI Courses",
   },
   {
-    eyebrow: "Government and Vinsys-supported opportunity",
-    title: "Join a free internship with a ₹12,000 stipend.",
-    text: "Gain practical experience through an internship supported by the government and the Vinsys team, with placement preparation and career support.",
-    quote: "Experience turns what you know into confidence employers can see.",
-    theme: "launchpad",
-    primary: { label: "Apply for internship", href: "#internship" },
-    secondary: { label: "View courses", to: "/courses" },
-    benefits: ["₹12,000 stipend", "Free internship", "Placement support"],
+    id: "banner-learn-build",
+    src: "/banner/REF2.png",
+    alt: "Learn Today, Build Tomorrow: Industry-oriented IT training programs with live classes and placement support",
+    to: "/courses",
+    title: "Learn Today. Build Tomorrow.",
   },
   {
-    eyebrow: "Free guidance every Saturday",
-    title: "Career guidance for school and college students.",
-    text: "Get age-appropriate guidance to understand career options, learning paths and the skills needed to make confident academic and career decisions.",
-    quote: "Clarity is the first step toward a career you can grow with.",
-    theme: "universe",
-    primary: { label: "Book Saturday guidance", to: "/career-guidance" },
-    secondary: { label: "Explore programs", to: "/courses" },
-    benefits: ["Every Saturday", "School students", "College students"],
+    id: "banner-lead-tomorrow",
+    src: "/banner/REF3.png",
+    alt: "Learn Today, Lead Tomorrow: Practical learning and placement assistance from industry experts",
+    to: "/career-guidance",
+    title: "Learn Today. Lead Tomorrow.",
   },
 ];
 
@@ -197,7 +188,7 @@ function CommunitySection({ data, courses, testimonials }) {
     ["ti-cloud", "Cloud", "Runs scalable online services"], ["ti-api", "APIs", "Connects applications and services"],
   ];
 
-  return <section className="bg-white pb-8 pt-8 sm:pb-10 sm:pt-12" aria-labelledby="community-title"><div className="mx-auto max-w-7xl px-6"><div className="mx-auto max-w-3xl text-center"><p className="text-xs font-bold uppercase tracking-[.22em] text-amber-700">Why Simatrix</p><h2 id="community-title" className="mt-3 font-display text-4xl font-semibold text-slate-950 sm:text-5xl">You don’t have to learn alone.</h2><p className="mx-auto mt-4 max-w-2xl leading-7 text-slate-600">Connect practical learning with mentor support, peer momentum and technology-focused career preparation.</p><div className="mt-8 flex justify-center -space-x-3" aria-label="Simatrix learner community">{people.map((src, index) => <img key={src} src={src} alt="" className="h-14 w-14 rounded-full border-4 border-white object-cover shadow-md" />)}{["AK","RS","MP","VK","SN"].map((name, index) => <span key={name} className={`grid h-14 w-14 place-items-center rounded-full border-4 border-white text-xs font-bold text-white shadow-md ${["bg-brand-700","bg-amber-600","bg-emerald-700","bg-violet-700","bg-slate-800"][index]}`}>{name}</span>)}</div></div>
+  return <section className="bg-white pb-8 pt-2 sm:pb-10 sm:pt-3" aria-labelledby="community-title"><div className="mx-auto max-w-7xl px-6"><div className="mx-auto max-w-3xl text-center"><p className="text-xs font-bold uppercase tracking-[.22em] text-amber-700">Why Simatrix</p><h2 id="community-title" className="mt-3 font-display text-4xl font-semibold text-slate-950 sm:text-5xl">You don’t have to learn alone.</h2><p className="mx-auto mt-4 max-w-2xl leading-7 text-slate-600">Connect practical learning with mentor support, peer momentum and technology-focused career preparation.</p><div className="mt-8 flex justify-center -space-x-3" aria-label="Simatrix learner community">{people.map((src, index) => <img key={src} src={src} alt="" className="h-14 w-14 rounded-full border-4 border-white object-cover shadow-md" />)}{["AK","RS","MP","VK","SN"].map((name, index) => <span key={name} className={`grid h-14 w-14 place-items-center rounded-full border-4 border-white text-xs font-bold text-white shadow-md ${["bg-brand-700","bg-amber-600","bg-emerald-700","bg-violet-700","bg-slate-800"][index]}`}>{name}</span>)}</div></div>
     <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
       {[
         ["ti-book-2", "Comprehensive Curriculum", "Industry-aligned syllabus covering fundamentals to advanced, real-world topics."],
@@ -212,29 +203,15 @@ function CommunitySection({ data, courses, testimonials }) {
   </div></section>;
 }
 
-function HeroSlideVisual({ theme }) {
-  if (theme === "guidance") return <div className="relative mx-auto w-full max-w-[540px]" aria-label="Saturday career guidance program illustration" role="img"><div className="absolute -inset-8 rounded-full bg-violet-400/10 blur-3xl" /><div className="relative overflow-hidden rounded-[2rem] border border-violet-300/20 bg-gradient-to-br from-[#241b4f] via-[#172642] to-[#111b31] p-6 shadow-[0_28px_70px_-24px_rgba(0,0,0,.75)] sm:p-8"><div className="flex items-center justify-between"><div><p className="text-xs font-bold uppercase tracking-[.2em] text-violet-300">Free every Saturday</p><h2 className="mt-2 font-display text-2xl font-semibold">Career clarity starts here.</h2></div><span className="grid h-12 w-12 place-items-center rounded-2xl bg-violet-400/15 text-2xl text-violet-300"><i className="ti ti-calendar-event" /></span></div><div className="mt-7 grid grid-cols-2 gap-3"><div className="rounded-2xl border border-white/10 bg-white/[.06] p-5"><i className="ti ti-school text-3xl text-violet-300" /><strong className="mt-5 block">School students</strong><span className="mt-1 block text-xs leading-5 text-slate-400">Explore interests, subjects and future career possibilities.</span></div><div className="rounded-2xl border border-white/10 bg-white/[.06] p-5"><i className="ti ti-building-community text-3xl text-amber-300" /><strong className="mt-5 block">College students</strong><span className="mt-1 block text-xs leading-5 text-slate-400">Understand skill paths, roles and career preparation.</span></div></div><div className="mt-4 flex items-center justify-between rounded-xl border border-violet-300/20 bg-violet-300/10 px-4 py-3"><span className="flex items-center gap-2 text-sm"><i className="ti ti-clock text-violet-300" />Available every Saturday</span><span className="rounded-full bg-violet-300 px-3 py-1 text-xs font-bold text-slate-950">FREE</span></div></div></div>;
-
-  if (theme === "internship") return <div className="relative mx-auto w-full max-w-[540px]" aria-label="Free internship with stipend and placement support illustration" role="img"><div className="absolute -inset-8 rounded-full bg-emerald-400/10 blur-3xl" /><div className="relative overflow-hidden rounded-[2rem] border border-emerald-300/20 bg-gradient-to-br from-[#0c302e] via-[#102a34] to-[#111b31] p-6 shadow-[0_28px_70px_-24px_rgba(0,0,0,.75)] sm:p-8"><div className="flex items-center justify-between"><div><p className="text-xs font-bold uppercase tracking-[.2em] text-emerald-300">Free internship program</p><h2 className="mt-2 font-display text-2xl font-semibold">Learn with real experience.</h2></div><span className="rounded-xl border border-emerald-300/20 bg-emerald-300/10 px-4 py-2 text-right"><strong className="block text-xl text-emerald-300">₹12,000</strong><span className="text-[10px] uppercase tracking-wider text-slate-400">Stipend</span></span></div><div className="mt-6 rounded-2xl border border-white/10 bg-[#08151d] p-5"><p className="text-xs uppercase tracking-[.18em] text-slate-500">Program support</p><div className="mt-4 grid grid-cols-2 gap-3"><span className="rounded-xl bg-white/[.06] p-3 text-center text-sm font-semibold"><i className="ti ti-building-bank mr-2 text-emerald-300" />Government</span><span className="rounded-xl bg-white/[.06] p-3 text-center text-sm font-semibold"><i className="ti ti-users-group mr-2 text-emerald-300" />Vinsys team</span></div></div><div className="mt-5 grid grid-cols-3 gap-3">{[["ti-folders","Real projects"],["ti-currency-rupee","Stipend"],["ti-briefcase","Placement"]].map(([ic,label]) => <span key={label} className="grid place-items-center rounded-xl border border-white/10 bg-white/[.05] px-2 py-3 text-center text-xs text-slate-300"><i className={`ti ${ic} mb-1 text-xl text-emerald-300`} />{label}</span>)}</div></div></div>;
-
-  return <div className="relative mx-auto w-full max-w-[540px]" aria-label="September Full Stack and AI course offer illustration" role="img"><div className="absolute -inset-8 rounded-full bg-orange-300/20 blur-3xl" /><div className="relative overflow-hidden rounded-[2rem] border border-orange-200/25 bg-gradient-to-br from-[#9a3412] via-[#7c2d12] to-[#431407] p-6 shadow-[0_28px_70px_-24px_rgba(67,20,7,.9)] sm:p-8"><div aria-hidden="true" className="absolute -right-16 -top-16 h-52 w-52 rounded-full bg-amber-300/20 blur-2xl" /><div className="relative flex items-center justify-between"><div><p className="text-xs font-bold uppercase tracking-[.2em] text-amber-200">September 1–30</p><h2 className="mt-2 font-display text-3xl font-semibold">Course offer</h2></div><span className="grid h-20 w-20 place-items-center rounded-full border border-amber-100/50 bg-gradient-to-br from-yellow-200 to-orange-300 text-center text-orange-950 shadow-lg shadow-orange-950/30"><strong className="text-2xl leading-none">20%</strong><span className="-mt-5 text-[10px] font-bold uppercase">Off</span></span></div><div className="relative mt-7 grid grid-cols-2 gap-4"><div className="rounded-2xl border border-orange-100/15 bg-white/[.09] p-5"><i className="ti ti-stack-2 text-3xl text-amber-200" /><strong className="mt-6 block text-lg">Full Stack</strong><span className="mt-1 block text-xs leading-5 text-orange-100/70">Frontend, backend, databases and deployment.</span></div><div className="rounded-2xl border border-orange-100/15 bg-white/[.09] p-5"><i className="ti ti-brain text-3xl text-yellow-200" /><strong className="mt-6 block text-lg">AI Courses</strong><span className="mt-1 block text-xs leading-5 text-orange-100/70">Practical artificial intelligence learning paths.</span></div></div><div className="relative mt-4 flex items-center justify-between rounded-xl border border-amber-200/25 bg-amber-200/10 px-4 py-3 text-xs"><span className="flex items-center gap-2 text-orange-50"><i className="ti ti-calendar text-amber-200" />Limited September enrolment</span><strong className="text-amber-200">SAVE 20%</strong></div></div></div>;
-}
-
-function CarouselThemeVisual({ theme }) {
-  if (theme === "launchpad") return <div className="relative mx-auto h-[400px] w-full max-w-[540px] overflow-hidden rounded-[2rem] border border-orange-200/20 bg-gradient-to-br from-[#312e81] via-[#7c2d12] to-[#431407] shadow-[0_28px_70px_-24px_rgba(0,0,0,.8)]" role="img" aria-label="Career launchpad with rocket, pathway and achievement milestones"><div className="absolute -right-12 -top-12 h-52 w-52 rounded-full bg-amber-300/20 blur-3xl" /><div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#1e1b4b] to-transparent" /><div className="absolute bottom-12 left-12 right-12 h-28 rounded-[50%] border-t-2 border-dashed border-amber-200/40" /><div className="absolute bottom-20 left-[43%] grid h-24 w-24 -rotate-12 place-items-center rounded-full bg-orange-300/10 text-7xl text-amber-200 drop-shadow-2xl motion-safe:animate-[launchFloat_5s_ease-in-out_infinite]"><i className="ti ti-rocket" /></div>{[["left-6 bottom-8","ti-code","Build"],["left-16 top-28","ti-certificate","Achieve"],["right-8 top-16","ti-briefcase","Launch"]].map(([position,ic,label]) => <span key={label} className={`absolute ${position} flex items-center gap-2 rounded-xl border border-white/15 bg-slate-950/55 px-3 py-2 text-xs font-bold shadow-xl backdrop-blur`}><i className={`ti ${ic} text-lg text-amber-200`} />{label}</span>)}<div className="absolute left-7 top-7"><p className="text-xs font-bold uppercase tracking-[.2em] text-amber-200">Career launchpad</p><h2 className="mt-2 font-display text-2xl font-semibold">Experience that moves you forward.</h2></div><div className="absolute bottom-5 right-6 rounded-xl border border-emerald-200/20 bg-emerald-300/15 px-4 py-2 text-right"><strong className="block text-lg text-emerald-200">₹12,000</strong><span className="text-[10px] uppercase tracking-wider text-orange-100/70">Stipend</span></div></div>;
-
-  if (theme === "universe") return <div className="relative mx-auto h-[400px] w-full max-w-[540px] overflow-hidden rounded-[2rem] border border-violet-200/20 bg-[radial-gradient(circle_at_50%_45%,#312e81,#11112c_48%,#030712_85%)] shadow-[0_28px_70px_-24px_rgba(0,0,0,.9)]" role="img" aria-label="Code universe with programming languages represented as orbiting planets"><div className="absolute inset-0 opacity-50 [background-image:radial-gradient(white_1px,transparent_1px)] [background-size:34px_34px]" /><div className="absolute left-1/2 top-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full border border-violet-300/20" /><div className="absolute left-1/2 top-1/2 h-44 w-44 -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-sky-300/25 motion-safe:animate-[spin_24s_linear_infinite]" /><div className="absolute left-1/2 top-1/2 grid h-24 w-24 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-gradient-to-br from-violet-300 to-indigo-600 shadow-[0_0_55px_rgba(167,139,250,.45)]"><i className="ti ti-compass text-4xl" /></div>{[["left-10 top-20","ti-brand-python","Python","bg-yellow-300 text-slate-950"],["right-10 top-28","ti-brand-react","React","bg-cyan-300 text-slate-950"],["bottom-10 left-24","ti-brand-javascript","JS","bg-amber-300 text-slate-950"],["bottom-16 right-20","ti-brand-nodejs","Node","bg-emerald-300 text-slate-950"]].map(([position,ic,label,color]) => <span key={label} className={`absolute ${position} grid h-14 w-14 place-items-center rounded-full ${color} shadow-[0_0_28px_rgba(255,255,255,.18)]`}><i className={`ti ${ic} text-2xl`} /><span className="sr-only">{label}</span></span>)}<div className="absolute left-6 top-6"><p className="text-xs font-bold uppercase tracking-[.2em] text-violet-300">Code universe</p><h2 className="mt-2 font-display text-2xl font-semibold">Explore a universe of possibilities.</h2></div><span className="absolute bottom-5 left-1/2 -translate-x-1/2 rounded-full border border-white/10 bg-white/[.06] px-4 py-2 text-xs text-slate-300 backdrop-blur">Free guidance every Saturday</span></div>;
-
-  if (theme !== "campus") return <HeroSlideVisual theme={theme} />;
-  return <div className="relative mx-auto h-[400px] w-full max-w-[540px] overflow-hidden rounded-[2rem] border border-sky-200/25 bg-gradient-to-b from-[#075985] via-[#0369a1] to-[#0c4a6e] shadow-[0_28px_70px_-24px_rgba(3,105,161,.85)]" role="img" aria-label="Modern digital academy campus with floating technology elements"><div className="absolute right-8 top-8 h-24 w-24 rounded-full bg-gradient-to-br from-yellow-100 to-amber-300 shadow-[0_0_60px_rgba(253,224,71,.45)]" /><div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-emerald-950/80 to-transparent" /><div className="absolute bottom-12 left-1/2 h-52 w-72 -translate-x-1/2 rounded-t-[2.5rem] border border-white/20 bg-gradient-to-br from-slate-100/95 to-sky-100/80 p-5 shadow-2xl"><div className="mx-auto flex h-12 w-40 items-center justify-center rounded-xl bg-sky-900 text-sm font-bold tracking-wide text-white">SIMATRIX</div><div className="mt-5 grid grid-cols-5 gap-3">{Array.from({length:15}).map((_,index) => <span key={index} className="h-5 rounded bg-sky-700/70 shadow-inner" />)}</div><div className="absolute bottom-0 left-1/2 h-16 w-14 -translate-x-1/2 rounded-t-xl bg-sky-950" /></div>{[["left-5 top-20","ti-brand-react","text-cyan-200"],["right-5 top-32","ti-brand-python","text-yellow-200"],["left-10 bottom-12","ti-brain","text-violet-200"]].map(([position,ic,color]) => <span key={ic} className={`absolute ${position} grid h-14 w-14 place-items-center rounded-2xl border border-white/20 bg-slate-950/45 text-2xl shadow-xl backdrop-blur ${color} motion-safe:animate-[campusFloat_6s_ease-in-out_infinite]`}><i className={`ti ${ic}`} /></span>)}<div className="absolute left-6 top-6"><p className="text-xs font-bold uppercase tracking-[.2em] text-sky-100">Digital campus</p><h2 className="mt-2 font-display text-2xl font-semibold">Learn where technology comes alive.</h2></div><span className="absolute bottom-5 right-6 rounded-full bg-amber-300 px-4 py-2 text-sm font-extrabold text-orange-950 shadow-lg">20% OFF</span></div>;
-}
-
 function HeroCarousel({ onEnquiry }) {
   const [current, setCurrent] = useState(0);
   const [paused, setPaused] = useState(false);
   const [tabHidden, setTabHidden] = useState(false);
-  const [timerKey, setTimerKey] = useState(0);
-  const touchStart = useRef(null);
+  const [dragOffset, setDragOffset] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+
+  const startX = useRef(0);
+  const hasDragged = useRef(false);
 
   useEffect(() => {
     const onVisibility = () => setTabHidden(document.hidden);
@@ -244,45 +221,135 @@ function HeroCarousel({ onEnquiry }) {
   }, []);
 
   useEffect(() => {
-    if (paused || tabHidden || window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return;
-    const timer = window.setInterval(() => setCurrent((value) => (value + 1) % HERO_SLIDES.length), 6500);
+    if (paused || tabHidden || isDragging || window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return;
+    const timer = window.setInterval(() => {
+      setCurrent((val) => (val + 1) % HERO_BANNERS.length);
+    }, 6000);
     return () => window.clearInterval(timer);
-  }, [paused, tabHidden, timerKey]);
+  }, [paused, tabHidden, isDragging]);
 
-  const select = (index) => { setCurrent((index + HERO_SLIDES.length) % HERO_SLIDES.length); setTimerKey((value) => value + 1); };
+  const select = (index) => {
+    setCurrent((index + HERO_BANNERS.length) % HERO_BANNERS.length);
+  };
   const move = (direction) => select(current + direction);
-  const buttonClass = (primary, dark = false) => primary
-    ? `group/cta inline-flex min-h-10 items-center justify-center gap-1.5 rounded-full px-5 py-2 text-sm font-bold shadow-[0_12px_28px_-14px_rgba(15,23,42,.7)] transition duration-200 hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-offset-2 ${dark ? "bg-gradient-to-r from-sky-400 via-violet-500 to-fuchsia-500 text-white hover:brightness-110 focus-visible:ring-sky-300 focus-visible:ring-offset-slate-950" : "bg-brand-900 text-white hover:bg-brand-800 focus-visible:ring-brand-400 focus-visible:ring-offset-[#f7f1e5]"}`
-    : `group/cta inline-flex min-h-10 items-center justify-center gap-1.5 rounded-full border px-5 py-2 text-sm font-bold transition duration-200 hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-offset-2 ${dark ? "border-white/20 bg-white/[.08] text-white hover:border-sky-300/50 hover:bg-white/[.14] focus-visible:ring-white focus-visible:ring-offset-slate-950" : "border-brand-900/25 bg-white/65 text-brand-900 hover:border-brand-900/45 hover:bg-white focus-visible:ring-brand-500 focus-visible:ring-offset-[#f7f1e5]"}`;
-  const action = (item, primary = false, dark = false) => item.to
-    ? <Link to={item.to} className={buttonClass(primary, dark)}>{item.label}<i className="ti ti-arrow-right transition-transform duration-200 group-hover/cta:translate-x-1" /></Link>
-    : item.href ? <a href={item.href} className={buttonClass(primary, dark)}>{item.label}<i className="ti ti-arrow-down transition-transform duration-200 group-hover/cta:translate-y-1" /></a>
-    : <button type="button" onClick={onEnquiry} className={buttonClass(primary, dark)}>{item.label}<i className="ti ti-arrow-right transition-transform duration-200 group-hover/cta:translate-x-1" /></button>;
 
-  return <section tabIndex={0} className="relative isolate overflow-hidden border-b border-white/10 bg-[#071426] text-white outline-none" aria-roledescription="carousel" aria-label="Simatrix opportunities" onKeyDown={(event) => { if (event.key === "ArrowLeft") move(-1); if (event.key === "ArrowRight") move(1); }} onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)} onFocusCapture={() => setPaused(true)} onBlurCapture={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) setPaused(false); }} onTouchStart={(event) => { touchStart.current = event.touches[0].clientX; }} onTouchEnd={(event) => { if (touchStart.current == null) return; const distance = event.changedTouches[0].clientX - touchStart.current; if (Math.abs(distance) > 50) move(distance > 0 ? -1 : 1); touchStart.current = null; }}>
-    <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_80%_20%,rgba(56,189,248,.18),transparent_32%),radial-gradient(circle_at_15%_85%,rgba(168,85,247,.15),transparent_30%),linear-gradient(135deg,#071426,#101d3a)]" />
-    <div className="absolute inset-0 -z-10 opacity-[.035] [background-image:linear-gradient(rgba(255,255,255,.3)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.3)_1px,transparent_1px)] [background-size:40px_40px]" />
-    <div className="flex transition-transform duration-500 ease-[cubic-bezier(.22,1,.36,1)] motion-reduce:transition-none" style={{ transform: `translateX(-${current * 100}%)` }}>
-      {HERO_SLIDES.map((slide, index) => <article key={slide.eyebrow} className="relative w-full shrink-0 text-white" aria-hidden={index !== current} inert={index !== current}>
-        <div aria-hidden="true" className={`pointer-events-none absolute inset-0 ${slide.theme === "universe" ? "bg-[radial-gradient(circle_at_80%_20%,rgba(244,114,182,.32),transparent_30%),radial-gradient(circle_at_10%_90%,rgba(99,102,241,.3),transparent_34%),linear-gradient(120deg,#080b2d,#312e81_52%,#581c87)]" : slide.theme === "launchpad" ? "bg-[radial-gradient(circle_at_82%_20%,rgba(251,191,36,.3),transparent_30%),radial-gradient(circle_at_8%_88%,rgba(239,68,68,.22),transparent_34%),linear-gradient(120deg,#210c12,#7c2d12_52%,#4c1d5f)]" : "bg-[radial-gradient(circle_at_82%_18%,rgba(34,211,238,.3),transparent_30%),radial-gradient(circle_at_8%_88%,rgba(16,185,129,.22),transparent_34%),linear-gradient(120deg,#031827,#075985_52%,#064e3b)]"}`} />
-        <div className="relative mx-auto grid min-h-[310px] max-w-[880px] items-center gap-3 px-5 pb-12 pt-2 md:min-h-[330px] md:grid-cols-[minmax(0,1.25fr)_minmax(240px,.75fr)] md:px-7 lg:gap-6">
-          <div key={`copy-${current}`} className="mx-auto w-full max-w-[560px] text-center motion-safe:animate-[heroCopyIn_.55s_cubic-bezier(.22,1,.36,1)_both] md:mx-0 md:text-left"><div className="flex items-center justify-center gap-2 md:justify-start"><span className={`grid h-8 w-8 place-items-center rounded-lg border text-[10px] font-black ${slide.theme === "universe" ? "border-pink-300/30 bg-pink-300/15 text-pink-200" : slide.theme === "launchpad" ? "border-amber-300/30 bg-amber-300/15 text-amber-200" : "border-cyan-300/30 bg-cyan-300/15 text-cyan-200"}`}>0{index + 1}</span><p className={`inline-flex items-center gap-1.5 rounded-full border bg-white/[.08] px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider backdrop-blur ${slide.theme === "universe" ? "border-pink-300/20 text-pink-200" : slide.theme === "launchpad" ? "border-amber-300/20 text-amber-200" : "border-cyan-300/20 text-cyan-200"}`}><span className={`h-1.5 w-1.5 rounded-full ${slide.theme === "universe" ? "bg-pink-300" : slide.theme === "launchpad" ? "bg-amber-300" : "bg-cyan-300"}`} />{slide.eyebrow}</p></div><h1 className="mx-auto mt-2 max-w-[550px] font-display text-[1.65rem] font-semibold leading-[1.08] tracking-tight text-white sm:text-[1.95rem] md:mx-0 lg:text-[2.2rem]">{slide.title}</h1><p className="mx-auto mt-2 max-w-[540px] text-xs leading-5 text-slate-200 sm:text-sm md:mx-0">{slide.text}</p><div className="mt-2 flex flex-wrap justify-center gap-1.5 md:justify-start">{slide.benefits.map((benefit) => <span key={benefit} className="inline-flex items-center gap-1 rounded-full border border-white/15 bg-black/15 px-2 py-0.5 text-[10px] font-semibold text-white/90 backdrop-blur"><i className="ti ti-circle-check-filled text-emerald-300" />{benefit}</span>)}</div><blockquote className={`mx-auto mt-2 flex max-w-[540px] items-start gap-1.5 rounded-lg border bg-black/15 px-2.5 py-1 text-[11px] italic leading-4 backdrop-blur md:mx-0 ${slide.theme === "universe" ? "border-pink-300/15 text-pink-100" : slide.theme === "launchpad" ? "border-amber-300/15 text-amber-100" : "border-cyan-300/15 text-cyan-100"}`}><i className="ti ti-quote shrink-0 text-sm" /><span>“{slide.quote}”</span></blockquote><div className="mt-3 flex flex-col justify-center gap-2 sm:flex-row md:justify-start">{action(slide.primary, true, true)}{action(slide.secondary, false, true)}</div></div>
-          <div className="hidden h-[175px] min-w-0 place-items-center md:grid [&>div]:w-[147%] [&>div]:origin-center [&>div]:scale-[.4] lg:[&>div]:scale-[.44]"><CarouselThemeVisual theme={slide.theme} /></div>
+  // Unified Pointer Events (works for both mouse cursor on desktop and finger touch on mobile)
+  const handlePointerDown = (e) => {
+    if (e.button !== 0 && e.pointerType === "mouse") return;
+    startX.current = e.clientX;
+    setIsDragging(true);
+    hasDragged.current = false;
+    setDragOffset(0);
+    try {
+      e.currentTarget.setPointerCapture(e.pointerId);
+    } catch (_) {}
+  };
+
+  const handlePointerMove = (e) => {
+    if (!isDragging) return;
+    const diff = e.clientX - startX.current;
+    if (Math.abs(diff) > 8) {
+      hasDragged.current = true;
+    }
+    setDragOffset(diff);
+  };
+
+  const handlePointerUp = (e) => {
+    if (!isDragging) return;
+    setIsDragging(false);
+    try {
+      if (e.currentTarget.hasPointerCapture(e.pointerId)) {
+        e.currentTarget.releasePointerCapture(e.pointerId);
+      }
+    } catch (_) {}
+    if (dragOffset < -50) {
+      move(1);
+    } else if (dragOffset > 50) {
+      move(-1);
+    }
+    setDragOffset(0);
+    // Reset hasDragged after a brief delay so click handler can block unwanted link navigation during drag
+    setTimeout(() => {
+      hasDragged.current = false;
+    }, 80);
+  };
+
+  const handlePointerCancel = () => {
+    setIsDragging(false);
+    setDragOffset(0);
+    hasDragged.current = false;
+  };
+
+  return (
+    <section
+      className="relative w-full bg-white"
+      aria-label="Simatrix Featured Announcements"
+    >
+      <div
+        tabIndex={0}
+        className={`group relative w-full overflow-hidden bg-white outline-none select-none touch-pan-y ${
+          isDragging ? "cursor-grabbing" : "cursor-grab"
+        }`}
+        aria-roledescription="carousel"
+        aria-label="Simatrix opportunities"
+        onKeyDown={(e) => {
+          if (e.key === "ArrowLeft") move(-1);
+          if (e.key === "ArrowRight") move(1);
+        }}
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+        onFocusCapture={() => setPaused(true)}
+        onBlurCapture={(e) => {
+          if (!e.currentTarget.contains(e.relatedTarget)) setPaused(false);
+        }}
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerUp}
+        onPointerCancel={handlePointerCancel}
+      >
+        {/* Banner Slides Track */}
+        <div
+          className="flex motion-reduce:transition-none"
+          style={{
+            transform: `translateX(calc(-${current * 100}% + ${dragOffset}px))`,
+            transition: isDragging ? "none" : "transform 500ms cubic-bezier(0.25, 1, 0.5, 1)",
+          }}
+        >
+          {HERO_BANNERS.map((banner, index) => (
+            <article
+              key={banner.id}
+              className="relative w-full shrink-0 h-[170px] sm:h-[240px] md:h-[320px] lg:h-[470px]"
+              aria-hidden={index !== current}
+              inert={index !== current ? "" : undefined}
+            >
+              <Link
+                to={banner.to}
+                onClick={(e) => {
+                  if (hasDragged.current) {
+                    e.preventDefault();
+                  }
+                }}
+                className="block h-full w-full select-none focus:outline-none"
+                aria-label={banner.title}
+                tabIndex={index === current ? 0 : -1}
+                draggable="false"
+              >
+                <ResponsiveImage
+                  src={banner.src}
+                  alt={banner.alt}
+                  priority={index === 0}
+                  widths={[480, 768, 1080, 1440, 1920, 2120]}
+                  sizes="100vw"
+                  className="h-full w-full object-cover object-center select-none pointer-events-none"
+                  draggable="false"
+                />
+              </Link>
+            </article>
+          ))}
         </div>
-      </article>)}
-    </div>
-    <button type="button" onClick={() => move(-1)} aria-label="Previous slide" className="absolute left-4 top-1/2 hidden h-10 w-10 -translate-y-1/2 place-items-center rounded-full border border-white/20 bg-slate-950/55 text-white shadow-lg backdrop-blur-md transition duration-200 hover:scale-105 hover:border-white/40 hover:bg-white/15 focus-visible:ring-2 focus-visible:ring-white lg:grid xl:left-8"><i className="ti ti-chevron-left" /></button>
-    <button type="button" onClick={() => move(1)} aria-label="Next slide" className="absolute right-4 top-1/2 hidden h-10 w-10 -translate-y-1/2 place-items-center rounded-full border border-white/20 bg-slate-950/55 text-white shadow-lg backdrop-blur-md transition duration-200 hover:scale-105 hover:border-white/40 hover:bg-white/15 focus-visible:ring-2 focus-visible:ring-white lg:grid xl:right-8"><i className="ti ti-chevron-right" /></button>
-    <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 items-center gap-2.5 rounded-full border border-white/15 bg-slate-950/55 px-3 py-2 shadow-lg shadow-black/20 backdrop-blur-xl" role="group" aria-label="Choose slide">{HERO_SLIDES.map((slide, index) => <button type="button" key={slide.eyebrow} onClick={() => select(index)} aria-label={`Show slide ${index + 1}: ${slide.eyebrow}`} aria-current={index === current ? "true" : undefined} className={`relative h-2.5 overflow-hidden rounded-full transition-all duration-300 ${index === current ? "w-8 bg-white/25" : "w-2.5 bg-white/30 hover:bg-white/60"}`}>{index === current && !paused && !tabHidden && <span key={`${current}-${timerKey}`} className="hero-progress absolute inset-0 origin-left bg-gradient-to-r from-sky-400 via-violet-400 to-fuchsia-400" />}</button>)}</div>
-    <style>{`
-      @keyframes heroCopyIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
-      @keyframes campusFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
-      @keyframes launchFloat { 0%, 100% { transform: translateY(0) rotate(-12deg); } 50% { transform: translateY(-8px) rotate(-8deg); } }
-      @keyframes heroProgress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
-      .hero-progress { animation: heroProgress 6.5s linear forwards; }
-      @media (prefers-reduced-motion: reduce) { .hero-progress { animation: none; } }
-    `}</style>
-  </section>;
+      </div>
+    </section>
+  );
 }
 
 export default function Home() {
