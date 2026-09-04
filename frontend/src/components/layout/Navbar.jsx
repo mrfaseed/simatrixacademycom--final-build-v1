@@ -6,46 +6,46 @@ import { icon } from "../../lib/icons";
 // Enrich categories with authoritative certification subtitles & badges
 const CATEGORY_META = {
   "full-stack": {
-    sub: "MERN, Java & Python • Capstone Projects",
+    sub: "MERN, Java, Python, etc.",
     badge: "Popular",
     badgeColor: "bg-sky-500/15 text-sky-300 border-sky-400/20",
   },
   "data-science": {
-    sub: "Machine Learning, Python & Analytics",
+    sub: "Machine Learning, Python, etc.",
     badge: "Trending",
     badgeColor: "bg-violet-500/15 text-violet-300 border-violet-400/20",
   },
   "cloud": {
-    sub: "AWS, Azure, GCP & DevOps Workflows",
+    sub: "AWS, Azure, DevOps, etc.",
     badge: null,
   },
   "cybersecurity": {
-    sub: "Ethical Hacking, CCNA & CompTIA Security+",
+    sub: "Ethical Hacking, CCNA, etc.",
     badge: "New",
     badgeColor: "bg-emerald-500/15 text-emerald-300 border-emerald-400/20",
   },
   "programming": {
-    sub: "Python, Java, C++ & Core Data Structures",
+    sub: "Python, Java, C++, etc.",
     badge: null,
   },
   "mobile-app": {
-    sub: "Flutter, React Native & Android Development",
+    sub: "Flutter, React Native, etc.",
     badge: null,
   },
   "testing": {
-    sub: "Selenium Automation, API & Manual QA",
+    sub: "Selenium, API, Manual QA, etc.",
     badge: null,
   },
   "database": {
-    sub: "MySQL, PostgreSQL & Oracle Database Admin",
+    sub: "MySQL, PostgreSQL, Oracle, etc.",
     badge: null,
   },
   "sap": {
-    sub: "SAP FICO, MM & ABAP Enterprise Modules",
+    sub: "SAP FICO, MM, ABAP, etc.",
     badge: null,
   },
   "digital-marketing": {
-    sub: "SEO, Performance Ads & Analytics",
+    sub: "SEO, Performance Ads, etc.",
     badge: null,
   },
 };
@@ -139,6 +139,7 @@ export default function Navbar() {
   const [activeMenu, setActiveMenu] = useState(null);
   const [categories, setCategories] = useState([]);
   const [scrolled, setScrolled] = useState(false);
+  const [hoveredNav, setHoveredNav] = useState(null);
 
   // Stripe Morphing Dropdown State
   const [dropdownPos, setDropdownPos] = useState({
@@ -175,6 +176,7 @@ export default function Navbar() {
   useEffect(() => {
     setMobileOpen(false);
     setActiveMenu(null);
+    setHoveredNav(null);
   }, [pathname, search]);
 
   useEffect(() => {
@@ -191,6 +193,7 @@ export default function Navbar() {
       if (e.key === "Escape") {
         setMobileOpen(false);
         setActiveMenu(null);
+        setHoveredNav(null);
       }
     };
     document.addEventListener("keydown", onKeyDown);
@@ -201,6 +204,7 @@ export default function Navbar() {
     const onClick = (e) => {
       if (navRef.current && !navRef.current.contains(e.target)) {
         setActiveMenu(null);
+        setHoveredNav(null);
       }
     };
     document.addEventListener("mousedown", onClick);
@@ -250,12 +254,14 @@ export default function Navbar() {
       clearTimeout(timeoutRef.current);
       timeoutRef.current = null;
     }
+    setHoveredNav(menuName);
     setActiveMenu(menuName);
   };
 
   const handleTriggerLeave = () => {
     timeoutRef.current = setTimeout(() => {
       setActiveMenu(null);
+      setHoveredNav(null);
     }, 180);
   };
 
@@ -264,11 +270,13 @@ export default function Navbar() {
       clearTimeout(timeoutRef.current);
       timeoutRef.current = null;
     }
+    setHoveredNav(activeMenu || "dropdown");
   };
 
   const handleDropdownLeave = () => {
     timeoutRef.current = setTimeout(() => {
       setActiveMenu(null);
+      setHoveredNav(null);
     }, 180);
   };
 
@@ -277,6 +285,12 @@ export default function Navbar() {
   };
 
   const primaryCategories = categories.slice(0, 6);
+
+  const isHomeActive = pathname === "/";
+  const showHomeIndicator = isHomeActive && !activeMenu && (!hoveredNav || hoveredNav === "home");
+
+  const isContactActive = pathname === "/contact";
+  const showContactIndicator = isContactActive && !activeMenu && (!hoveredNav || hoveredNav === "contact");
 
   return (
     <header
@@ -304,19 +318,29 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop Navigation Links */}
-        <nav className="hidden items-center gap-6 lg:flex xl:gap-8">
+        <nav
+          onMouseLeave={() => setHoveredNav(null)}
+          className="hidden items-center gap-6 lg:flex xl:gap-8"
+        >
           <NavLink
             to="/"
             end
-            className={({ isActive }) =>
-              `relative py-1 text-[13.5px] font-medium transition-colors ${
-                isActive
-                  ? "font-semibold text-white after:absolute after:-bottom-1 after:left-0 after:right-0 after:h-0.5 after:rounded-full after:bg-sky-400"
-                  : "text-slate-300 hover:text-white"
-              }`
-            }
+            onMouseEnter={() => setHoveredNav("home")}
+            className={`relative py-1 text-[13.5px] font-medium transition-colors ${
+              showHomeIndicator
+                ? "font-semibold text-white"
+                : "text-slate-300 hover:text-white"
+            }`}
           >
-            Home
+            <span>Home</span>
+            <span
+              aria-hidden="true"
+              className={`absolute -bottom-1 left-0 right-0 h-0.5 rounded-full bg-sky-400 transition-all duration-200 ${
+                showHomeIndicator
+                  ? "opacity-100 scale-x-100"
+                  : "opacity-0 scale-x-0 pointer-events-none"
+              }`}
+            />
           </NavLink>
 
           {/* Trigger 1: Courses */}
@@ -399,20 +423,31 @@ export default function Navbar() {
 
           <NavLink
             to="/contact"
-            className={({ isActive }) =>
-              `relative py-1 text-[13.5px] font-medium transition-colors ${
-                isActive
-                  ? "font-semibold text-white after:absolute after:-bottom-1 after:left-0 after:right-0 after:h-0.5 after:rounded-full after:bg-sky-400"
-                  : "text-slate-300 hover:text-white"
-              }`
-            }
+            onMouseEnter={() => setHoveredNav("contact")}
+            className={`relative py-1 text-[13.5px] font-medium transition-colors ${
+              showContactIndicator
+                ? "font-semibold text-white"
+                : "text-slate-300 hover:text-white"
+            }`}
           >
-            Contact
+            <span>Contact</span>
+            <span
+              aria-hidden="true"
+              className={`absolute -bottom-1 left-0 right-0 h-0.5 rounded-full bg-sky-400 transition-all duration-200 ${
+                showContactIndicator
+                  ? "opacity-100 scale-x-100"
+                  : "opacity-0 scale-x-0 pointer-events-none"
+              }`}
+            />
           </NavLink>
         </nav>
 
         {/* Right Actions: Phone + Enquire Now CTA */}
-        <div className="hidden items-center gap-5 lg:flex">
+        <div
+          onMouseEnter={() => setHoveredNav("actions")}
+          onMouseLeave={() => setHoveredNav(null)}
+          className="hidden items-center gap-5 lg:flex"
+        >
           <a
             href="tel:+919677781155"
             className="flex items-center gap-1.5 text-xs font-medium text-slate-300 transition hover:text-white"
@@ -467,7 +502,7 @@ export default function Navbar() {
               <div className="grid grid-cols-2 gap-3">
                 {primaryCategories.map((c) => {
                   const meta = CATEGORY_META[c.slug] || {
-                    sub: c.description || "Industry Capstone & Placement Track",
+                    sub: c.description || "Industry Capstone, Placement, etc.",
                     badge: null,
                   };
 
