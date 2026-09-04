@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-const SITE_NAME = "Elysium Academy";
+const SITE_NAME = "Simatrix Academy";
 
 function setMeta(attr, key, content) {
   if (!content) return;

@@ -8,12 +8,12 @@ const CATEGORY_META = {
   "full-stack": {
     sub: "MERN, Java, Python, etc.",
     badge: "Popular",
-    badgeColor: "bg-sky-500/15 text-sky-300 border-sky-400/20",
+    badgeColor: "bg-sky-50 text-sky-700 border-sky-200/80",
   },
   "data-science": {
     sub: "Machine Learning, Python, etc.",
     badge: "Trending",
-    badgeColor: "bg-violet-500/15 text-violet-300 border-violet-400/20",
+    badgeColor: "bg-violet-50 text-violet-700 border-violet-200/80",
   },
   "cloud": {
     sub: "AWS, Azure, DevOps, etc.",
@@ -22,7 +22,7 @@ const CATEGORY_META = {
   "cybersecurity": {
     sub: "Ethical Hacking, CCNA, etc.",
     badge: "New",
-    badgeColor: "bg-emerald-500/15 text-emerald-300 border-emerald-400/20",
+    badgeColor: "bg-emerald-50 text-emerald-700 border-emerald-200/80",
   },
   "programming": {
     sub: "Python, Java, C++, etc.",
@@ -84,7 +84,7 @@ const CAREER_PRIMARY_LINKS = [
     to: "/placement",
     icon: "ti-briefcase",
     badge: "94% Hired",
-    badgeColor: "bg-emerald-500/15 text-emerald-300 border-emerald-400/20",
+    badgeColor: "bg-emerald-50 text-emerald-700 border-emerald-200/80",
   },
   {
     label: "1-on-1 Career Guidance",
@@ -92,7 +92,7 @@ const CAREER_PRIMARY_LINKS = [
     to: "/career-guidance",
     icon: "ti-compass",
     badge: "Free Session",
-    badgeColor: "bg-sky-500/15 text-sky-300 border-sky-400/20",
+    badgeColor: "bg-sky-50 text-sky-700 border-sky-200/80",
   },
   {
     label: "Interview Prep Kit",
@@ -100,7 +100,7 @@ const CAREER_PRIMARY_LINKS = [
     to: "/interview-resources",
     icon: "ti-file-text",
     badge: "Kit",
-    badgeColor: "bg-violet-500/15 text-violet-300 border-violet-400/20",
+    badgeColor: "bg-violet-50 text-violet-700 border-violet-200/80",
   },
   {
     label: "Student Reviews",
@@ -108,7 +108,7 @@ const CAREER_PRIMARY_LINKS = [
     to: "/reviews",
     icon: "ti-star",
     badge: "Verified",
-    badgeColor: "bg-amber-500/15 text-amber-300 border-amber-400/20",
+    badgeColor: "bg-amber-50 text-amber-700 border-amber-200/80",
   },
 ];
 
@@ -294,10 +294,10 @@ export default function Navbar() {
 
   return (
     <header
-      className={`sticky top-0 z-50 w-full transition-colors duration-200 ${
+      className={`sticky top-0 z-50 w-full transition-all duration-200 ${
         scrolled
-          ? "border-b border-white/10 bg-[#071426]/95 shadow-[0_8px_30px_rgba(2,6,23,0.6)] backdrop-blur-xl"
-          : "border-b border-white/[0.07] bg-[#071426] backdrop-blur-md"
+          ? "border-b border-slate-200/90 bg-white/95 shadow-[0_4px_25px_-4px_rgba(15,23,42,0.08)] backdrop-blur-xl"
+          : "border-b border-slate-100 bg-white/90 backdrop-blur-md"
       }`}
     >
       <div
@@ -311,7 +311,7 @@ export default function Navbar() {
           aria-label="Simatrix Academy Home"
         >
           <img
-            src="/lightMode-without-tagline.svg"
+            src="/darkMode-without-tagline.svg"
             alt="Simatrix Academy"
             className="h-10 sm:h-11 w-auto object-contain transition-transform duration-150 group-hover:scale-105"
           />
@@ -328,14 +328,14 @@ export default function Navbar() {
             onMouseEnter={() => setHoveredNav("home")}
             className={`relative py-1 text-[13.5px] font-medium transition-colors ${
               showHomeIndicator
-                ? "font-semibold text-white"
-                : "text-slate-300 hover:text-white"
+                ? "font-semibold text-slate-950"
+                : "text-slate-600 hover:text-slate-950"
             }`}
           >
             <span>Home</span>
             <span
               aria-hidden="true"
-              className={`absolute -bottom-1 left-0 right-0 h-0.5 rounded-full bg-sky-400 transition-all duration-200 ${
+              className={`absolute -bottom-1 left-0 right-0 h-0.5 rounded-full bg-sky-600 transition-all duration-200 ${
                 showHomeIndicator
                   ? "opacity-100 scale-x-100"
                   : "opacity-0 scale-x-0 pointer-events-none"
@@ -353,14 +353,14 @@ export default function Navbar() {
             aria-expanded={activeMenu === "courses"}
             className={`flex items-center gap-1.5 py-1 text-[13.5px] font-medium transition-colors ${
               activeMenu === "courses" || pathname.startsWith("/courses")
-                ? "font-semibold text-white"
-                : "text-slate-300 hover:text-white"
+                ? "font-semibold text-slate-950"
+                : "text-slate-600 hover:text-slate-950"
             }`}
           >
             <span>Courses</span>
             <i
               className={`ti ti-chevron-down text-xs text-slate-400 transition-transform duration-200 ${
-                activeMenu === "courses" ? "rotate-180 text-white" : ""
+                activeMenu === "courses" ? "rotate-180 text-sky-600 font-bold" : ""
               }`}
             />
           </button>
@@ -378,14 +378,14 @@ export default function Navbar() {
               pathname.startsWith("/about") ||
               pathname === "/awards" ||
               pathname === "/gallery"
-                ? "font-semibold text-white"
-                : "text-slate-300 hover:text-white"
+                ? "font-semibold text-slate-950"
+                : "text-slate-600 hover:text-slate-950"
             }`}
           >
             <span>About</span>
             <i
               className={`ti ti-chevron-down text-xs text-slate-400 transition-transform duration-200 ${
-                activeMenu === "about" ? "rotate-180 text-white" : ""
+                activeMenu === "about" ? "rotate-180 text-sky-600 font-bold" : ""
               }`}
             />
           </button>
@@ -409,14 +409,14 @@ export default function Navbar() {
                 "/blog",
                 "/help-center",
               ].includes(pathname)
-                ? "font-semibold text-white"
-                : "text-slate-300 hover:text-white"
+                ? "font-semibold text-slate-950"
+                : "text-slate-600 hover:text-slate-950"
             }`}
           >
             <span>Career & Support</span>
             <i
               className={`ti ti-chevron-down text-xs text-slate-400 transition-transform duration-200 ${
-                activeMenu === "support" ? "rotate-180 text-white" : ""
+                activeMenu === "support" ? "rotate-180 text-sky-600 font-bold" : ""
               }`}
             />
           </button>
@@ -426,14 +426,14 @@ export default function Navbar() {
             onMouseEnter={() => setHoveredNav("contact")}
             className={`relative py-1 text-[13.5px] font-medium transition-colors ${
               showContactIndicator
-                ? "font-semibold text-white"
-                : "text-slate-300 hover:text-white"
+                ? "font-semibold text-slate-950"
+                : "text-slate-600 hover:text-slate-950"
             }`}
           >
             <span>Contact</span>
             <span
               aria-hidden="true"
-              className={`absolute -bottom-1 left-0 right-0 h-0.5 rounded-full bg-sky-400 transition-all duration-200 ${
+              className={`absolute -bottom-1 left-0 right-0 h-0.5 rounded-full bg-sky-600 transition-all duration-200 ${
                 showContactIndicator
                   ? "opacity-100 scale-x-100"
                   : "opacity-0 scale-x-0 pointer-events-none"
@@ -450,16 +450,16 @@ export default function Navbar() {
         >
           <a
             href="tel:+919677781155"
-            className="flex items-center gap-1.5 text-xs font-medium text-slate-300 transition hover:text-white"
+            className="flex items-center gap-1.5 text-xs font-medium text-slate-600 transition hover:text-slate-950"
             title="Call Admissions"
           >
-            <i className="ti ti-phone text-sm text-sky-400" />
+            <i className="ti ti-phone text-sm text-sky-600" />
             <span>+91 96777 81155</span>
           </a>
 
           <Link
             to="/contact"
-            className="inline-flex items-center gap-1.5 rounded-lg bg-sky-500 px-4 py-2 text-xs font-bold text-slate-950 shadow-md shadow-sky-500/20 transition-all duration-150 hover:-translate-y-0.5 hover:bg-sky-400 hover:shadow-sky-500/30 active:translate-y-0"
+            className="inline-flex items-center gap-1.5 rounded-lg bg-sky-600 px-4 py-2 text-xs font-bold text-white shadow-md shadow-sky-600/20 transition-all duration-150 hover:-translate-y-0.5 hover:bg-sky-500 hover:shadow-sky-600/30 active:translate-y-0"
           >
             <span>Enquire Now</span>
             <i className="ti ti-arrow-right text-xs" />
@@ -472,7 +472,7 @@ export default function Navbar() {
         <div
           onMouseEnter={handleDropdownEnter}
           onMouseLeave={handleDropdownLeave}
-          className="absolute top-full mt-2 hidden lg:block overflow-hidden rounded-2xl border border-white/10 bg-[#08172c] text-white shadow-[0_25px_60px_-15px_rgba(0,0,0,0.85)] backdrop-blur-2xl"
+          className="absolute top-full mt-2 hidden lg:block overflow-hidden rounded-2xl border border-slate-200/90 bg-white text-slate-900 shadow-[0_20px_50px_-10px_rgba(15,23,42,0.18)] backdrop-blur-2xl"
           style={{
             transform: `translateX(${dropdownPos.left}px) scale(${activeMenu ? 1 : 0.96})`,
             width: `${dropdownPos.width}px`,
@@ -485,7 +485,7 @@ export default function Navbar() {
         >
           {/* Animated Caret Arrow following the active trigger button */}
           <div
-            className="absolute -top-1.5 h-3 w-3 -translate-x-1/2 rotate-45 border-l border-t border-white/10 bg-[#08172c] transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]"
+            className="absolute -top-1.5 h-3 w-3 -translate-x-1/2 rotate-45 border-l border-t border-slate-200/90 bg-white transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]"
             style={{ left: `${caretLeft}px` }}
           />
 
@@ -511,25 +511,25 @@ export default function Navbar() {
                       key={c.id}
                       to={`/courses?category=${c.slug}`}
                       onClick={() => setActiveMenu(null)}
-                      className="group flex items-start gap-3 rounded-xl border border-white/[0.04] bg-white/[0.02] p-3 transition-all duration-150 hover:border-white/15 hover:bg-white/[0.06]"
+                      className="group flex items-start gap-3 rounded-xl border border-slate-100 bg-slate-50/50 p-3 transition-all duration-150 hover:border-slate-200 hover:bg-slate-50 hover:shadow-xs"
                     >
-                      <span className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/[0.05] text-sky-400 transition-colors group-hover:border-sky-500/30 group-hover:bg-sky-500/15 group-hover:text-sky-300 group-hover:scale-105">
+                      <span className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-sky-100 bg-sky-50 text-sky-600 transition-colors group-hover:border-sky-200 group-hover:bg-sky-100 group-hover:text-sky-700 group-hover:scale-105">
                         <i className={`${icon(c.icon)} text-lg`} />
                       </span>
                       <div className="min-w-0 flex-1">
                         <div className="flex items-center gap-2">
-                          <span className="truncate text-[13.5px] font-semibold text-slate-100 group-hover:text-white">
+                          <span className="truncate text-[13.5px] font-semibold text-slate-900 group-hover:text-sky-600 transition-colors">
                             {c.name}
                           </span>
                           {meta.badge && (
                             <span
-                              className={`rounded-full border px-2 py-0.2 text-[9.5px] font-bold tracking-wide uppercase ${meta.badgeColor || "bg-sky-500/15 text-sky-300 border-sky-400/20"}`}
+                              className={`rounded-full border px-2 py-0.2 text-[9.5px] font-bold tracking-wide uppercase ${meta.badgeColor || "bg-sky-50 text-sky-700 border-sky-200/80"}`}
                             >
                               {meta.badge}
                             </span>
                           )}
                         </div>
-                        <p className="mt-0.5 text-xs text-slate-400 leading-snug line-clamp-1 group-hover:text-slate-300">
+                        <p className="mt-0.5 text-xs text-slate-500 leading-snug line-clamp-1 group-hover:text-slate-600">
                           {meta.sub}
                         </p>
                       </div>
@@ -540,18 +540,18 @@ export default function Navbar() {
             </div>
 
             {/* Simatrix Signature Bottom Strip */}
-            <div className="flex items-center justify-between border-t border-white/[0.08] bg-[#061222]/95 px-6 py-3.5">
+            <div className="flex items-center justify-between border-t border-slate-100 bg-slate-50/80 px-6 py-3.5">
               <div className="flex items-center gap-2 text-xs">
-                <span className="text-slate-400">Unsure which stack fits your goal?</span>
+                <span className="text-slate-500">Unsure which stack fits your goal?</span>
                 <Link
                   to="/career-guidance"
                   onClick={() => setActiveMenu(null)}
-                  className="inline-flex items-center gap-1.5 font-semibold text-white transition hover:text-sky-300 group"
+                  className="inline-flex items-center gap-1.5 font-semibold text-slate-900 transition hover:text-sky-600 group"
                 >
-                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-sky-500/20 text-sky-400 text-xs">
+                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-sky-100 text-sky-600 text-xs">
                     <i className="ti ti-compass" />
                   </span>
-                  <span className="underline underline-offset-4 decoration-sky-400/40 group-hover:decoration-sky-300">
+                  <span className="underline underline-offset-4 decoration-sky-300 group-hover:decoration-sky-500">
                     Talk to a Tech Mentor
                   </span>
                 </Link>
@@ -560,7 +560,7 @@ export default function Navbar() {
               <Link
                 to="/courses"
                 onClick={() => setActiveMenu(null)}
-                className="inline-flex items-center gap-1.5 rounded-lg border border-white/10 bg-white/[0.06] px-3.5 py-1.5 text-xs font-semibold text-slate-200 shadow-sm transition hover:border-white/20 hover:bg-white/[0.12] hover:text-white"
+                className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3.5 py-1.5 text-xs font-semibold text-slate-700 shadow-xs transition hover:border-slate-300 hover:bg-slate-50 hover:text-slate-950"
               >
                 <span>Explore all Programs</span>
                 <i className="ti ti-arrow-right text-xs text-slate-400" />
@@ -584,16 +584,16 @@ export default function Navbar() {
                     key={item.to}
                     to={item.to}
                     onClick={() => setActiveMenu(null)}
-                    className="group flex items-start gap-3 rounded-xl border border-white/[0.04] bg-white/[0.02] p-2.5 transition hover:border-white/15 hover:bg-white/[0.06]"
+                    className="group flex items-start gap-3 rounded-xl border border-slate-100 bg-slate-50/50 p-2.5 transition hover:border-slate-200 hover:bg-slate-50 hover:shadow-xs"
                   >
-                    <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/[0.05] text-sky-400 transition-colors group-hover:border-sky-500/30 group-hover:bg-sky-500/15 group-hover:text-sky-300">
+                    <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-sky-100 bg-sky-50 text-sky-600 transition-colors group-hover:border-sky-200 group-hover:bg-sky-100 group-hover:text-sky-700">
                       <i className={`ti ${item.icon} text-base`} />
                     </span>
                     <div className="min-w-0 flex-1">
-                      <div className="text-[13px] font-semibold text-slate-100 group-hover:text-white">
+                      <div className="text-[13px] font-semibold text-slate-900 group-hover:text-sky-600 transition-colors">
                         {item.label}
                       </div>
-                      <div className="text-[11px] text-slate-400 leading-snug group-hover:text-slate-300">
+                      <div className="text-[11px] text-slate-500 leading-snug group-hover:text-slate-600">
                         {item.desc}
                       </div>
                     </div>
@@ -601,16 +601,16 @@ export default function Navbar() {
                 ))}
               </div>
 
-              <div className="col-span-5 flex flex-col justify-between rounded-xl border border-white/[0.08] bg-[#0c223d]/90 p-3.5">
+              <div className="col-span-5 flex flex-col justify-between rounded-xl border border-sky-100 bg-gradient-to-br from-sky-50/90 via-blue-50/60 to-indigo-50/80 p-3.5">
                 <div>
-                  <div className="flex items-center gap-1.5 text-[10.5px] font-semibold text-amber-300 mb-1.5">
+                  <div className="flex items-center gap-1.5 text-[10.5px] font-semibold text-amber-700 mb-1.5">
                     <i className="ti ti-flame text-xs" />
                     <span>Hands-on Pedagogy</span>
                   </div>
-                  <h4 className="text-sm font-semibold text-white">
+                  <h4 className="text-sm font-semibold text-slate-950">
                     Life at Simatrix
                   </h4>
-                  <p className="mt-1 text-[11px] leading-relaxed text-slate-300">
+                  <p className="mt-1 text-[11px] leading-relaxed text-slate-600">
                     Experience our modern coding labs, hackathon arenas, and mentor-led collaborative spaces.
                   </p>
                 </div>
@@ -618,7 +618,7 @@ export default function Navbar() {
                 <Link
                   to="/gallery"
                   onClick={() => setActiveMenu(null)}
-                  className="mt-3 flex items-center justify-between rounded-lg border border-white/10 bg-white/[0.06] px-3 py-2 text-xs font-semibold text-sky-300 transition hover:bg-white/10 hover:text-white"
+                  className="mt-3 flex items-center justify-between rounded-lg border border-sky-200/80 bg-white px-3 py-2 text-xs font-semibold text-sky-700 shadow-xs transition hover:bg-sky-50 hover:text-sky-800"
                 >
                   <span>Explore Campus Gallery</span>
                   <i className="ti ti-photo text-xs" />
@@ -626,16 +626,16 @@ export default function Navbar() {
               </div>
             </div>
 
-            <div className="flex items-center justify-between border-t border-white/[0.08] bg-[#061222]/95 px-6 py-3">
+            <div className="flex items-center justify-between border-t border-slate-100 bg-slate-50/80 px-6 py-3">
               <div className="flex items-center gap-2 text-xs">
-                <span className="text-slate-400">Want to inspect our training labs?</span>
+                <span className="text-slate-500">Want to inspect our training labs?</span>
                 <Link
                   to="/appointment"
                   onClick={() => setActiveMenu(null)}
-                  className="inline-flex items-center gap-1 font-semibold text-white transition hover:text-sky-300"
+                  className="inline-flex items-center gap-1 font-semibold text-slate-900 transition hover:text-sky-600"
                 >
-                  <i className="ti ti-building text-sky-400" />
-                  <span className="underline underline-offset-4 decoration-sky-400/40">
+                  <i className="ti ti-building text-sky-600" />
+                  <span className="underline underline-offset-4 decoration-sky-300">
                     Schedule a Campus Tour
                   </span>
                 </Link>
@@ -644,7 +644,7 @@ export default function Navbar() {
               <Link
                 to="/about"
                 onClick={() => setActiveMenu(null)}
-                className="text-xs font-semibold text-slate-400 hover:text-white transition"
+                className="text-xs font-semibold text-slate-500 hover:text-slate-900 transition"
               >
                 About Overview →
               </Link>
@@ -662,11 +662,11 @@ export default function Navbar() {
           >
             <div className="grid grid-cols-12 gap-5 p-5">
               <div className="col-span-7 flex flex-col">
-                <div className="mb-2.5 flex items-center justify-between border-b border-white/[0.08] pb-1.5">
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+                <div className="mb-2.5 flex items-center justify-between border-b border-slate-100 pb-1.5">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500">
                     Career Acceleration
                   </span>
-                  <span className="text-[11px] font-semibold text-emerald-400">
+                  <span className="text-[11px] font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200/80">
                     Placement Cell
                   </span>
                 </div>
@@ -677,14 +677,14 @@ export default function Navbar() {
                       key={item.to}
                       to={item.to}
                       onClick={() => setActiveMenu(null)}
-                      className="group flex items-start gap-3 rounded-xl border border-white/[0.04] bg-white/[0.02] p-2.5 transition hover:border-white/15 hover:bg-white/[0.06]"
+                      className="group flex items-start gap-3 rounded-xl border border-slate-100 bg-slate-50/50 p-2.5 transition hover:border-slate-200 hover:bg-slate-50 hover:shadow-xs"
                     >
-                      <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/[0.05] text-sky-400 transition-colors group-hover:border-sky-500/30 group-hover:bg-sky-500/15 group-hover:text-sky-300">
+                      <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-sky-100 bg-sky-50 text-sky-600 transition-colors group-hover:border-sky-200 group-hover:bg-sky-100 group-hover:text-sky-700">
                         <i className={`ti ${item.icon} text-base`} />
                       </span>
                       <div className="min-w-0 flex-1">
                         <div className="flex items-center gap-2">
-                          <span className="text-[13px] font-semibold text-slate-100 group-hover:text-white">
+                          <span className="text-[13px] font-semibold text-slate-900 group-hover:text-sky-600 transition-colors">
                             {item.label}
                           </span>
                           {item.badge && (
@@ -695,7 +695,7 @@ export default function Navbar() {
                             </span>
                           )}
                         </div>
-                        <div className="text-[11px] text-slate-400 leading-snug group-hover:text-slate-300">
+                        <div className="text-[11px] text-slate-500 leading-snug group-hover:text-slate-600">
                           {item.desc}
                         </div>
                       </div>
@@ -706,11 +706,11 @@ export default function Navbar() {
 
               <div className="col-span-5 flex flex-col justify-between">
                 <div>
-                  <div className="mb-2.5 flex items-center justify-between border-b border-white/[0.08] pb-1.5">
-                    <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+                  <div className="mb-2.5 flex items-center justify-between border-b border-slate-100 pb-1.5">
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500">
                       Support & Community
                     </span>
-                    <span className="text-[11px] text-slate-400">
+                    <span className="text-[11px] text-slate-500">
                       Student Hub
                     </span>
                   </div>
@@ -721,16 +721,16 @@ export default function Navbar() {
                         key={item.to}
                         to={item.to}
                         onClick={() => setActiveMenu(null)}
-                        className="group flex items-start gap-2.5 rounded-xl border border-white/[0.04] bg-white/[0.02] p-2.5 transition hover:border-white/15 hover:bg-white/[0.06]"
+                        className="group flex items-start gap-2.5 rounded-xl border border-slate-100 bg-slate-50/50 p-2.5 transition hover:border-slate-200 hover:bg-slate-50 hover:shadow-xs"
                       >
-                        <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-white/[0.05] text-sky-400 group-hover:bg-sky-500/20">
+                        <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-sky-50 text-sky-600 group-hover:bg-sky-100">
                           <i className={`ti ${item.icon} text-sm`} />
                         </span>
                         <div className="min-w-0 flex-1">
-                          <div className="text-xs font-semibold text-slate-200 group-hover:text-white">
+                          <div className="text-xs font-semibold text-slate-800 group-hover:text-sky-600 transition-colors">
                             {item.label}
                           </div>
-                          <div className="text-[10.5px] leading-tight text-slate-400 mt-0.5">
+                          <div className="text-[10.5px] leading-tight text-slate-500 mt-0.5">
                             {item.desc}
                           </div>
                         </div>
@@ -739,33 +739,33 @@ export default function Navbar() {
                   </div>
                 </div>
 
-                <div className="mt-3 rounded-xl border border-sky-400/20 bg-sky-500/10 p-3">
-                  <div className="text-[11px] font-semibold text-sky-300">
+                <div className="mt-3 rounded-xl border border-sky-100 bg-sky-50/80 p-3">
+                  <div className="text-[11px] font-semibold text-sky-800">
                     Admissions Helpline
                   </div>
                   <a
                     href="tel:+919677781155"
-                    className="mt-1 flex items-center gap-1.5 text-xs font-bold text-white hover:text-sky-200 transition"
+                    className="mt-1 flex items-center gap-1.5 text-xs font-bold text-slate-900 hover:text-sky-700 transition"
                   >
-                    <i className="ti ti-phone text-sky-400 text-xs" />
+                    <i className="ti ti-phone text-sky-600 text-xs" />
                     <span>+91 96777 81155</span>
                   </a>
                 </div>
               </div>
             </div>
 
-            <div className="flex items-center justify-between border-t border-white/[0.08] bg-[#061222]/95 px-6 py-3.5">
+            <div className="flex items-center justify-between border-t border-slate-100 bg-slate-50/80 px-6 py-3.5">
               <div className="flex items-center gap-2 text-xs">
-                <span className="text-slate-400">Have specific admission questions?</span>
+                <span className="text-slate-500">Have specific admission questions?</span>
                 <Link
                   to="/contact"
                   onClick={() => setActiveMenu(null)}
-                  className="inline-flex items-center gap-1.5 font-semibold text-white transition hover:text-sky-300"
+                  className="inline-flex items-center gap-1.5 font-semibold text-slate-900 transition hover:text-sky-600"
                 >
-                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-emerald-500/20 text-emerald-400 text-xs">
+                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-emerald-100 text-emerald-600 text-xs">
                     <i className="ti ti-message-circle" />
                   </span>
-                  <span className="underline underline-offset-4 decoration-sky-400/40">
+                  <span className="underline underline-offset-4 decoration-emerald-300">
                     Chat with an Advisor
                   </span>
                 </Link>
@@ -774,7 +774,7 @@ export default function Navbar() {
               <Link
                 to="/placement"
                 onClick={() => setActiveMenu(null)}
-                className="inline-flex items-center gap-1 text-xs font-semibold text-slate-200 hover:text-sky-300 transition"
+                className="inline-flex items-center gap-1 text-xs font-semibold text-slate-600 hover:text-slate-950 transition"
               >
                 <span>View Placement Records</span>
                 <i className="ti ti-chevron-right text-xs text-slate-400" />
@@ -786,7 +786,7 @@ export default function Navbar() {
         {/* Mobile Toggle Button */}
         <button
           type="button"
-          className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/15 bg-white/[0.05] text-white transition hover:bg-white/10 lg:hidden"
+          className="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 bg-slate-50 text-slate-700 transition hover:bg-slate-100 hover:text-slate-950 lg:hidden"
           onClick={() => setMobileOpen((prev) => !prev)}
           aria-label="Toggle navigation menu"
           aria-expanded={mobileOpen}
@@ -799,7 +799,7 @@ export default function Navbar() {
       {mobileOpen && (
         <div
           id="mobile-navigation"
-          className="fixed inset-x-0 top-16 bottom-0 z-40 flex flex-col justify-between overflow-y-auto border-t border-white/10 bg-[#071426] px-5 py-6 backdrop-blur-2xl lg:hidden"
+          className="fixed inset-x-0 top-16 bottom-0 z-40 flex flex-col justify-between overflow-y-auto border-t border-slate-200 bg-white/98 px-5 py-6 backdrop-blur-2xl lg:hidden"
         >
           <div className="space-y-3">
             <NavLink
@@ -809,13 +809,13 @@ export default function Navbar() {
               className={({ isActive }) =>
                 `flex items-center justify-between rounded-lg px-3 py-2.5 text-sm font-medium transition ${
                   isActive
-                    ? "bg-sky-500/15 text-sky-300 font-semibold"
-                    : "text-slate-200 hover:bg-white/[0.05]"
+                    ? "bg-sky-50 text-sky-700 font-semibold"
+                    : "text-slate-700 hover:bg-slate-50 hover:text-slate-950"
                 }`
               }
             >
               <span>Home</span>
-              <i className="ti ti-chevron-right text-xs text-slate-500" />
+              <i className="ti ti-chevron-right text-xs text-slate-400" />
             </NavLink>
 
             {/* Mobile Courses Accordion */}
@@ -826,16 +826,16 @@ export default function Navbar() {
                     key={c.id}
                     to={`/courses?category=${c.slug}`}
                     onClick={() => setMobileOpen(false)}
-                    className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-xs font-medium text-slate-300 hover:bg-white/[0.05] hover:text-white"
+                    className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-xs font-medium text-slate-600 hover:bg-white hover:text-slate-950"
                   >
-                    <i className={`${icon(c.icon)} text-sky-400`} />
+                    <i className={`${icon(c.icon)} text-sky-600`} />
                     <span>{c.name}</span>
                   </Link>
                 ))}
                 <Link
                   to="/courses"
                   onClick={() => setMobileOpen(false)}
-                  className="flex items-center gap-2 rounded-lg bg-sky-500/10 px-3 py-2 text-xs font-semibold text-sky-300 hover:bg-sky-500/20"
+                  className="flex items-center gap-2 rounded-lg bg-sky-50 px-3 py-2 text-xs font-semibold text-sky-700 hover:bg-sky-100"
                 >
                   <span>View All Courses</span>
                   <i className="ti ti-arrow-right text-xs" />
@@ -851,9 +851,9 @@ export default function Navbar() {
                     key={l.to}
                     to={l.to}
                     onClick={() => setMobileOpen(false)}
-                    className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-xs font-medium text-slate-300 hover:bg-white/[0.05] hover:text-white"
+                    className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-xs font-medium text-slate-600 hover:bg-white hover:text-slate-950"
                   >
-                    <i className={`ti ${l.icon} text-sky-400`} />
+                    <i className={`ti ${l.icon} text-sky-600`} />
                     <span>{l.label}</span>
                   </Link>
                 ))}
@@ -861,9 +861,9 @@ export default function Navbar() {
                   key="/gallery"
                   to="/gallery"
                   onClick={() => setMobileOpen(false)}
-                  className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-xs font-medium text-slate-300 hover:bg-white/[0.05] hover:text-white"
+                  className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-xs font-medium text-slate-600 hover:bg-white hover:text-slate-950"
                 >
-                  <i className="ti ti-photo text-sky-400" />
+                  <i className="ti ti-photo text-sky-600" />
                   <span>Campus Gallery</span>
                 </Link>
               </div>
@@ -877,9 +877,9 @@ export default function Navbar() {
                     key={l.to}
                     to={l.to}
                     onClick={() => setMobileOpen(false)}
-                    className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-xs font-medium text-slate-300 hover:bg-white/[0.05] hover:text-white"
+                    className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-xs font-medium text-slate-600 hover:bg-white hover:text-slate-950"
                   >
-                    <i className={`ti ${l.icon} text-sky-400`} />
+                    <i className={`ti ${l.icon} text-sky-600`} />
                     <span>{l.label}</span>
                   </Link>
                 ))}
@@ -888,9 +888,9 @@ export default function Navbar() {
                     key={l.to}
                     to={l.to}
                     onClick={() => setMobileOpen(false)}
-                    className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-xs font-medium text-slate-300 hover:bg-white/[0.05] hover:text-white"
+                    className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-xs font-medium text-slate-600 hover:bg-white hover:text-slate-950"
                   >
-                    <i className={`ti ${l.icon} text-sky-400`} />
+                    <i className={`ti ${l.icon} text-sky-600`} />
                     <span>{l.label}</span>
                   </Link>
                 ))}
@@ -903,29 +903,29 @@ export default function Navbar() {
               className={({ isActive }) =>
                 `flex items-center justify-between rounded-lg px-3 py-2.5 text-sm font-medium transition ${
                   isActive
-                    ? "bg-sky-500/15 text-sky-300 font-semibold"
-                    : "text-slate-200 hover:bg-white/[0.05]"
+                    ? "bg-sky-50 text-sky-700 font-semibold"
+                    : "text-slate-700 hover:bg-slate-50 hover:text-slate-950"
                 }`
               }
             >
               <span>Contact Us</span>
-              <i className="ti ti-chevron-right text-xs text-slate-500" />
+              <i className="ti ti-chevron-right text-xs text-slate-400" />
             </NavLink>
           </div>
 
           {/* Mobile Bottom Actions */}
-          <div className="mt-6 space-y-2.5 border-t border-white/10 pt-5">
+          <div className="mt-6 space-y-2.5 border-t border-slate-200 pt-5">
             <a
               href="tel:+919677781155"
-              className="flex items-center justify-center gap-2 rounded-lg border border-white/15 bg-white/[0.04] py-2.5 text-sm font-medium text-slate-200 transition hover:bg-white/10"
+              className="flex items-center justify-center gap-2 rounded-lg border border-slate-200 bg-slate-50 py-2.5 text-sm font-medium text-slate-800 transition hover:bg-slate-100"
             >
-              <i className="ti ti-phone text-sky-400" />
+              <i className="ti ti-phone text-sky-600" />
               <span>Call +91 96777 81155</span>
             </a>
             <Link
               to="/contact"
               onClick={() => setMobileOpen(false)}
-              className="flex items-center justify-center gap-2 rounded-lg bg-sky-500 py-2.5 text-sm font-bold text-slate-950 transition hover:bg-sky-400"
+              className="flex items-center justify-center gap-2 rounded-lg bg-sky-600 py-2.5 text-sm font-bold text-white transition hover:bg-sky-500"
             >
               <span>Enquire Now</span>
               <i className="ti ti-arrow-right text-xs" />
@@ -941,23 +941,23 @@ function MobileAccordion({ label, iconName, children }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="rounded-lg border border-white/[0.08] bg-white/[0.02]">
+    <div className="rounded-lg border border-slate-200/80 bg-slate-50/50">
       <button
         type="button"
         onClick={() => setOpen(!open)}
-        className="flex w-full items-center justify-between px-3.5 py-2.5 text-sm font-medium text-slate-200"
+        className="flex w-full items-center justify-between px-3.5 py-2.5 text-sm font-medium text-slate-800"
       >
         <div className="flex items-center gap-2.5">
-          <i className={`ti ${iconName} text-sky-400`} />
+          <i className={`ti ${iconName} text-sky-600`} />
           <span>{label}</span>
         </div>
         <i
           className={`ti ti-chevron-down text-xs text-slate-400 transition-transform duration-150 ${
-            open ? "rotate-180" : ""
+            open ? "rotate-180 text-sky-600" : ""
           }`}
         />
       </button>
-      {open && <div className="border-t border-white/[0.06] px-3.5 pb-2">{children}</div>}
+      {open && <div className="border-t border-slate-200/60 px-3.5 pb-2">{children}</div>}
     </div>
   );
 }

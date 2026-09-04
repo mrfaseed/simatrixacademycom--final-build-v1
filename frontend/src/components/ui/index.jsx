@@ -409,3 +409,6 @@ export function SectionHeading({ eyebrow, title, subtitle, center = true }) {
 export function Hairline({ className = "" }) {
   return <div className={`hairline ${className}`} />;
 }
+
+export { ResponsiveImage } from "./ResponsiveImage";
+export { cfImageUrl, cfSrcSet } from "../../lib/cloudflareImage";
