@@ -31,6 +31,13 @@ const HERO_BANNERS = [
     to: "/career-guidance",
     title: "Learn Today. Lead Tomorrow.",
   },
+  {
+    id: "banner-learn-without-limits",
+    src: "/banner/REF4.png",
+    alt: "Learn Without Limits: Start Your Journey Toward a Successful Career in Technology",
+    to: "/contact",
+    title: "Learn Without Limits",
+  },
 ];
 
 const STORIES = [
@@ -204,7 +211,22 @@ function CommunitySection({ data, courses, testimonials }) {
 }
 
 function HeroCarousel({ onEnquiry }) {
-  const [current, setCurrent] = useState(0);
+  // Build slide list with boundary clones for infinite loop:
+  // [Clone of Last, ...Banners, Clone of First]
+  const extendedSlides = useMemo(() => {
+    if (HERO_BANNERS.length <= 1) return HERO_BANNERS;
+    const first = HERO_BANNERS[0];
+    const last = HERO_BANNERS[HERO_BANNERS.length - 1];
+    return [
+      { ...last, keyId: `${last.id}-clone-start`, isClone: true, realIndex: HERO_BANNERS.length - 1 },
+      ...HERO_BANNERS.map((b, i) => ({ ...b, keyId: b.id, isClone: false, realIndex: i })),
+      { ...first, keyId: `${first.id}-clone-end`, isClone: true, realIndex: 0 },
+    ];
+  }, []);
+
+  // Index 1 corresponds to HERO_BANNERS[0]
+  const [current, setCurrent] = useState(1);
+  const [withTransition, setWithTransition] = useState(true);
   const [paused, setPaused] = useState(false);
   const [tabHidden, setTabHidden] = useState(false);
   const [dragOffset, setDragOffset] = useState(0);
@@ -212,6 +234,8 @@ function HeroCarousel({ onEnquiry }) {
 
   const startX = useRef(0);
   const hasDragged = useRef(false);
+  const isAnimating = useRef(false);
+  const containerRef = useRef(null);
 
   useEffect(() => {
     const onVisibility = () => setTabHidden(document.hidden);
@@ -220,22 +244,67 @@ function HeroCarousel({ onEnquiry }) {
     return () => document.removeEventListener("visibilitychange", onVisibility);
   }, []);
 
+  // When transition was disabled for instant boundary reset, re-enable it on next animation frame
+  useEffect(() => {
+    if (!withTransition) {
+      const raf = requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          setWithTransition(true);
+        });
+      });
+      return () => cancelAnimationFrame(raf);
+    }
+  }, [withTransition]);
+
+  // Safety fallback for isAnimating flag in case transitionend is interrupted
+  useEffect(() => {
+    if (isAnimating.current) {
+      const timer = setTimeout(() => {
+        isAnimating.current = false;
+      }, 600);
+      return () => clearTimeout(timer);
+    }
+  }, [current]);
+
+  // Autoplay
   useEffect(() => {
     if (paused || tabHidden || isDragging || window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return;
     const timer = window.setInterval(() => {
-      setCurrent((val) => (val + 1) % HERO_BANNERS.length);
+      if (isAnimating.current) return;
+      isAnimating.current = true;
+      setWithTransition(true);
+      setCurrent((val) => val + 1);
     }, 6000);
     return () => window.clearInterval(timer);
   }, [paused, tabHidden, isDragging]);
 
-  const select = (index) => {
-    setCurrent((index + HERO_BANNERS.length) % HERO_BANNERS.length);
+  const move = (direction) => {
+    if (isAnimating.current) return;
+    isAnimating.current = true;
+    setWithTransition(true);
+    setCurrent((val) => val + direction);
   };
-  const move = (direction) => select(current + direction);
+
+  // Seamless jump when reaching boundary clones
+  const handleTransitionEnd = (e) => {
+    if (e.target !== e.currentTarget) return;
+    isAnimating.current = false;
+
+    if (current >= extendedSlides.length - 1) {
+      // Reached clone of first slide -> snap instantly to real first slide
+      setWithTransition(false);
+      setCurrent(1);
+    } else if (current <= 0) {
+      // Reached clone of last slide -> snap instantly to real last slide
+      setWithTransition(false);
+      setCurrent(extendedSlides.length - 2);
+    }
+  };
 
   // Unified Pointer Events (works for both mouse cursor on desktop and finger touch on mobile)
   const handlePointerDown = (e) => {
     if (e.button !== 0 && e.pointerType === "mouse") return;
+    if (isAnimating.current) return;
     startX.current = e.clientX;
     setIsDragging(true);
     hasDragged.current = false;
@@ -251,7 +320,9 @@ function HeroCarousel({ onEnquiry }) {
     if (Math.abs(diff) > 8) {
       hasDragged.current = true;
     }
-    setDragOffset(diff);
+    const containerWidth = containerRef.current?.offsetWidth || 800;
+    const clamped = Math.max(-containerWidth, Math.min(containerWidth, diff));
+    setDragOffset(clamped);
   };
 
   const handlePointerUp = (e) => {
@@ -262,12 +333,24 @@ function HeroCarousel({ onEnquiry }) {
         e.currentTarget.releasePointerCapture(e.pointerId);
       }
     } catch (_) {}
-    if (dragOffset < -50) {
-      move(1);
-    } else if (dragOffset > 50) {
-      move(-1);
+
+    const threshold = 50;
+    if (dragOffset < -threshold) {
+      // Swiped left -> move to next
+      isAnimating.current = true;
+      setWithTransition(true);
+      setCurrent((val) => val + 1);
+    } else if (dragOffset > threshold) {
+      // Swiped right -> move to previous
+      isAnimating.current = true;
+      setWithTransition(true);
+      setCurrent((val) => val - 1);
+    } else {
+      // Snapped back
+      setWithTransition(true);
     }
     setDragOffset(0);
+
     // Reset hasDragged after a brief delay so click handler can block unwanted link navigation during drag
     setTimeout(() => {
       hasDragged.current = false;
@@ -277,6 +360,7 @@ function HeroCarousel({ onEnquiry }) {
   const handlePointerCancel = () => {
     setIsDragging(false);
     setDragOffset(0);
+    setWithTransition(true);
     hasDragged.current = false;
   };
 
@@ -286,6 +370,7 @@ function HeroCarousel({ onEnquiry }) {
       aria-label="Simatrix Featured Announcements"
     >
       <div
+        ref={containerRef}
         tabIndex={0}
         className={`group relative w-full overflow-hidden bg-white outline-none select-none touch-pan-y ${
           isDragging ? "cursor-grabbing" : "cursor-grab"
@@ -310,42 +395,46 @@ function HeroCarousel({ onEnquiry }) {
         {/* Banner Slides Track */}
         <div
           className="flex motion-reduce:transition-none"
+          onTransitionEnd={handleTransitionEnd}
           style={{
             transform: `translateX(calc(-${current * 100}% + ${dragOffset}px))`,
-            transition: isDragging ? "none" : "transform 500ms cubic-bezier(0.25, 1, 0.5, 1)",
+            transition: isDragging || !withTransition ? "none" : "transform 450ms cubic-bezier(0.25, 1, 0.5, 1)",
           }}
         >
-          {HERO_BANNERS.map((banner, index) => (
-            <article
-              key={banner.id}
-              className="relative w-full shrink-0 h-[170px] sm:h-[240px] md:h-[320px] lg:h-[470px]"
-              aria-hidden={index !== current}
-              inert={index !== current ? "" : undefined}
-            >
-              <Link
-                to={banner.to}
-                onClick={(e) => {
-                  if (hasDragged.current) {
-                    e.preventDefault();
-                  }
-                }}
-                className="block h-full w-full select-none focus:outline-none"
-                aria-label={banner.title}
-                tabIndex={index === current ? 0 : -1}
-                draggable="false"
+          {extendedSlides.map((banner, index) => {
+            const isCurrent = index === current;
+            return (
+              <article
+                key={banner.keyId || `${banner.id}-${index}`}
+                className="relative w-full shrink-0 h-[170px] sm:h-[240px] md:h-[320px] lg:h-[470px]"
+                aria-hidden={!isCurrent}
+                inert={!isCurrent ? "" : undefined}
               >
-                <ResponsiveImage
-                  src={banner.src}
-                  alt={banner.alt}
-                  priority={index === 0}
-                  widths={[480, 768, 1080, 1440, 1920, 2120]}
-                  sizes="100vw"
-                  className="h-full w-full object-cover object-center select-none pointer-events-none"
+                <Link
+                  to={banner.to}
+                  onClick={(e) => {
+                    if (hasDragged.current) {
+                      e.preventDefault();
+                    }
+                  }}
+                  className="block h-full w-full select-none focus:outline-none"
+                  aria-label={banner.title}
+                  tabIndex={isCurrent ? 0 : -1}
                   draggable="false"
-                />
-              </Link>
-            </article>
-          ))}
+                >
+                  <ResponsiveImage
+                    src={banner.src}
+                    alt={banner.alt}
+                    priority={index === 1}
+                    widths={[480, 768, 1080, 1440, 1920, 2120]}
+                    sizes="100vw"
+                    className="h-full w-full object-cover object-center select-none pointer-events-none"
+                    draggable="false"
+                  />
+                </Link>
+              </article>
+            );
+          })}
         </div>
       </div>
     </section>
