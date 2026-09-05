@@ -35,6 +35,7 @@ const HERO_BANNERS = [
   {
     id: "banner-learn-without-limits",
     src: "/banner/REF4.png",
+    mobileSrc: "/banner/REF4_MOBILE.png",
     alt: "Learn Without Limits: Start Your Journey Toward a Successful Career in Technology",
     to: "/contact",
     title: "Learn Without Limits",
@@ -212,21 +213,52 @@ function CommunitySection({ data, courses, testimonials }) {
 }
 
 function HeroCarousel({ onEnquiry }) {
-  // Build slide list with boundary clones for infinite loop:
-  // [Clone of Last, ...Banners, Clone of First]
-  const extendedSlides = useMemo(() => {
-    if (HERO_BANNERS.length <= 1) return HERO_BANNERS;
-    const first = HERO_BANNERS[0];
-    const last = HERO_BANNERS[HERO_BANNERS.length - 1];
-    return [
-      { ...last, keyId: `${last.id}-clone-start`, isClone: true, realIndex: HERO_BANNERS.length - 1 },
-      ...HERO_BANNERS.map((b, i) => ({ ...b, keyId: b.id, isClone: false, realIndex: i })),
-      { ...first, keyId: `${first.id}-clone-end`, isClone: true, realIndex: 0 },
-    ];
+  const [isMobile, setIsMobile] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return window.matchMedia("(max-width: 639px)").matches;
+  });
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 639px)");
+    const onChange = (e) => setIsMobile(e.matches);
+    setIsMobile(mq.matches);
+    if (mq.addEventListener) {
+      mq.addEventListener("change", onChange);
+      return () => mq.removeEventListener("change", onChange);
+    } else {
+      mq.addListener(onChange);
+      return () => mq.removeListener(onChange);
+    }
   }, []);
 
-  // Index 1 corresponds to HERO_BANNERS[0]
-  const [current, setCurrent] = useState(1);
+  const activeBanners = useMemo(() => {
+    if (isMobile) {
+      const mobileOnly = HERO_BANNERS.filter((b) => Boolean(b.mobileSrc)).map((b) => ({
+        ...b,
+        src: b.mobileSrc,
+      }));
+      return mobileOnly.length > 0 ? mobileOnly : HERO_BANNERS;
+    }
+    return HERO_BANNERS;
+  }, [isMobile]);
+
+  const isSingle = activeBanners.length <= 1;
+
+  // Build slide list with boundary clones for infinite loop when multiple slides exist:
+  // [Clone of Last, ...Banners, Clone of First]
+  const extendedSlides = useMemo(() => {
+    if (activeBanners.length <= 1) return activeBanners;
+    const first = activeBanners[0];
+    const last = activeBanners[activeBanners.length - 1];
+    return [
+      { ...last, keyId: `${last.id}-clone-start`, isClone: true, realIndex: activeBanners.length - 1 },
+      ...activeBanners.map((b, i) => ({ ...b, keyId: b.id, isClone: false, realIndex: i })),
+      { ...first, keyId: `${first.id}-clone-end`, isClone: true, realIndex: 0 },
+    ];
+  }, [activeBanners]);
+
+  // Index 1 corresponds to activeBanners[0] when cloned; index 0 when single
+  const [current, setCurrent] = useState(() => (activeBanners.length <= 1 ? 0 : 1));
   const [withTransition, setWithTransition] = useState(true);
   const [paused, setPaused] = useState(false);
   const [tabHidden, setTabHidden] = useState(false);
@@ -237,6 +269,11 @@ function HeroCarousel({ onEnquiry }) {
   const hasDragged = useRef(false);
   const isAnimating = useRef(false);
   const containerRef = useRef(null);
+
+  // Sync current index when switching between single and multiple banners
+  useEffect(() => {
+    setCurrent(activeBanners.length <= 1 ? 0 : 1);
+  }, [activeBanners.length]);
 
   useEffect(() => {
     const onVisibility = () => setTabHidden(document.hidden);
@@ -267,9 +304,9 @@ function HeroCarousel({ onEnquiry }) {
     }
   }, [current]);
 
-  // Autoplay
+  // Autoplay (only when multiple slides exist)
   useEffect(() => {
-    if (paused || tabHidden || isDragging || window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return;
+    if (isSingle || paused || tabHidden || isDragging || window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return;
     const timer = window.setInterval(() => {
       if (isAnimating.current) return;
       isAnimating.current = true;
@@ -277,10 +314,10 @@ function HeroCarousel({ onEnquiry }) {
       setCurrent((val) => val + 1);
     }, 6000);
     return () => window.clearInterval(timer);
-  }, [paused, tabHidden, isDragging]);
+  }, [isSingle, paused, tabHidden, isDragging]);
 
   const move = (direction) => {
-    if (isAnimating.current) return;
+    if (isSingle || isAnimating.current) return;
     isAnimating.current = true;
     setWithTransition(true);
     setCurrent((val) => val + direction);
@@ -288,7 +325,7 @@ function HeroCarousel({ onEnquiry }) {
 
   // Seamless jump when reaching boundary clones
   const handleTransitionEnd = (e) => {
-    if (e.target !== e.currentTarget) return;
+    if (isSingle || e.target !== e.currentTarget) return;
     isAnimating.current = false;
 
     if (current >= extendedSlides.length - 1) {
@@ -304,6 +341,7 @@ function HeroCarousel({ onEnquiry }) {
 
   // Unified Pointer Events (works for both mouse cursor on desktop and finger touch on mobile)
   const handlePointerDown = (e) => {
+    if (isSingle) return;
     if (e.button !== 0 && e.pointerType === "mouse") return;
     if (isAnimating.current) return;
     startX.current = e.clientX;
@@ -316,7 +354,7 @@ function HeroCarousel({ onEnquiry }) {
   };
 
   const handlePointerMove = (e) => {
-    if (!isDragging) return;
+    if (isSingle || !isDragging) return;
     const diff = e.clientX - startX.current;
     if (Math.abs(diff) > 8) {
       hasDragged.current = true;
@@ -327,7 +365,7 @@ function HeroCarousel({ onEnquiry }) {
   };
 
   const handlePointerUp = (e) => {
-    if (!isDragging) return;
+    if (isSingle || !isDragging) return;
     setIsDragging(false);
     try {
       if (e.currentTarget.hasPointerCapture(e.pointerId)) {
@@ -359,6 +397,7 @@ function HeroCarousel({ onEnquiry }) {
   };
 
   const handlePointerCancel = () => {
+    if (isSingle) return;
     setIsDragging(false);
     setDragOffset(0);
     setWithTransition(true);
@@ -372,42 +411,43 @@ function HeroCarousel({ onEnquiry }) {
     >
       <div
         ref={containerRef}
-        tabIndex={0}
-        className={`group relative w-full overflow-hidden bg-white outline-none select-none touch-pan-y ${
-          isDragging ? "cursor-grabbing" : "cursor-grab"
+        tabIndex={isSingle ? -1 : 0}
+        className={`group relative w-full overflow-hidden bg-white outline-none select-none ${
+          isSingle ? "" : isDragging ? "cursor-grabbing touch-pan-y" : "cursor-grab touch-pan-y"
         }`}
         aria-roledescription="carousel"
         aria-label="Simatrix opportunities"
         onKeyDown={(e) => {
+          if (isSingle) return;
           if (e.key === "ArrowLeft") move(-1);
           if (e.key === "ArrowRight") move(1);
         }}
-        onMouseEnter={() => setPaused(true)}
-        onMouseLeave={() => setPaused(false)}
-        onFocusCapture={() => setPaused(true)}
+        onMouseEnter={() => !isSingle && setPaused(true)}
+        onMouseLeave={() => !isSingle && setPaused(false)}
+        onFocusCapture={() => !isSingle && setPaused(true)}
         onBlurCapture={(e) => {
-          if (!e.currentTarget.contains(e.relatedTarget)) setPaused(false);
+          if (!isSingle && !e.currentTarget.contains(e.relatedTarget)) setPaused(false);
         }}
-        onPointerDown={handlePointerDown}
-        onPointerMove={handlePointerMove}
-        onPointerUp={handlePointerUp}
-        onPointerCancel={handlePointerCancel}
+        onPointerDown={isSingle ? undefined : handlePointerDown}
+        onPointerMove={isSingle ? undefined : handlePointerMove}
+        onPointerUp={isSingle ? undefined : handlePointerUp}
+        onPointerCancel={isSingle ? undefined : handlePointerCancel}
       >
         {/* Banner Slides Track */}
         <div
           className="flex motion-reduce:transition-none"
           onTransitionEnd={handleTransitionEnd}
           style={{
-            transform: `translateX(calc(-${current * 100}% + ${dragOffset}px))`,
-            transition: isDragging || !withTransition ? "none" : "transform 450ms cubic-bezier(0.25, 1, 0.5, 1)",
+            transform: isSingle ? "none" : `translateX(calc(-${current * 100}% + ${dragOffset}px))`,
+            transition: isSingle || isDragging || !withTransition ? "none" : "transform 450ms cubic-bezier(0.25, 1, 0.5, 1)",
           }}
         >
           {extendedSlides.map((banner, index) => {
-            const isCurrent = index === current;
+            const isCurrent = isSingle ? true : index === current;
             return (
               <article
                 key={banner.keyId || `${banner.id}-${index}`}
-                className="relative w-full shrink-0 h-[170px] sm:h-[240px] md:h-[320px] lg:h-[470px]"
+                className="relative w-full shrink-0 aspect-square sm:aspect-auto h-auto sm:h-[240px] md:h-[320px] lg:h-[470px] max-h-[85vh]"
                 aria-hidden={!isCurrent}
                 inert={!isCurrent ? "" : undefined}
               >
@@ -426,8 +466,8 @@ function HeroCarousel({ onEnquiry }) {
                   <ResponsiveImage
                     src={banner.src}
                     alt={banner.alt}
-                    priority={index === 1}
-                    widths={[480, 768, 1080, 1440, 1920, 2120]}
+                    priority={isSingle ? true : index === 1}
+                    widths={isMobile ? [360, 480, 640, 768, 1080, 1254] : [480, 768, 1080, 1440, 1920, 2120]}
                     sizes="100vw"
                     className="h-full w-full object-cover object-center select-none pointer-events-none"
                     draggable="false"
