@@ -2,7 +2,8 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { api, mediaUrl } from "../api/client";
 import { icon } from "../lib/icons";
-import { Spinner, ResponsiveImage } from "../components/ui";
+import { ResponsiveImage } from "../components/ui";
+import PageLoader from "./Pageloader";
 import EnquiryForm from "../components/EnquiryForm";
 import { useSeo } from "../lib/useSeo";
 import avatar1 from "../assets/avatar1.png";
@@ -500,7 +501,7 @@ export default function Home() {
     window.requestAnimationFrame(() => enquiryRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }));
   };
 
-  if (!data && !error) return <div className="grid min-h-[60vh] place-items-center bg-slate-50"><Spinner className="text-3xl" /></div>;
+  if (!data && !error) return <PageLoader />;
 
   return <main ref={mainRef} id="main-content" className="overflow-hidden bg-white">
     <div className="pointer-events-none fixed inset-x-0 top-0 z-[70] h-1 bg-transparent" aria-hidden="true"><span className="block h-full origin-left bg-gradient-to-r from-amber-400 via-orange-500 to-brand-600 shadow-[0_0_12px_rgba(245,158,11,.45)]" style={{ transform: `scaleX(${scrollProgress})` }} /></div>

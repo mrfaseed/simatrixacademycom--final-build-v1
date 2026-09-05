@@ -3,7 +3,6 @@ import { Outlet, useLocation } from "react-router-dom";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import AcademyChatbot from "../AcademyChatbot";
-import { useLenis } from "../../lib/Uselenis";
 
 const BUTTON_PRIMARY = "#2563EB";
 const BUTTON_HOVER = "#1D4ED8";
@@ -56,7 +55,6 @@ function BackToTop() {
 
 export default function PublicLayout() {
   const { pathname } = useLocation();
-  useLenis();
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "auto" });
     const main = document.getElementById("main");
