@@ -294,10 +294,12 @@ export default function Navbar() {
 
   return (
     <header
-      className={`sticky top-0 z-50 w-full transition-all duration-200 ${
-        scrolled
-          ? "border-b border-slate-200/90 bg-white/95 shadow-[0_4px_25px_-4px_rgba(15,23,42,0.08)] backdrop-blur-xl"
-          : "border-b border-slate-100 bg-white/90 backdrop-blur-md"
+      className={`sticky top-0 w-full transition-all duration-200 ${
+        mobileOpen
+          ? "z-[100] border-b border-slate-200 bg-white shadow-sm"
+          : scrolled
+          ? "z-50 border-b border-slate-200/90 bg-white/95 shadow-[0_4px_25px_-4px_rgba(15,23,42,0.08)] backdrop-blur-xl"
+          : "z-50 border-b border-slate-100 bg-white/90 backdrop-blur-md"
       }`}
     >
       <div
@@ -799,7 +801,7 @@ export default function Navbar() {
       {mobileOpen && (
         <div
           id="mobile-navigation"
-          className="fixed inset-x-0 top-16 bottom-0 z-40 flex flex-col justify-between overflow-y-auto border-t border-slate-200 bg-white/98 px-5 py-6 backdrop-blur-2xl lg:hidden"
+          className="fixed inset-x-0 top-16 bottom-0 h-[calc(100dvh-4rem)] z-[100] flex flex-col justify-between overflow-y-auto border-t border-slate-200 bg-white px-5 py-6 lg:hidden"
         >
           <div className="space-y-3">
             <NavLink
