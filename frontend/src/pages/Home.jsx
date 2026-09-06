@@ -9,6 +9,7 @@ import { useSeo } from "../lib/useSeo";
 import avatar1 from "../assets/avatar1.png";
 import avatar2 from "../assets/avatar2.png";
 import avatar3 from "../assets/avatar3.png";
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
 const HERO_BANNERS = [
   {
@@ -179,37 +180,502 @@ function TechnologyMarquee() {
   </div>;
 }
 
-function CommunitySection({ data, courses, testimonials }) {
-  const suppliedStats = Array.isArray(data?.stats) ? data.stats.slice(0, 4) : [];
-  const stats = suppliedStats.length ? suppliedStats.map((item) => ({ value: item.value || item.number || item.count, label: item.label || item.title })) : [
-    { value: `${courses.length}+`, label: "Courses to explore" },
-    { value: `${data?.categories?.length || 0}`, label: "Technology domains" },
-    { value: "50+", label: "Real World Projects" },
-    { value: `${testimonials.length}`, label: "Learner stories published" },
-  ];
-  const people = [avatar1, avatar2, avatar3];
-  const technologies = [
-    ["ti-brand-html5", "HTML5", "Structures modern web pages"], ["ti-brand-css3", "CSS3", "Styles responsive interfaces"],
-    ["ti-brand-javascript", "JavaScript", "Adds interactive web behavior"], ["ti-brand-react", "React", "Builds component-based interfaces"],
-    ["ti-brand-nodejs", "Node.js", "Runs JavaScript on servers"], ["ti-brand-python", "Python", "Powers web, data and AI apps"],
-    ["ti-brand-github", "GitHub", "Hosts and collaborates on code"], ["ti-brand-docker", "Docker", "Packages apps into containers"],
-    ["ti-brand-aws", "AWS", "Deploys apps in the cloud"], ["ti-database", "Databases", "Stores and manages application data"],
-    ["ti-cloud", "Cloud", "Runs scalable online services"], ["ti-api", "APIs", "Connects applications and services"],
-  ];
+const TECH_ROW_1 = [
+  {
+    name: "HTML5",
+    detail: "Structures modern web pages",
+    icon: (
+      <span className="inline-flex h-7 w-7 items-center justify-center rounded-lg bg-[#E44D26] text-xs font-black text-white shadow-sm">
+        5
+      </span>
+    ),
+  },
+  {
+    name: "CSS3",
+    detail: "Styles responsive interfaces",
+    icon: (
+      <span className="inline-flex h-7 w-7 items-center justify-center rounded-lg bg-[#264DE4] text-xs font-black text-white shadow-sm">
+        3
+      </span>
+    ),
+  },
+  {
+    name: "JS",
+    detail: "Adds interactive web behavior",
+    icon: (
+      <span className="inline-flex h-7 w-7 items-center justify-center rounded-lg bg-[#F7DF1E] text-[11px] font-black text-black shadow-sm">
+        JS
+      </span>
+    ),
+  },
+  {
+    name: "React",
+    detail: "Builds component-based interfaces",
+    icon: <i className="ti ti-brand-react text-2xl text-cyan-400" />,
+  },
+  {
+    name: "Node.js",
+    detail: "Runs JavaScript on servers",
+    icon: <i className="ti ti-brand-nodejs text-2xl text-emerald-400" />,
+  },
+  {
+    name: "Python",
+    detail: "Powers web, data and AI apps",
+    icon: <i className="ti ti-brand-python text-2xl text-amber-300" />,
+  },
+  {
+    name: "Git",
+    detail: "Version control and collaboration",
+    icon: (
+      <span className="inline-flex h-7 w-7 items-center justify-center rounded-lg bg-[#F05032] text-xs font-bold text-white shadow-sm">
+        <i className="ti ti-git-branch text-base" />
+      </span>
+    ),
+  },
+];
 
-  return <section className="bg-white pb-8 pt-2 sm:pb-10 sm:pt-3" aria-labelledby="community-title"><div className="mx-auto max-w-7xl px-6"><div className="mx-auto max-w-3xl text-center"><p className="text-xs font-bold uppercase tracking-[.22em] text-amber-700">Why Simatrix</p><h2 id="community-title" className="mt-3 font-display text-4xl font-semibold text-slate-950 sm:text-5xl">You don’t have to learn alone.</h2><p className="mx-auto mt-4 max-w-2xl leading-7 text-slate-600">Connect practical learning with mentor support, peer momentum and technology-focused career preparation.</p><div className="mt-8 flex justify-center -space-x-3" aria-label="Simatrix learner community">{people.map((src, index) => <img key={src} src={src} alt="" className="h-14 w-14 rounded-full border-4 border-white object-cover shadow-md" />)}{["AK","RS","MP","VK","SN"].map((name, index) => <span key={name} className={`grid h-14 w-14 place-items-center rounded-full border-4 border-white text-xs font-bold text-white shadow-md ${["bg-brand-700","bg-amber-600","bg-emerald-700","bg-violet-700","bg-slate-800"][index]}`}>{name}</span>)}</div></div>
-    <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-      {[
-        ["ti-book-2", "Comprehensive Curriculum", "Industry-aligned syllabus covering fundamentals to advanced, real-world topics."],
-        ["ti-code", "Real-World Projects", "Hands-on projects that mirror the work you’ll do on the job."],
-        ["ti-route", "Personalized Learning Paths", "Flexible tracks tailored to your goals and current skill level."],
-        ["ti-briefcase", "Job Placement Assistance", "Resume building, mock interviews and placement drives with hiring partners."],
-      ].map(([ic, title, text]) => <article key={title} className="group rounded-2xl border border-slate-200 bg-white p-6 shadow-[0_12px_35px_-26px_rgba(15,23,42,.45)] transition duration-300 hover:-translate-y-1 hover:border-brand-300 hover:shadow-lg"><span className="grid h-11 w-11 place-items-center rounded-xl bg-blue-50 text-xl text-blue-600 transition group-hover:bg-blue-600 group-hover:text-white"><i className={`ti ${ic}`} /></span><h3 className="mt-5 font-display text-xl font-semibold text-slate-950">{title}</h3><p className="mt-2 text-sm leading-6 text-slate-600">{text}</p></article>)}
-    </div>
-    <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">{stats.map((stat, index) => <div key={`${stat.label}-${index}`} className="rounded-2xl border border-slate-200 bg-slate-50 p-6"><strong className="font-display text-4xl font-semibold text-slate-950">{stat.value}</strong><p className="mt-1 text-sm text-slate-600">{stat.label}</p></div>)}</div>
-    <div className="mt-4 grid gap-4 lg:grid-cols-2"><article className="relative min-h-64 self-start overflow-hidden rounded-3xl border border-slate-200 bg-slate-50 p-6 sm:p-7"><p className="text-xs font-bold uppercase tracking-[.18em] text-brand-700">Always-on learning support</p><h3 className="mt-2 font-display text-2xl font-semibold text-slate-950">Questions become progress when you can discuss them.</h3><p className="mt-2 max-w-lg text-sm leading-6 text-slate-600">Learn through mentor feedback, peer conversations, project reviews and structured career preparation.</p><div className="absolute inset-x-6 bottom-5 flex flex-wrap items-center gap-3 text-2xl sm:gap-4 sm:text-3xl" aria-hidden="true">{["ti-message-circle","ti-brand-whatsapp","ti-brand-instagram","ti-mail","ti-video"].map((item, index) => <span key={item} className={`grid h-11 w-11 place-items-center rounded-xl bg-white shadow-md ${index % 2 ? "rotate-3 text-emerald-600" : "-rotate-3 text-brand-700"}`}><i className={`ti ${item}`} /></span>)}</div></article><article className="relative min-h-64 self-start rounded-3xl border border-slate-200 bg-[#0d1b32] p-6 text-white sm:p-7"><p className="text-[10px] font-bold uppercase tracking-[.16em] text-amber-300">Build with relevant tools</p><h3 className="mt-1.5 font-display text-xl font-semibold">From foundations to modern technology stacks.</h3><p className="mt-1.5 max-w-lg text-xs leading-5 text-slate-300">Explore technologies through guided courses and combine them into portfolio-ready projects.</p><div className="mt-3 flex max-w-sm flex-wrap gap-2" aria-label="Technologies covered">{technologies.map(([ic, name, detail]) => <button type="button" key={name} aria-label={`${name}: ${detail}`} className="group/tech relative grid h-9 w-9 place-items-center rounded-lg border border-white/10 bg-white/10 text-lg text-white transition hover:-translate-y-1 hover:bg-white hover:text-brand-800 focus-visible:bg-white focus-visible:text-brand-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-300"><i className={`ti ${ic}`} /><span className="pointer-events-none absolute bottom-[calc(100%+.5rem)] left-1/2 z-20 w-44 -translate-x-1/2 translate-y-1 rounded-lg bg-white px-3 py-2 text-left text-xs leading-4 text-slate-600 opacity-0 shadow-xl transition group-hover/tech:translate-y-0 group-hover/tech:opacity-100 group-focus-visible/tech:translate-y-0 group-focus-visible/tech:opacity-100"><strong className="mb-1 block text-slate-950">{name}</strong>{detail}</span></button>)}</div></article></div>
-    {/* <TechnologyMarquee /> */}
-  </div></section>;
+const TECH_ROW_2 = [
+  {
+    name: "Docker",
+    detail: "Packages apps into containers",
+    icon: <i className="ti ti-brand-docker text-2xl text-sky-400" />,
+  },
+  {
+    name: "AWS",
+    detail: "Deploys apps in the cloud",
+    icon: (
+      <span className="font-black text-amber-400 text-sm tracking-tighter">
+        aws
+      </span>
+    ),
+  },
+  {
+    name: "MySQL",
+    detail: "Relational database management",
+    icon: <i className="ti ti-brand-mysql text-2xl text-sky-400" />,
+  },
+  {
+    name: "MongoDB",
+    detail: "Document-oriented NoSQL database",
+    icon: <i className="ti ti-brand-mongodb text-2xl text-emerald-400" />,
+  },
+  {
+    name: "PostgreSQL",
+    detail: "Enterprise-grade SQL database",
+    icon: <i className="ti ti-database text-2xl text-sky-300" />,
+  },
+  {
+    name: "API",
+    detail: "Connects applications and services",
+    icon: (
+      <span className="inline-flex items-center justify-center rounded-md border border-white/20 bg-white/10 px-1.5 py-0.5 text-[10px] font-black tracking-wider text-white">
+        API
+      </span>
+    ),
+  },
+  {
+    name: "Cloud",
+    detail: "Scalable cloud infrastructure",
+    icon: <i className="ti ti-cloud text-2xl text-white" />,
+  },
+];
+
+function CommunitySection({ data, courses, testimonials }) {
+  const people = [avatar1, avatar2, avatar3];
+
+  return (
+    <section className="bg-white pb-12 pt-2 sm:pb-16 sm:pt-3" aria-labelledby="community-title">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+        {/* Header - Kept 100% untouched as requested */}
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="text-xs font-bold uppercase tracking-[.22em] text-amber-700">Why Simatrix</p>
+          <h2 id="community-title" className="mt-3 font-display text-4xl font-semibold text-slate-950 sm:text-5xl">
+            You don’t have to learn alone.
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl leading-7 text-slate-600">
+            Connect practical learning with mentor support, peer momentum and technology-focused career preparation.
+          </p>
+          <div className="mt-8 flex justify-center -space-x-3" aria-label="Simatrix learner community">
+            {people.map((src) => (
+              <img key={src} src={src} alt="" className="h-14 w-14 rounded-full border-4 border-white object-cover shadow-md" />
+            ))}
+            {["AK", "RS", "MP", "VK", "SN"].map((name, index) => (
+              <span
+                key={name}
+                className={`grid h-14 w-14 place-items-center rounded-full border-4 border-white text-xs font-bold text-white shadow-md ${
+                  ["bg-brand-700", "bg-amber-600", "bg-emerald-700", "bg-violet-700", "bg-slate-800"][index]
+                }`}
+              >
+                {name}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* 1. Four Feature Cards */}
+        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {/* 01: Industry-Ready Learning */}
+          <Link
+            to="/courses"
+            className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-slate-200/70 bg-gradient-to-br from-white via-white to-blue-50/30 p-6 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.03)] transition-all duration-300 hover:-translate-y-1 hover:border-blue-300/80 hover:shadow-xl"
+          >
+            <div className="pointer-events-none absolute -bottom-8 -right-8 h-28 w-28 rounded-full bg-blue-100/60 blur-xl transition-all duration-300 group-hover:scale-125 group-hover:bg-blue-200/70" />
+            <div className="relative z-10">
+              <div className="flex items-center justify-between">
+                <span className="grid h-12 w-12 place-items-center rounded-2xl bg-blue-600 text-2xl text-white shadow-sm transition-transform duration-300 group-hover:scale-105">
+                  <i className="ti ti-school" />
+                </span>
+                <span className="font-mono text-sm font-semibold text-blue-300">01</span>
+              </div>
+              <h3 className="mt-4 font-display text-lg font-bold text-slate-900">
+                Industry-Ready Learning
+              </h3>
+              <p className="mt-2 text-xs leading-relaxed text-slate-600">
+                Learn skills aligned with today’s technology industry.
+              </p>
+            </div>
+            <div className="relative z-10 mt-6 flex items-center justify-between pt-1">
+              <span className="flex items-center gap-1.5 text-xs font-semibold text-blue-600 transition-colors group-hover:text-blue-700">
+                Explore Curriculum
+                <i className="ti ti-arrow-right text-xs transition-transform group-hover:translate-x-0.5" />
+              </span>
+              <span className="grid h-8 w-8 place-items-center rounded-full bg-blue-50 text-blue-600 shadow-xs transition-all duration-300 group-hover:scale-105 group-hover:bg-blue-600 group-hover:text-white">
+                <i className="ti ti-arrow-right text-xs" />
+              </span>
+            </div>
+          </Link>
+
+          {/* 02: Real-World Projects */}
+          <Link
+            to="/courses"
+            className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-slate-200/70 bg-gradient-to-br from-white via-white to-emerald-50/30 p-6 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.03)] transition-all duration-300 hover:-translate-y-1 hover:border-emerald-300/80 hover:shadow-xl"
+          >
+            <div className="pointer-events-none absolute -bottom-8 -right-8 h-28 w-28 rounded-full bg-emerald-100/60 blur-xl transition-all duration-300 group-hover:scale-125 group-hover:bg-emerald-200/70" />
+            <div className="relative z-10">
+              <div className="flex items-center justify-between">
+                <span className="grid h-12 w-12 place-items-center rounded-2xl bg-emerald-600 text-2xl text-white shadow-sm transition-transform duration-300 group-hover:scale-105">
+                  <i className="ti ti-code" />
+                </span>
+                <span className="font-mono text-sm font-semibold text-emerald-300">02</span>
+              </div>
+              <h3 className="mt-4 font-display text-lg font-bold text-slate-900">
+                Real-World Projects
+              </h3>
+              <p className="mt-2 text-xs leading-relaxed text-slate-600">
+                Build practical projects for your portfolio.
+              </p>
+            </div>
+            <div className="relative z-10 mt-6 flex items-center justify-between pt-1">
+              <span className="flex items-center gap-1.5 text-xs font-semibold text-emerald-600 transition-colors group-hover:text-emerald-700">
+                Explore Projects
+                <i className="ti ti-arrow-right text-xs transition-transform group-hover:translate-x-0.5" />
+              </span>
+              <span className="grid h-8 w-8 place-items-center rounded-full bg-emerald-50 text-emerald-600 shadow-xs transition-all duration-300 group-hover:scale-105 group-hover:bg-emerald-600 group-hover:text-white">
+                <i className="ti ti-arrow-right text-xs" />
+              </span>
+            </div>
+          </Link>
+
+          {/* 03: Personalized Learning */}
+          <Link
+            to="/career-guidance"
+            className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-slate-200/70 bg-gradient-to-br from-white via-white to-purple-50/30 p-6 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.03)] transition-all duration-300 hover:-translate-y-1 hover:border-purple-300/80 hover:shadow-xl"
+          >
+            <div className="pointer-events-none absolute -bottom-8 -right-8 h-28 w-28 rounded-full bg-purple-100/60 blur-xl transition-all duration-300 group-hover:scale-125 group-hover:bg-purple-200/70" />
+            <div className="relative z-10">
+              <div className="flex items-center justify-between">
+                <span className="grid h-12 w-12 place-items-center rounded-2xl bg-purple-600 text-2xl text-white shadow-sm transition-transform duration-300 group-hover:scale-105">
+                  <i className="ti ti-users" />
+                </span>
+                <span className="font-mono text-sm font-semibold text-purple-300">03</span>
+              </div>
+              <h3 className="mt-4 font-display text-lg font-bold text-slate-900">
+                Personalized Learning
+              </h3>
+              <p className="mt-2 text-xs leading-relaxed text-slate-600">
+                Learn at your pace with guidance that fits your goals.
+              </p>
+            </div>
+            <div className="relative z-10 mt-6 flex items-center justify-between pt-1">
+              <span className="flex items-center gap-1.5 text-xs font-semibold text-purple-600 transition-colors group-hover:text-purple-700">
+                Personalize Track
+                <i className="ti ti-arrow-right text-xs transition-transform group-hover:translate-x-0.5" />
+              </span>
+              <span className="grid h-8 w-8 place-items-center rounded-full bg-purple-50 text-purple-600 shadow-xs transition-all duration-300 group-hover:scale-105 group-hover:bg-purple-600 group-hover:text-white">
+                <i className="ti ti-arrow-right text-xs" />
+              </span>
+            </div>
+          </Link>
+
+          {/* 04: Career & Placement Support */}
+          <Link
+            to="/placement"
+            className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-slate-200/70 bg-gradient-to-br from-white via-white to-amber-50/30 p-6 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.03)] transition-all duration-300 hover:-translate-y-1 hover:border-amber-300/80 hover:shadow-xl"
+          >
+            <div className="pointer-events-none absolute -bottom-8 -right-8 h-28 w-28 rounded-full bg-amber-100/60 blur-xl transition-all duration-300 group-hover:scale-125 group-hover:bg-amber-200/70" />
+            <div className="relative z-10">
+              <div className="flex items-center justify-between">
+                <span className="grid h-12 w-12 place-items-center rounded-2xl bg-amber-500 text-2xl text-white shadow-sm transition-transform duration-300 group-hover:scale-105">
+                  <i className="ti ti-briefcase" />
+                </span>
+                <span className="font-mono text-sm font-semibold text-amber-300">04</span>
+              </div>
+              <h3 className="mt-4 font-display text-lg font-bold text-slate-900">
+                Career &amp; Placement Support
+              </h3>
+              <p className="mt-2 text-xs leading-relaxed text-slate-600">
+                Prepare for interviews, careers and placement opportunities.
+              </p>
+            </div>
+            <div className="relative z-10 mt-6 flex items-center justify-between pt-1">
+              <span className="flex items-center gap-1.5 text-xs font-semibold text-amber-600 transition-colors group-hover:text-amber-700">
+                Placement Support
+                <i className="ti ti-arrow-right text-xs transition-transform group-hover:translate-x-0.5" />
+              </span>
+              <span className="grid h-8 w-8 place-items-center rounded-full bg-amber-50 text-amber-600 shadow-xs transition-all duration-300 group-hover:scale-105 group-hover:bg-amber-600 group-hover:text-white">
+                <i className="ti ti-arrow-right text-xs" />
+              </span>
+            </div>
+          </Link>
+        </div>
+
+        {/* 2. Four Stats Cards */}
+        <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="flex items-center gap-4 rounded-3xl border border-slate-200/70 bg-white p-5 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.03)] sm:p-6">
+            <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-blue-50 text-2xl text-blue-600">
+              <i className="ti ti-file-text" />
+            </span>
+            <div>
+              <strong className="font-display text-3xl font-bold text-slate-950">
+                {courses.length ? `${courses.length}+` : "34+"}
+              </strong>
+              <p className="mt-0.5 text-xs font-medium text-slate-500">Courses to explore</p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-4 rounded-3xl border border-slate-200/70 bg-white p-5 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.03)] sm:p-6">
+            <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-purple-50 text-2xl text-purple-600">
+              <i className="ti ti-stack-2" />
+            </span>
+            <div>
+              <strong className="font-display text-3xl font-bold text-slate-950">
+                {data?.categories?.length || "10"}
+              </strong>
+              <p className="mt-0.5 text-xs font-medium text-slate-500">Technology domains</p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-4 rounded-3xl border border-slate-200/70 bg-white p-5 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.03)] sm:p-6">
+            <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-blue-50 text-2xl text-blue-600">
+              <i className="ti ti-file-text" />
+            </span>
+            <div>
+              <strong className="font-display text-3xl font-bold text-slate-950">50+</strong>
+              <p className="mt-0.5 text-xs font-medium text-slate-500">Real World Projects</p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-4 rounded-3xl border border-slate-200/70 bg-white p-5 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.03)] sm:p-6">
+            <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-purple-50 text-2xl text-purple-600">
+              <i className="ti ti-users" />
+            </span>
+            <div>
+              <strong className="font-display text-3xl font-bold text-slate-950">500+</strong>
+              <p className="mt-0.5 text-xs font-medium text-slate-500">Learners supported</p>
+            </div>
+          </div>
+        </div>
+
+        {/* 3. Two Big Bento Cards: Support (with Lottie) & Tech Stacks */}
+        <div className="mt-5 grid gap-5 lg:grid-cols-2">
+          {/* Support Card with Lottie */}
+          <div className="relative flex flex-col justify-between overflow-hidden rounded-3xl border border-slate-200/70 bg-white p-7 shadow-[0_4px_25px_-4px_rgba(0,0,0,0.04)] sm:p-8">
+            <div className="grid grid-cols-1 items-center gap-6 md:grid-cols-[1.1fr_0.9fr]">
+              <div>
+                <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-blue-600">
+                  Always-on learning support
+                </p>
+                <h3 className="mt-3 font-display text-2xl font-bold leading-snug text-slate-950 sm:text-3xl">
+                  Questions become progress when you can discuss them.
+                </h3>
+                <p className="mt-3 text-xs leading-relaxed text-slate-600 sm:text-sm">
+                  Learn through mentor feedback, peer conversations, project reviews and structured career preparation.
+                </p>
+                <div className="mt-6">
+                  <Link
+                    to="/contact"
+                    className="inline-flex items-center gap-2 rounded-full bg-[#0b1528] px-6 py-2.5 text-xs font-semibold text-white shadow-sm transition hover:bg-brand-900"
+                  >
+                    <span>Get Started</span>
+                    <i className="ti ti-arrow-right text-xs" />
+                  </Link>
+                </div>
+              </div>
+
+              {/* Lottie Animation (Share.lottie) */}
+              <div className="flex items-center justify-center">
+                <div className="relative h-48 w-full max-w-[280px] sm:h-56">
+                  <DotLottieReact
+                    src="/Lottie/Share.lottie"
+                    loop
+                    autoplay
+                    className="h-full w-full object-contain"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-8 flex flex-col justify-between gap-4 border-t border-slate-100 pt-6 sm:flex-row sm:items-center">
+              <div>
+                <p className="mb-2.5 text-xs font-bold text-slate-800">Connect with our community</p>
+                <div className="flex items-center gap-2">
+                  <a
+                    href="https://discord.gg"
+                    target="_blank"
+                    rel="noreferrer"
+                    title="Discord"
+                    className="grid h-9 w-9 place-items-center rounded-xl border border-slate-200/80 bg-white text-[#5865F2] shadow-xs transition hover:border-[#5865F2] hover:bg-[#5865F2]/10"
+                  >
+                    <i className="ti ti-brand-discord text-lg" />
+                  </a>
+                  <a
+                    href="https://wa.me/919677781155"
+                    target="_blank"
+                    rel="noreferrer"
+                    title="WhatsApp"
+                    className="grid h-9 w-9 place-items-center rounded-xl border border-slate-200/80 bg-white text-[#25D366] shadow-xs transition hover:border-[#25D366] hover:bg-[#25D366]/10"
+                  >
+                    <i className="ti ti-brand-whatsapp text-lg" />
+                  </a>
+                  <a
+                    href="https://instagram.com/simatrixacademy"
+                    target="_blank"
+                    rel="noreferrer"
+                    title="Instagram"
+                    className="grid h-9 w-9 place-items-center rounded-xl border border-slate-200/80 bg-white text-[#E4405F] shadow-xs transition hover:border-[#E4405F] hover:bg-[#E4405F]/10"
+                  >
+                    <i className="ti ti-brand-instagram text-lg" />
+                  </a>
+                  <a
+                    href="https://linkedin.com/company/simatrixacademy"
+                    target="_blank"
+                    rel="noreferrer"
+                    title="LinkedIn"
+                    className="grid h-9 w-9 place-items-center rounded-xl border border-slate-200/80 bg-white text-[#0A66C2] shadow-xs transition hover:border-[#0A66C2] hover:bg-[#0A66C2]/10"
+                  >
+                    <i className="ti ti-brand-linkedin text-lg" />
+                  </a>
+                  <a
+                    href="https://youtube.com/@simatrixacademy"
+                    target="_blank"
+                    rel="noreferrer"
+                    title="YouTube"
+                    className="grid h-9 w-9 place-items-center rounded-xl border border-slate-200/80 bg-white text-[#FF0000] shadow-xs transition hover:border-[#FF0000] hover:bg-[#FF0000]/10"
+                  >
+                    <i className="ti ti-brand-youtube text-lg" />
+                  </a>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3 rounded-2xl border border-blue-100 bg-blue-50/50 px-4 py-2.5">
+                <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-blue-600 text-white shadow-xs">
+                  <i className="ti ti-shield-check text-lg" />
+                </span>
+                <div className="text-[11px] leading-tight">
+                  <p className="font-semibold text-slate-700">Mentor-guided • Peer-driven • Project-focused</p>
+                  <p className="mt-0.5 font-bold text-blue-700">Career-ready</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Dark Tech Stack Card */}
+          <div className="relative flex flex-col justify-between overflow-hidden rounded-3xl border border-slate-800 bg-[#050b18] p-7 text-white shadow-2xl sm:p-8">
+            {/* Ambient Glows */}
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-blue-600/20 blur-3xl"
+            />
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute -bottom-16 -left-16 h-48 w-48 rounded-full bg-indigo-600/10 blur-3xl"
+            />
+
+            <div>
+              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-amber-500 sm:text-[11px]">
+                Build with relevant tools
+              </p>
+              <h3 className="mt-2 font-display text-xl font-bold text-white sm:text-2xl">
+                From foundations to modern technology stacks.
+              </h3>
+              <p className="mt-2 max-w-xl text-xs leading-relaxed text-slate-300 sm:text-sm">
+                Explore technologies through guided courses and combine them into portfolio-ready projects.
+              </p>
+            </div>
+
+            <div className="mt-6 flex flex-col gap-2.5">
+              {/* Row 1: 7 technologies */}
+              <div className="grid grid-cols-7 gap-2 sm:gap-2.5">
+                {TECH_ROW_1.map((item) => (
+                  <div
+                    key={item.name}
+                    title={`${item.name} — ${item.detail}`}
+                    className="group/tech flex h-16 cursor-default flex-col items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] p-1 transition-all duration-200 hover:-translate-y-1 hover:border-white/30 hover:bg-white/[0.09] sm:h-18"
+                  >
+                    <span className="flex h-7 w-7 items-center justify-center text-xl sm:text-2xl">
+                      {item.icon}
+                    </span>
+                    <span className="mt-1 text-[10px] font-medium tracking-tight text-slate-300 group-hover/tech:text-white">
+                      {item.name}
+                    </span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Row 2: 7 technologies */}
+              <div className="grid grid-cols-7 gap-2 sm:gap-2.5">
+                {TECH_ROW_2.map((item) => (
+                  <div
+                    key={item.name}
+                    title={`${item.name} — ${item.detail}`}
+                    className="group/tech flex h-16 cursor-default flex-col items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] p-1 transition-all duration-200 hover:-translate-y-1 hover:border-white/30 hover:bg-white/[0.09] sm:h-18"
+                  >
+                    <span className="flex h-7 w-7 items-center justify-center text-xl sm:text-2xl">
+                      {item.icon}
+                    </span>
+                    <span className="mt-1 text-[10px] font-medium tracking-tight text-slate-300 group-hover/tech:text-white">
+                      {item.name}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="mt-7 flex items-center justify-between">
+              <Link
+                to="/courses"
+                className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/[0.03] px-6 py-2.5 text-xs font-semibold text-white backdrop-blur-sm transition-all hover:border-white/40 hover:bg-white/10"
+              >
+                <span>Explore All Technologies</span>
+                <i className="ti ti-arrow-right text-xs" />
+              </Link>
+
+              {/* Handwritten "Learn Build Belong ↗" watermark */}
+              <div className="select-none text-right font-caveat text-sm leading-tight text-slate-300 sm:text-base -rotate-3">
+                <p className="tracking-wide">Learn</p>
+                <p className="tracking-wide pl-1">Build</p>
+                <p className="flex items-center justify-end gap-1 font-bold tracking-wide text-white">
+                  <span>Belong</span>
+                  <span className="text-base sm:text-lg">↗</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  );
 }
 
 function HeroCarousel({ onEnquiry }) {
@@ -554,7 +1020,6 @@ export default function Home() {
       <div className="mt-10 grid gap-6 lg:grid-cols-3">{VISITOR_PATHS.map((path, index) => <article key={path.label} className={`group relative flex flex-col overflow-hidden rounded-3xl border p-7 transition duration-300 hover:-translate-y-1.5 hover:shadow-2xl ${index === 2 ? "border-amber-300 bg-gradient-to-br from-amber-50 to-white" : "border-slate-200 bg-white"}`}><span aria-hidden="true" className="absolute -right-8 -top-10 font-display text-[8rem] font-bold leading-none text-slate-900/[.035]">{index + 1}</span><div className="relative flex items-center justify-between"><span className="grid h-12 w-12 place-items-center rounded-2xl bg-brand-50 text-2xl text-brand-700 ring-1 ring-brand-100"><i className={`ti ${path.icon}`} /></span><span className="rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-bold text-slate-600 shadow-sm">{path.label}</span></div><h2 className="relative mt-6 font-display text-2xl font-semibold text-slate-950">{path.title}</h2><p className="relative mt-3 flex-1 text-sm leading-6 text-slate-600">{path.text}</p><Link to={path.to} className="relative mt-6 inline-flex items-center gap-2 font-bold text-brand-700">{path.action}<i className="ti ti-arrow-right transition-transform group-hover:translate-x-1" /></Link></article>)}</div>
     </section>
  */}
-    <section className="border-y border-slate-200 bg-slate-50" aria-labelledby="verify-heading"><div className="mx-auto max-w-7xl px-6 py-10"><div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between"><div><p className="text-xs font-bold uppercase tracking-[.2em] text-amber-700">Verify before you decide</p><h2 id="verify-heading" className="mt-2 font-display text-2xl font-semibold text-slate-950">Explore the proof behind the promise</h2></div><p className="max-w-lg text-sm leading-6 text-slate-600">Use these resources to evaluate Simatrix on your own terms before sharing your details.</p></div><div className="mt-7 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">{TRUST_LINKS.map(([ic,title,text,to]) => <Link key={title} to={to} className="group flex gap-3 rounded-xl border border-slate-200 bg-white p-4 transition hover:border-brand-300 hover:shadow-md"><i className={`ti ${ic} mt-0.5 text-xl text-brand-700`} /><span><strong className="block text-sm text-slate-950">{title}</strong><span className="mt-1 block text-xs leading-5 text-slate-500">{text}</span></span><i className="ti ti-arrow-up-right ml-auto text-slate-400 transition group-hover:text-brand-700" /></Link>)}</div></div></section>
 
     {error ? <section className="mx-auto max-w-7xl px-6 py-20 text-center"><p className="text-slate-600">We couldn’t load the latest courses right now.</p><Link to="/courses" className="mt-4 inline-flex font-bold text-brand-700">Browse courses</Link></section> : <>
       <section className="mx-auto max-w-7xl px-6 py-20 sm:py-28">
