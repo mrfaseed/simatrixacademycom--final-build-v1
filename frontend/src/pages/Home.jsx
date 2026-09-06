@@ -353,256 +353,196 @@ function PopularCoursesCarousel({ courses }) {
 }
 
 function ModernLearnerStories({ testimonials = [] }) {
-  const [activeCategory, setActiveCategory] = useState("all");
-  const trackRef = useRef(null);
+  const curatedStories = useMemo(() => {
+    const list = [
+      {
+        id: "curated-1",
+        name: "Priya R.",
+        role: "Junior Web Developer",
+        track: "Full Stack",
+        avatar: avatar1,
+        quote: "Before Simatrix, my projects were mostly copied tutorial code. Mentors helped me build an e-commerce engine with Docker and live payments that impressed interviewers.",
+        rating: 5,
+      },
+      {
+        id: "curated-2",
+        name: "Karthik S.",
+        role: "AI & Data Science Associate",
+        track: "Python & AI",
+        avatar: avatar2,
+        quote: "Moving from basic Python to fine-tuning LLM embeddings and FastAPI endpoints gave me a genuine portfolio. The 1-on-1 mentor guidance in the lab was invaluable.",
+        rating: 5,
+      },
+      {
+        id: "curated-3",
+        name: "Divya M.",
+        role: "Cloud Operations Associate",
+        track: "Cloud & DevOps",
+        avatar: avatar3,
+        quote: "Physical lab access with real server equipment made all the difference. Configuring CI/CD pipelines and AWS VPCs matched exactly what recruiters tested.",
+        rating: 5,
+      },
+      {
+        id: "curated-4",
+        name: "Sanjay Kumar",
+        role: "Junior SOC Analyst",
+        track: "Cybersecurity",
+        avatar: avatar2,
+        quote: "The practical Wireshark packet captures and vulnerability scanning gave me hands-on confidence. The mock interview rounds prepared me thoroughly.",
+        rating: 5,
+      },
+      {
+        id: "curated-5",
+        name: "Anitha Balan",
+        role: "Frontend Engineer Intern",
+        track: "React & TypeScript",
+        avatar: avatar1,
+        quote: "Coming from a non-engineering degree, the step-by-step mentoring removed all self-doubt. The trainers took me from basics to shipping full React web apps.",
+        rating: 5,
+      },
+      {
+        id: "curated-6",
+        name: "Harish Roshan",
+        role: "Software Intern @ Startup",
+        track: "Full Stack Track",
+        avatar: avatar3,
+        quote: "Most internships are certificate rubber-stamps. At Simatrix, we had daily standups, Git branch reviews, and sprint deadlines that recruiters loved.",
+        rating: 5,
+      },
+    ];
 
-  // Merge any dynamic backend testimonials with our curated rich stories
-  const allStories = useMemo(() => {
-    const list = [...STORIES];
-    if (testimonials?.length) {
-      testimonials.forEach((item, idx) => {
-        const found = list.find((s) => s.name.toLowerCase() === (item.name || "").toLowerCase());
-        if (found) {
-          if (item.quote || item.content) found.quote = item.quote || item.content;
-          if (item.rating) found.rating = item.rating;
-        } else if (item.name && (item.quote || item.content)) {
+    if (testimonials?.length && testimonials !== STORIES) {
+      const dynamicList = testimonials
+        .filter((t) => t?.quote || t?.content)
+        .map((t, idx) => {
           const avatars = [avatar1, avatar2, avatar3];
-          list.push({
-            id: `dyn-${item.id || idx}`,
-            name: item.name,
-            course: item.course || item.designation || "Full Stack Development",
-            category: "full-stack",
-            avatar: avatars[idx % avatars.length],
-            college: "Simatrix Academy Alum",
-            batch: "Verified Student",
-            role: item.designation || "Software Engineer",
-            headline: "“Hands-on projects and direct mentor support made all the difference.”",
-            quote: item.quote || item.content,
-            highlight: "Verified Placement Support",
-            campus: "Madurai Campus",
-            rating: item.rating || 5,
-          });
-        }
-      });
+          return {
+            id: `dyn-${t.id || idx}`,
+            name: t.name || "Student",
+            role: t.designation || "Simatrix Graduate",
+            track: t.course || "Technical Track",
+            avatar: t.avatar || avatars[idx % avatars.length],
+            quote: t.quote || t.content,
+            rating: t.rating || 5,
+          };
+        });
+      if (dynamicList.length >= 3) {
+        return dynamicList;
+      }
     }
     return list;
   }, [testimonials]);
 
-  const filteredStories = useMemo(() => {
-    if (activeCategory === "all") return allStories;
-    return allStories.filter((s) => s.category === activeCategory);
-  }, [allStories, activeCategory]);
-
-  const CATEGORIES = [
-    { id: "all", label: "All Stories", count: allStories.length },
-    { id: "full-stack", label: "Full Stack Web", count: allStories.filter((s) => s.category === "full-stack").length },
-    { id: "ai", label: "Python & AI", count: allStories.filter((s) => s.category === "ai").length },
-    { id: "cloud", label: "Cloud & DevOps", count: allStories.filter((s) => s.category === "cloud").length },
-    { id: "cybersecurity", label: "Cybersecurity", count: allStories.filter((s) => s.category === "cybersecurity").length },
-  ];
-
-  const scroll = (direction) => {
-    if (!trackRef.current) return;
-    const card = trackRef.current.firstElementChild;
-    const cardWidth = card ? card.getBoundingClientRect().width : 380;
-    trackRef.current.scrollBy({ left: direction * (cardWidth + 24), behavior: "smooth" });
-  };
-
   return (
     <div className="relative">
-      {/* 1. Header & Proof Ribbon */}
-      <div className="mx-auto max-w-4xl text-center">
-        <div className="inline-flex items-center gap-2 rounded-full border border-amber-200/80 bg-gradient-to-r from-amber-50 to-orange-50/50 px-4 py-1.5 text-xs font-bold uppercase tracking-[.18em] text-amber-900 shadow-xs">
-          <i className="ti ti-sparkles text-amber-600" />
-          Verified Learner Stories
+      {/* 1. Minimal Header (Clean, Monochromatic, Elegant) */}
+      <div className="mx-auto max-w-2xl text-center">
+        <div className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3.5 py-1 text-xs font-semibold tracking-wider text-slate-700 shadow-2xs">
+          <i className="ti ti-star-filled text-amber-500 text-xs" />
+          <span>Student Stories</span>
         </div>
-        <h2 className="mt-4 font-display text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl lg:text-5xl">
+        <h2 className="mt-3 font-display text-2xl font-bold tracking-tight text-slate-950 sm:text-3xl lg:text-4xl">
           Confidence built through practice.
         </h2>
-        <p className="mt-4 text-sm leading-relaxed text-slate-600 sm:text-base max-w-2xl mx-auto">
-          Real feedback from students who built live portfolio projects, defended their code in mock interviews, and transitioned into technical careers.
+        <p className="mt-2 text-xs sm:text-sm leading-relaxed text-slate-600">
+          Real feedback from graduates who built practical portfolio projects and launched their tech careers.
         </p>
-
-        {/* Proof & Ratings Bar */}
-        <div className="mt-7 flex flex-wrap items-center justify-center gap-3 sm:gap-6 text-xs text-slate-700">
-          <div className="flex items-center gap-2 rounded-full border border-slate-200/80 bg-white px-4 py-2 shadow-xs">
-            <div className="flex text-amber-400 text-xs">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <i key={i} className="ti ti-star-filled" />
-              ))}
-            </div>
-            <span className="font-bold text-slate-950">4.9 / 5.0</span>
-            <span className="text-slate-400">|</span>
-            <span className="text-slate-600">500+ Verified Reviews</span>
-          </div>
-
-          <div className="flex items-center gap-2 rounded-full border border-slate-200/80 bg-white px-4 py-2 shadow-xs">
-            <i className="ti ti-briefcase text-blue-600" />
-            <span className="font-bold text-slate-950">85%+</span>
-            <span className="text-slate-600">Placement &amp; Internship Rate</span>
-          </div>
-
-          <div className="flex items-center gap-2 rounded-full border border-slate-200/80 bg-white px-4 py-2 shadow-xs">
-            <i className="ti ti-device-desktop text-emerald-600" />
-            <span className="font-bold text-slate-950">100%</span>
-            <span className="text-slate-600">Practical Lab Work</span>
-          </div>
-        </div>
       </div>
 
-      {/* 2. Category Filter Pills */}
-      <div className="mt-10 flex flex-wrap items-center justify-center gap-2">
-        {CATEGORIES.map((cat) => {
-          const isActive = activeCategory === cat.id;
-          return (
-            <button
-              key={cat.id}
-              type="button"
-              onClick={() => setActiveCategory(cat.id)}
-              className={`inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-xs font-bold transition-all duration-200 ${
-                isActive
-                  ? "bg-[#0b1528] text-white shadow-md shadow-brand-950/20 scale-105"
-                  : "border border-slate-200/80 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-950 hover:bg-slate-50"
-              }`}
-            >
-              <span>{cat.label}</span>
-              <span className={`rounded-full px-1.5 py-0.5 text-[10px] ${isActive ? "bg-white/20 text-white" : "bg-slate-100 text-slate-500"}`}>
-                {cat.count}
-              </span>
-            </button>
-          );
-        })}
-      </div>
-
-      {/* 3. Horizontal Story Cards Slider */}
-      <div className="relative mt-8">
-        <div
-          ref={trackRef}
-          className="flex gap-6 overflow-x-auto pb-4 pt-2 snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden px-1"
-        >
-          {filteredStories.map((item) => (
-            <figure
-              key={item.id || item.name}
-              className="group relative flex min-h-[420px] w-[min(90vw,380px)] shrink-0 snap-start flex-col justify-between overflow-hidden rounded-3xl border border-slate-200/90 bg-white p-7 shadow-[0_4px_25px_-4px_rgba(15,23,42,0.04)] transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-300/80 hover:shadow-[0_20px_45px_-12px_rgba(15,23,42,0.1)] sm:p-8 lg:w-[410px]"
-            >
-              <span className="absolute inset-x-0 top-0 h-1 origin-left scale-x-0 bg-gradient-to-r from-amber-400 via-brand-500 to-indigo-600 transition-transform duration-500 group-hover:scale-x-100" />
-
-              <div>
-                {/* Header: Stars & Verified Badge */}
-                <div className="flex items-center justify-between gap-2">
-                  <div className="flex items-center gap-1.5">
-                    <div className="flex items-center gap-0.5 text-amber-400 text-sm">
-                      {Array.from({ length: item.rating || 5 }).map((_, star) => (
-                        <i key={star} className="ti ti-star-filled" />
-                      ))}
+      {/* 2. Infinite Marquee Stream (Edge fade, pause on hover) */}
+      <div className="reviews-marquee mt-10 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]">
+        <div className="reviews-track flex w-max">
+          {[0, 1].map((copy) => (
+            <div key={copy} className="flex shrink-0 gap-5 pr-5" aria-hidden={copy === 1 ? "true" : undefined}>
+              {curatedStories.map((item) => (
+                <figure
+                  key={`${copy}-${item.id}`}
+                  className="group flex h-[230px] w-[310px] sm:w-[350px] shrink-0 flex-col justify-between rounded-2xl border border-slate-200/90 bg-white p-5 shadow-[0_2px_12px_-2px_rgba(15,23,42,0.04)] transition-all duration-200 hover:-translate-y-1 hover:border-slate-300 hover:shadow-[0_12px_24px_-6px_rgba(15,23,42,0.08)]"
+                >
+                  <div>
+                    {/* Stars + Clean Quote Mark (Single-color gold stars, no rainbow) */}
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-0.5 text-amber-400 text-xs">
+                        {Array.from({ length: item.rating || 5 }).map((_, s) => (
+                          <i key={s} className="ti ti-star-filled" />
+                        ))}
+                      </div>
+                      <i className="ti ti-quote text-2xl text-slate-200" />
                     </div>
-                    <span className="text-xs font-bold text-slate-700 ml-1">5.0</span>
+
+                    {/* Concise Quote */}
+                    <blockquote className="mt-3 text-xs sm:text-[13px] leading-relaxed text-slate-700 font-normal line-clamp-4">
+                      “{item.quote}”
+                    </blockquote>
                   </div>
 
-                  <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2.5 py-0.5 text-[11px] font-bold text-emerald-700 border border-emerald-200/60">
-                    <i className="ti ti-circle-check-filled text-xs text-emerald-600" />
-                    Verified Student
-                  </span>
-                </div>
-
-                {/* Course Track Tag */}
-                <div className="mt-4 flex items-center gap-2">
-                  <span className="inline-flex items-center rounded-lg bg-slate-100/90 px-2.5 py-1 text-[11px] font-semibold text-slate-700">
-                    {item.course}
-                  </span>
-                  <span className="text-slate-300">•</span>
-                  <span className="text-[11px] font-medium text-slate-500">{item.campus}</span>
-                </div>
-
-                {/* Headline */}
-                <h3 className="mt-4 font-display text-base font-bold leading-snug text-slate-950 sm:text-lg">
-                  {item.headline || `“${item.quote.slice(0, 50)}...”`}
-                </h3>
-
-                {/* Detailed Quote */}
-                <blockquote className="mt-2.5 text-xs leading-relaxed text-slate-600 sm:text-[13px] sm:leading-6">
-                  “{item.quote}”
-                </blockquote>
-              </div>
-
-              {/* Milestone Highlight & Author Information */}
-              <div className="mt-6 pt-4 border-t border-slate-100">
-                {item.highlight && (
-                  <div className="mb-4 inline-flex items-center gap-1.5 rounded-xl bg-amber-50/80 px-3 py-1.5 text-xs font-semibold text-amber-900 border border-amber-200/50">
-                    <i className="ti ti-sparkles text-amber-600 text-xs" />
-                    <span>{item.highlight}</span>
-                  </div>
-                )}
-
-                <figcaption className="flex items-center gap-3">
-                  <div className="relative">
-                    {item.avatar ? (
+                  {/* Author Strip */}
+                  <figcaption className="flex items-center justify-between gap-3 pt-3 border-t border-slate-100">
+                    <div className="flex items-center gap-2.5 min-w-0">
                       <img
                         src={item.avatar}
                         alt={item.name}
-                        className="h-12 w-12 rounded-full object-cover ring-2 ring-brand-100 shadow-xs"
+                        className="h-9 w-9 rounded-full object-cover ring-1 ring-slate-200 shrink-0"
                       />
-                    ) : (
-                      <span className="grid h-12 w-12 place-items-center rounded-full bg-gradient-to-br from-brand-600 to-indigo-700 text-sm font-bold text-white shadow-xs">
-                        {initials(item.name)}
-                      </span>
-                    )}
-                    <span
-                      className="absolute -bottom-0.5 -right-0.5 grid h-4 w-4 place-items-center rounded-full bg-blue-600 text-[10px] text-white ring-2 ring-white"
-                      title="Verified graduate profile"
-                    >
-                      <i className="ti ti-check" />
+                      <div className="min-w-0 flex-1">
+                        <div className="flex items-center gap-1.5">
+                          <strong className="truncate text-xs sm:text-[13px] font-semibold text-slate-950">{item.name}</strong>
+                          <i className="ti ti-circle-check-filled text-emerald-500 text-xs shrink-0" title="Verified Student" />
+                        </div>
+                        <p className="truncate text-[11px] text-slate-500">{item.role}</p>
+                      </div>
+                    </div>
+                    <span className="rounded-md bg-slate-50 px-2 py-0.5 text-[10px] font-medium text-slate-600 border border-slate-100 shrink-0">
+                      {item.track}
                     </span>
-                  </div>
-
-                  <div className="min-w-0 flex-1">
-                    <strong className="block truncate text-sm font-bold text-slate-950">{item.name}</strong>
-                    <p className="truncate text-xs font-semibold text-brand-700">{item.role}</p>
-                    <p className="truncate text-[11px] text-slate-500">{item.college || item.batch}</p>
-                  </div>
-                </figcaption>
-              </div>
-            </figure>
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
           ))}
         </div>
       </div>
 
-      {/* 4. Controls Strip: Trust message + Navigation arrows + All Reviews link */}
-      <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-slate-100 pt-6">
-        <div className="flex items-center gap-2 text-xs text-slate-500">
-          <i className="ti ti-map-pin text-brand-700" />
-          <span>Verified student stories from Madurai, Virudhunagar &amp; Online Batches</span>
-        </div>
-
-        <div className="flex items-center gap-3">
-          <div className="flex gap-2" role="group" aria-label="Browse student stories">
-            <button
-              type="button"
-              onClick={() => scroll(-1)}
-              aria-label="Previous student story"
-              className="grid h-10 w-10 place-items-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-xs transition hover:bg-slate-50 hover:border-slate-300 active:scale-95"
-            >
-              <i className="ti ti-arrow-left text-sm" />
-            </button>
-            <button
-              type="button"
-              onClick={() => scroll(1)}
-              aria-label="Next student story"
-              className="grid h-10 w-10 place-items-center rounded-full bg-[#0b1528] text-white shadow-md shadow-brand-950/20 transition hover:bg-brand-900 active:scale-95"
-            >
-              <i className="ti ti-arrow-right text-sm" />
-            </button>
-          </div>
-
-          <Link
-            to="/reviews"
-            className="inline-flex min-h-10 items-center justify-center gap-2 rounded-full border border-slate-200 bg-white px-5 text-xs font-bold text-slate-800 shadow-xs transition hover:bg-slate-50 hover:border-brand-300 hover:text-brand-800"
-          >
-            <span>View All Reviews</span>
-            <i className="ti ti-arrow-up-right text-xs" />
-          </Link>
-        </div>
+      {/* 3. Subtle Bottom Trust Strip */}
+      <div className="mt-8 flex items-center justify-center gap-3 text-xs text-slate-500">
+        <span className="flex text-amber-400 text-xs">
+          <i className="ti ti-star-filled" />
+        </span>
+        <span className="font-semibold text-slate-800">4.9 / 5.0 rating</span>
+        <span className="text-slate-300">•</span>
+        <span>Verified graduates across Madurai &amp; Virudhunagar</span>
+        <span className="text-slate-300">•</span>
+        <Link
+          to="/reviews"
+          className="inline-flex items-center gap-1 font-semibold text-slate-900 hover:text-brand-700 transition-colors"
+        >
+          <span>All reviews</span>
+          <i className="ti ti-arrow-right text-xs" />
+        </Link>
       </div>
+
+      <style>{`
+        .reviews-track {
+          animation: reviews-scroll 35s linear infinite;
+        }
+        .reviews-marquee:hover .reviews-track,
+        .reviews-marquee:focus-within .reviews-track {
+          animation-play-state: paused;
+        }
+        @keyframes reviews-scroll {
+          to {
+            transform: translateX(-50%);
+          }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .reviews-track {
+            animation: none;
+          }
+          .reviews-marquee {
+            overflow-x: auto;
+          }
+        }
+      `}</style>
     </div>
   );
 }
@@ -1894,12 +1834,8 @@ export default function Home() {
       </section>
 
       {/* Learner Stories / Testimonials */}
-      <section id="learner-stories" className="scroll-mt-32 relative bg-gradient-to-b from-white via-slate-50/60 to-white py-20 sm:py-28 overflow-hidden">
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute top-12 left-1/2 -translate-x-1/2 -z-10 h-96 w-[700px] rounded-full bg-gradient-to-tr from-brand-100/30 via-amber-100/20 to-indigo-100/30 blur-3xl opacity-70"
-        />
-        <div className="mx-auto max-w-7xl px-6">
+      <section id="learner-stories" className="scroll-mt-32 relative bg-slate-50/40 py-16 sm:py-20 overflow-hidden border-y border-slate-100">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <ModernLearnerStories testimonials={testimonials} />
         </div>
       </section>
