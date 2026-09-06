@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { api, mediaUrl } from "../api/client";
 import { icon } from "../lib/icons";
 import { ResponsiveImage } from "../components/ui";
-import PageLoader from "./Pageloader";
 import EnquiryForm from "../components/EnquiryForm";
 import { useSeo } from "../lib/useSeo";
 import avatar1 from "../assets/avatar1.png";
@@ -120,6 +119,40 @@ function CourseTile({ course }) {
       <span className="mt-3 inline-flex items-center justify-between border-t border-slate-100 pt-3 text-xs font-bold text-brand-700"><span>View course</span><span className="grid h-7 w-7 place-items-center rounded-full bg-brand-50 transition group-hover:bg-brand-700 group-hover:text-white"><i className="ti ti-arrow-right transition-transform group-hover:translate-x-0.5" /></span></span>
     </div>
   </Link>;
+}
+
+function CourseCardSkeleton() {
+  return (
+    <div className="relative mx-auto flex h-full w-full max-w-[350px] animate-pulse flex-col overflow-hidden rounded-2xl border border-slate-200/80 bg-white p-0 shadow-sm">
+      <div className="aspect-[16/7] w-full bg-slate-200/70" />
+      <div className="flex flex-1 flex-col p-4">
+        <div className="flex gap-2">
+          <div className="h-3 w-16 rounded bg-slate-200/70" />
+          <div className="h-3 w-20 rounded bg-slate-200/70" />
+        </div>
+        <div className="mt-3 h-5 w-4/5 rounded bg-slate-300/80" />
+        <div className="mt-2.5 h-3.5 w-full rounded bg-slate-200/60" />
+        <div className="mt-1.5 h-3.5 w-2/3 rounded bg-slate-200/60" />
+        <div className="mt-5 flex items-center justify-between border-t border-slate-100 pt-3">
+          <div className="h-3 w-16 rounded bg-slate-200/70" />
+          <div className="h-7 w-7 rounded-full bg-slate-200/70" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function CategorySkeleton() {
+  return (
+    <div className="flex animate-pulse items-center gap-4 rounded-2xl border border-slate-200/80 bg-white p-5 shadow-xs">
+      <div className="h-12 w-12 shrink-0 rounded-xl bg-slate-200/70" />
+      <div className="min-w-0 flex-1 space-y-2">
+        <div className="h-4 w-3/4 rounded bg-slate-300/80" />
+        <div className="h-3 w-1/3 rounded bg-slate-200/60" />
+      </div>
+      <div className="h-4 w-4 rounded bg-slate-200/40" />
+    </div>
+  );
 }
 
 function PopularCoursesCarousel({ courses }) {
@@ -984,7 +1017,7 @@ export default function Home() {
   }, [data]);
 
   useEffect(() => {
-    if (!data || !mainRef.current || window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return;
+    if (!mainRef.current || window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return;
     const sections = mainRef.current.querySelectorAll(":scope > section:not(:first-of-type)");
     sections.forEach((section) => section.classList.add("home-reveal"));
     const observer = new IntersectionObserver((entries) => {
@@ -1007,26 +1040,23 @@ export default function Home() {
     window.requestAnimationFrame(() => enquiryRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }));
   };
 
-  if (!data && !error) return <PageLoader />;
-
   return <main ref={mainRef} id="main-content" className="overflow-hidden bg-white">
     <div className="pointer-events-none fixed inset-x-0 top-0 z-[70] h-1 bg-transparent" aria-hidden="true"><span className="block h-full origin-left bg-gradient-to-r from-amber-400 via-orange-500 to-brand-600 shadow-[0_0_12px_rgba(245,158,11,.45)]" style={{ transform: `scaleX(${scrollProgress})` }} /></div>
     <HeroCarousel onEnquiry={toEnquiry} />
     <CommunitySection data={data} courses={courses} testimonials={testimonials} />
 
-    {/* <section className="border-b border-slate-200 bg-slate-50" aria-label="Why choose Simatrix"><div className="mx-auto grid max-w-7xl grid-cols-2 gap-px bg-slate-200 sm:grid-cols-4">{[["ti-code","Project-based","Build while learning"],["ti-users","Mentor-led","Get human feedback"],["ti-briefcase","Career-focused","Prepare for interviews"],["ti-calendar","Flexible paths","Learn at your level"]].map(([ic,title,text]) => <div key={title} className="bg-slate-50 px-5 py-7 text-center"><i className={`ti ${ic} text-2xl text-amber-700`} /><p className="mt-2 font-bold text-slate-900">{title}</p><p className="mt-1 text-xs text-slate-500">{text}</p></div>)}</div></section> 
-    <section className="relative mx-auto max-w-7xl px-6 pb-20 pt-8 sm:pb-24 sm:pt-10"><div aria-hidden="true" className="pointer-events-none absolute -right-32 top-10 -z-10 h-72 w-72 rounded-full bg-amber-100/70 blur-3xl" />
-      <SectionTitle eyebrow="Start from where you are" title="What would help you most right now?" description="Choose the option that best describes your situation. You can change direction at any time." />
-      <div className="mt-10 grid gap-6 lg:grid-cols-3">{VISITOR_PATHS.map((path, index) => <article key={path.label} className={`group relative flex flex-col overflow-hidden rounded-3xl border p-7 transition duration-300 hover:-translate-y-1.5 hover:shadow-2xl ${index === 2 ? "border-amber-300 bg-gradient-to-br from-amber-50 to-white" : "border-slate-200 bg-white"}`}><span aria-hidden="true" className="absolute -right-8 -top-10 font-display text-[8rem] font-bold leading-none text-slate-900/[.035]">{index + 1}</span><div className="relative flex items-center justify-between"><span className="grid h-12 w-12 place-items-center rounded-2xl bg-brand-50 text-2xl text-brand-700 ring-1 ring-brand-100"><i className={`ti ${path.icon}`} /></span><span className="rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-bold text-slate-600 shadow-sm">{path.label}</span></div><h2 className="relative mt-6 font-display text-2xl font-semibold text-slate-950">{path.title}</h2><p className="relative mt-3 flex-1 text-sm leading-6 text-slate-600">{path.text}</p><Link to={path.to} className="relative mt-6 inline-flex items-center gap-2 font-bold text-brand-700">{path.action}<i className="ti ti-arrow-right transition-transform group-hover:translate-x-1" /></Link></article>)}</div>
-    </section>
- */}
-
-    {error ? <section className="mx-auto max-w-7xl px-6 py-20 text-center"><p className="text-slate-600">We couldn’t load the latest courses right now.</p><Link to="/courses" className="mt-4 inline-flex font-bold text-brand-700">Browse courses</Link></section> : <>
+    {error && !data ? <section className="mx-auto max-w-7xl px-6 py-20 text-center"><p className="text-slate-600">We couldn’t load the latest courses right now.</p><Link to="/courses" className="mt-4 inline-flex font-bold text-brand-700">Browse courses</Link></section> : <>
       <section className="mx-auto max-w-7xl px-6 py-20 sm:py-28">
         <SectionTitle eyebrow="Find your path" title="Choose the skill you want to build" description="Start with a field that matches your goals. Each path takes you from essential concepts to practical application." />
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{data.categories?.slice(0, 6).map((category) => <Link key={category.id} to={`/courses?category=${category.slug}`} className="group flex items-center gap-4 rounded-2xl border border-slate-200 p-5 transition hover:-translate-y-0.5 hover:border-brand-300 hover:shadow-lg"><span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-brand-50 text-xl text-brand-700"><i className={icon(category.icon)} /></span><span className="min-w-0 flex-1"><strong className="block text-slate-950">{category.name}</strong><span className="mt-1 block text-sm text-slate-500">{(category.courses || []).length} courses</span></span><i className="ti ti-chevron-right text-slate-400 transition group-hover:translate-x-1" /></Link>)}</div>
+        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {!data ? (
+            Array.from({ length: 6 }).map((_, i) => <CategorySkeleton key={i} />)
+          ) : (
+            data.categories?.slice(0, 6).map((category) => <Link key={category.id} to={`/courses?category=${category.slug}`} className="group flex items-center gap-4 rounded-2xl border border-slate-200 p-5 transition hover:-translate-y-0.5 hover:border-brand-300 hover:shadow-lg"><span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-brand-50 text-xl text-brand-700"><i className={icon(category.icon)} /></span><span className="min-w-0 flex-1"><strong className="block text-slate-950">{category.name}</strong><span className="mt-1 block text-sm text-slate-500">{(category.courses || []).length} courses</span></span><i className="ti ti-chevron-right text-slate-400 transition group-hover:translate-x-1" /></Link>)
+          )}
+        </div>
       </section>
-      {featured.length > 0 && <section className="bg-slate-50 py-20 sm:py-28"><div className="mx-auto max-w-7xl px-6"><SectionTitle left eyebrow="Popular programs" title="Start with a learner favourite" description="Compare outcomes, duration and difficulty before choosing your course." /><PopularCoursesCarousel courses={featured} /></div></section>}
+      {(!data || featured.length > 0) && <section className="bg-slate-50 py-20 sm:py-28"><div className="mx-auto max-w-7xl px-6"><SectionTitle left eyebrow="Popular programs" title="Start with a learner favourite" description="Compare outcomes, duration and difficulty before choosing your course." />{!data ? <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">{Array.from({ length: 3 }).map((_, i) => <CourseCardSkeleton key={i} />)}</div> : <PopularCoursesCarousel courses={featured} />}</div></section>}
     </>}
 
     <section id="internship" className="scroll-mt-24 bg-white py-20 sm:py-28"><div className="mx-auto grid max-w-7xl gap-10 px-6 lg:grid-cols-[1.05fr_.95fr] lg:items-center"><div><p className="text-xs font-bold uppercase tracking-[.22em] text-amber-700">Free full-stack internship</p><h2 className="mt-3 max-w-2xl font-display text-4xl font-semibold leading-tight text-slate-950 sm:text-5xl">Bridge the gap between learning and your first interview.</h2><p className="mt-5 max-w-2xl leading-7 text-slate-600">Designed for final-year students and freshers who need structured practice, project exposure and a clearer way to present their skills.</p><div className="mt-8 flex flex-col gap-3 sm:flex-row"><button type="button" onClick={() => toEnquiry("internship")} className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-brand-800 px-6 py-3 font-bold text-white transition hover:bg-brand-700">Apply for the internship<i className="ti ti-arrow-right" /></button><Link to="/career-guidance" className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg border border-slate-300 px-6 py-3 font-bold text-slate-800 transition hover:bg-slate-50">Check if it fits my goal</Link></div><p className="mt-4 flex items-center gap-2 text-xs text-slate-500"><i className="ti ti-info-circle" />Eligibility and batch availability will be confirmed by the Simatrix team.</p></div><div className="rounded-3xl border border-slate-200 bg-slate-50 p-6 sm:p-8"><h3 className="font-display text-2xl font-semibold text-slate-950">What the experience focuses on</h3><ul className="mt-6 space-y-5">{[["ti-code","Guided technical practice","Apply full-stack concepts through structured tasks."],["ti-folders","Project exposure","Build work you can discuss during interviews."],["ti-message-dots","Mentor feedback","Understand what to improve and how to progress."],["ti-briefcase","Career preparation","Connect your technical work to resume and interview needs."]].map(([ic,title,text]) => <li key={title} className="flex gap-4"><span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-white text-lg text-amber-700 shadow-sm"><i className={`ti ${ic}`} /></span><span><strong className="block text-sm text-slate-950">{title}</strong><span className="mt-1 block text-sm leading-6 text-slate-600">{text}</span></span></li>)}</ul></div></div></section>

@@ -65,9 +65,49 @@ async function uploadFile(file) {
   return json.data; // { url, filename }
 }
 
+let siteCache = null;
+try {
+  const cached = sessionStorage.getItem("simatrix_site_cache");
+  if (cached) siteCache = JSON.parse(cached);
+} catch {
+  // Ignore storage errors (e.g. private browsing)
+}
+
 export const api = {
+  // ---- cache utilities ----
+  clearSiteCache: () => {
+    siteCache = null;
+    try {
+      sessionStorage.removeItem("simatrix_site_cache");
+    } catch {}
+  },
+
   // ---- public ----
-  getSite: () => request("/api/site"),
+  getSite: async () => {
+    // Return cached data immediately if available, then revalidate in background
+    if (siteCache) {
+      request("/api/site")
+        .then((fresh) => {
+          if (fresh?.data) {
+            siteCache = fresh;
+            try {
+              sessionStorage.setItem("simatrix_site_cache", JSON.stringify(fresh));
+            } catch {}
+          }
+        })
+        .catch(() => {});
+      return siteCache;
+    }
+
+    const res = await request("/api/site");
+    if (res?.data) {
+      siteCache = res;
+      try {
+        sessionStorage.setItem("simatrix_site_cache", JSON.stringify(res));
+      } catch {}
+    }
+    return res;
+  },
   getCourses: (category) =>
     request(`/api/courses${category ? `?category=${category}` : ""}`),
   getCourse: (slug) => request(`/api/courses/${slug}`),
@@ -91,12 +131,18 @@ export const api = {
 
   // ---- admin (generic CRUD) ----
   adminList: (resource) => request(`/api/admin/${resource}`, { auth: true }),
-  adminCreate: (resource, data) =>
-    request(`/api/admin/${resource}`, { method: "POST", body: data, auth: true }),
-  adminUpdate: (resource, id, data) =>
-    request(`/api/admin/${resource}/${id}`, { method: "PUT", body: data, auth: true }),
-  adminDelete: (resource, id) =>
-    request(`/api/admin/${resource}/${id}`, { method: "DELETE", auth: true }),
+  adminCreate: (resource, data) => {
+    api.clearSiteCache();
+    return request(`/api/admin/${resource}`, { method: "POST", body: data, auth: true });
+  },
+  adminUpdate: (resource, id, data) => {
+    api.clearSiteCache();
+    return request(`/api/admin/${resource}/${id}`, { method: "PUT", body: data, auth: true });
+  },
+  adminDelete: (resource, id) => {
+    api.clearSiteCache();
+    return request(`/api/admin/${resource}/${id}`, { method: "DELETE", auth: true });
+  },
 
   // ---- enquiry notes ----
   getEnquiryNotes: (id) => request(`/api/admin/enquiries/${id}/notes`, { auth: true }),
@@ -105,6 +151,8 @@ export const api = {
 
   // ---- settings ----
   adminGetSettings: () => request("/api/admin/settings", { auth: true }),
-  adminSaveSettings: (data) =>
-    request("/api/admin/settings", { method: "PUT", body: data, auth: true }),
+  adminSaveSettings: (data) => {
+    api.clearSiteCache();
+    return request("/api/admin/settings", { method: "PUT", body: data, auth: true });
+  },
 };
