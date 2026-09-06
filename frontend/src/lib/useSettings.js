@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { api } from "../api/client";
 
-// Module-level cache so multiple components share one /api/site request.
 let cache = null;
 
 export function loadSettings() {
