@@ -1904,33 +1904,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FAQs Section with Anchor */}
-      <section id="faqs" className="scroll-mt-32 bg-slate-50 py-20 sm:py-24">
-        <div className="mx-auto grid max-w-6xl gap-10 px-6 lg:grid-cols-[.75fr_1.25fr]">
-          <SectionTitle
-            left
-            eyebrow="Before you decide"
-            title="Questions students often ask"
-            description="Clear expectations make it easier to choose your next step confidently."
-          />
-          <div className="space-y-3">
-            {FAQS.map(([question, answer], index) => (
-              <details
-                key={question}
-                className="group rounded-xl border border-slate-200 bg-white open:border-brand-300 open:shadow-xs transition"
-                open={index === 0}
-              >
-                <summary className="flex min-h-14 list-none items-center justify-between gap-4 px-5 py-4 font-bold text-slate-900 cursor-pointer">
-                  <span>{question}</span>
-                  <i className="ti ti-plus shrink-0 text-brand-700 transition-transform group-open:rotate-45" />
-                </summary>
-                <p className="px-5 pb-5 text-sm leading-6 text-slate-600">{answer}</p>
-              </details>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Enquiry Form Section - Modern Elegant Lounge */}
       <section
         ref={enquiryRef}
@@ -2054,6 +2027,65 @@ export default function Home() {
 
               <EnquiryForm courses={courses} compact type={enquiryIntent} />
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQs Section - Placed right above footer */}
+      <section id="faqs" className="scroll-mt-32 border-t border-slate-200/80 bg-slate-50/70 py-20 sm:py-28">
+        <div className="mx-auto grid max-w-6xl gap-10 px-6 lg:grid-cols-[.8fr_1.2fr]">
+          <div>
+            <SectionTitle
+              left
+              eyebrow="Before you decide"
+              title="Frequently asked questions"
+              description="Clear expectations make it easier to choose your learning path with confidence."
+            />
+
+            {/* Quick Contact Card for unresolved questions */}
+            <div className="mt-8 rounded-2xl border border-slate-200/80 bg-white p-5 shadow-2xs">
+              <span className="grid h-10 w-10 place-items-center rounded-xl bg-brand-50 text-xl text-brand-700">
+                <i className="ti ti-help" />
+              </span>
+              <h4 className="mt-3 text-sm font-bold text-slate-950">Have a different question?</h4>
+              <p className="mt-1 text-xs leading-relaxed text-slate-600">
+                Our counsellors are available to answer fee queries, batch timings, or syllabus details directly.
+              </p>
+              <div className="mt-4 flex flex-wrap items-center gap-2">
+                <a
+                  href="https://wa.me/919677781155"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-1.5 text-xs font-bold text-emerald-800 transition hover:bg-emerald-100"
+                >
+                  <i className="ti ti-brand-whatsapp text-emerald-600" /> WhatsApp Us
+                </a>
+                <a
+                  href="tel:+919677781155"
+                  className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-bold text-slate-800 transition hover:bg-slate-100"
+                >
+                  <i className="ti ti-phone text-brand-700" /> +91 96777 81155
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div className="space-y-3">
+            {FAQS.map(([question, answer], index) => (
+              <details
+                key={question}
+                className="group rounded-2xl border border-slate-200/90 bg-white open:border-brand-300 open:shadow-xs transition-all duration-200"
+                open={index === 0}
+              >
+                <summary className="flex min-h-14 list-none items-center justify-between gap-4 px-5 py-4 font-bold text-slate-900 cursor-pointer hover:text-brand-800 transition">
+                  <span className="text-sm sm:text-base">{question}</span>
+                  <i className="ti ti-plus shrink-0 text-brand-700 transition-transform group-open:rotate-45" />
+                </summary>
+                <p className="px-5 pb-5 text-xs sm:text-sm leading-relaxed text-slate-600 border-t border-slate-50 pt-3">
+                  {answer}
+                </p>
+              </details>
+            ))}
           </div>
         </div>
       </section>
