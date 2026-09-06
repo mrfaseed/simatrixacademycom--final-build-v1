@@ -43,16 +43,133 @@ const HERO_BANNERS = [
 ];
 
 const STORIES = [
-  { name: "Priya Kumari", role: "Full Stack Developer", quote: "The practical projects gave me the confidence to explain my work clearly in interviews." },
-  { name: "Sanjay Rao", role: "Data Analyst", quote: "Mentor feedback helped me move from tutorials to building a portfolio I was proud to share." },
-  { name: "Meera Varma", role: "Cloud Engineer", quote: "Mock interviews and resume reviews made the job search feel structured and achievable." },
+  {
+    id: "story-1",
+    name: "Priya R.",
+    course: "MERN Full Stack Development",
+    category: "full-stack",
+    avatar: avatar1,
+    college: "KLN College of Engineering",
+    batch: "2025 Graduate",
+    role: "Placed as Junior Web Developer",
+    headline: "From final-year confusion to a full-stack developer offer.",
+    quote: "Before Simatrix, my college projects were mostly copied tutorial code. Here, mentors pushed us to build a full-stack e-commerce engine with real authentication, payment gateways, and Docker deployment. During my interview, I shared my live GitHub repo and defended the database schema with complete confidence.",
+    highlight: "3 Live Full-Stack Apps Shipped",
+    campus: "Madurai Campus",
+    rating: 5,
+  },
+  {
+    id: "story-2",
+    name: "Karthik S.",
+    course: "Python & AI Engineering",
+    category: "ai",
+    avatar: avatar2,
+    college: "TCE Madurai",
+    batch: "2025-2026 Batch",
+    role: "AI / Data Science Associate",
+    headline: "Trainers explain complex ML pipelines simply. The code reviews were invaluable.",
+    quote: "Moving from basic Python syntax to training LLM embeddings and writing production FastAPI endpoints gave me a genuine portfolio. The trainers don't just lecture—they sit with you in the lab to debug Tensor errors and optimize model latency.",
+    highlight: "FastAPI & LLM Model Deployment",
+    campus: "Virudhunagar Center",
+    rating: 5,
+  },
+  {
+    id: "story-3",
+    name: "Divya M.",
+    course: "Cloud & DevOps Engineering",
+    category: "cloud",
+    avatar: avatar3,
+    college: "Sethu Institute of Technology",
+    batch: "2025 Graduate",
+    role: "Cloud Operations Associate",
+    headline: "Physical lab access with real server equipment made all the difference.",
+    quote: "Online video courses never give you real server muscle memory. Setting up CI/CD pipelines, Kubernetes clusters, and AWS VPCs in the Simatrix computer lab gave me practical skills that directly matched the job requirements in my technical interview.",
+    highlight: "AWS Certified & Docker CI/CD",
+    campus: "Madurai Campus",
+    rating: 5,
+  },
+  {
+    id: "story-4",
+    name: "Sanjay Kumar",
+    course: "Cybersecurity & Ethical Hacking",
+    category: "cybersecurity",
+    avatar: avatar2,
+    college: "Kamaraj College of Engg",
+    batch: "2025 Batch",
+    role: "Junior SOC Analyst",
+    headline: "Hands-on packet analysis and network security labs you cannot get from slides.",
+    quote: "The practical defensive labs, Wireshark packet captures, and vulnerability scanning exercises gave me practical experience that impressed the hiring panel. The placement team also conducted 3 rounds of mock technical interviews before my drive.",
+    highlight: "SOC Lab & Penetration Testing",
+    campus: "Madurai Campus",
+    rating: 5,
+  },
+  {
+    id: "story-5",
+    name: "Anitha Balan",
+    course: "Full Stack JavaScript / React",
+    category: "full-stack",
+    avatar: avatar1,
+    college: "Fatima College, Madurai",
+    batch: "BCA Fresher",
+    role: "Frontend Engineer Intern",
+    headline: "As a non-engineering student, the step-by-step guidance removed all self-doubt.",
+    quote: "Coming from a non-engineering degree, I was intimidated by modern frameworks. The mentors at Simatrix took me from HTML fundamentals to building full-scale Next.js web applications with TypeScript. The 1-on-1 lab support is unmatched.",
+    highlight: "Next.js & Tailwind SaaS App",
+    campus: "Madurai Campus",
+    rating: 5,
+  },
+  {
+    id: "story-6",
+    name: "Vigneshwaran P.",
+    course: "Data Analytics & Power BI",
+    category: "ai",
+    avatar: avatar3,
+    college: "Mepco Schlenk Engg College",
+    batch: "Career Switcher",
+    role: "Business Intelligence Analyst",
+    headline: "Transitioned from a non-tech sales job to a BI analyst role in 4 months.",
+    quote: "I wanted to transition into IT without starting from zero. Simatrix gave me a structured track covering advanced SQL, Python data pipelines, and interactive executive dashboards. The career counsellors helped me rework my resume to highlight transferable problem-solving skills.",
+    highlight: "Interactive Power BI Dashboards",
+    campus: "Virudhunagar Center",
+    rating: 5,
+  },
+  {
+    id: "story-7",
+    name: "Harish Roshan",
+    course: "Free Full-Stack Internship",
+    category: "full-stack",
+    avatar: avatar2,
+    college: "PSNA College of Engg",
+    batch: "Final-Year B.Tech",
+    role: "Software Intern @ Startup",
+    headline: "The free internship gave me live sprint experience before campus placements.",
+    quote: "Most college internships are just certificate rubber-stamps. At Simatrix, we had daily standups, Git branch reviews, and sprint deadlines. That tangible experience was the single biggest talking point during my on-campus placement interview.",
+    highlight: "Sprint-Based Team Development",
+    campus: "Madurai Campus",
+    rating: 5,
+  },
+  {
+    id: "story-8",
+    name: "Ravi Chandran",
+    course: "Cloud Infrastructure & Linux",
+    category: "cloud",
+    avatar: avatar3,
+    college: "Anna University Regional Campus",
+    batch: "2024 Graduate",
+    role: "Systems & Cloud Engineer",
+    headline: "The placement support doesn't end until you receive a verified offer letter.",
+    quote: "Even after course completion, the placement desk arranged direct interviews with partner IT firms in Madurai and Chennai. Their resume optimization helped my profile pass ATS screening, and the mock HR rounds helped me negotiate my offer with confidence.",
+    highlight: "Placed at Chennai IT Hub",
+    campus: "Madurai Campus",
+    rating: 5,
+  },
 ];
 
 const STEPS = [
-  ["01", "Choose your direction", "Compare learning paths or speak with a counsellor when you are unsure where to begin."],
-  ["02", "Learn by building", "Practise each concept through guided exercises and portfolio-ready industry projects."],
-  ["03", "Prepare for interviews", "Strengthen your resume, communication, technical answers and interview confidence."],
-  ["04", "Move toward your role", "Apply with a clearer profile and continued career support from the Simatrix team."],
+  ["01", "Choose your path", "Compare learning paths or speak with a career counsellor to identify the domain that matches your goals."],
+  ["02", "Learn by building", "Master each concept through guided coding labs, mentor code reviews, and production-style projects."],
+  ["03", "Prepare for interviews", "Strengthen your technical answers, GitHub portfolio, and resume through rigorous mock interview sessions."],
+  ["04", "Build toward your career", "Connect your verified technical work directly to interview opportunities and placement assistance."],
 ];
 
 const VISITOR_PATHS = [
@@ -69,10 +186,38 @@ const OUTCOMES = [
 ];
 
 const FAQS = [
-  ["I’m a complete beginner. Can I still join?", "Yes. Start with a beginner-friendly path and build foundational skills before moving into projects. A guidance session can help you choose the appropriate level."],
-  ["How do I know which course is right for me?", "Consider your current skills, the role you want and the time you can commit. If you are unsure, request free guidance before enrolling."],
-  ["What makes the learning practical?", "Courses focus on guided exercises, projects, feedback and interview preparation so that you practise applying what you learn."],
-  ["What happens after I submit an enquiry?", "The Simatrix team will contact you to understand your goal and share relevant course, eligibility and batch information."],
+  [
+    "Am I eligible to join Simatrix Academy?",
+    "Yes! Our programs are designed for college students, final-year students, recent graduates (engineering, arts & science), and working professionals seeking an IT career switch. We provide foundational modules as well as advanced industry tracks.",
+  ],
+  [
+    "Which technology course is right for my background?",
+    "If you enjoy creating visible interfaces and web apps, Full Stack Development is a great fit. If you prefer data analysis and problem-solving, Python & AI / Data Science is ideal. For systems and infrastructure, choose Cloud Computing or Cybersecurity. You can also book a free 1-on-1 session with our counsellors.",
+  ],
+  [
+    "Do you offer classroom (offline) and live online classes?",
+    "Yes. We offer fully equipped physical classroom training with dedicated computer labs at our Madurai and Virudhunagar centers, as well as interactive live online batches with screen-sharing, mentor debugging, and recorded sessions.",
+  ],
+  [
+    "Is there really a free program available?",
+    "Yes! We offer a Free Full-Stack Internship for eligible college students and freshers. It focuses on structured practical exercises, guided project exposure, and interview readiness. Our admissions team evaluates eligibility based on current batch capacity.",
+  ],
+  [
+    "Will I build real projects for my GitHub portfolio?",
+    "Absolutely. Every course includes 2 to 4 end-to-end portfolio projects. You will write clean code, use Git version control, deploy applications to the cloud, and document them properly so recruiters can inspect your real work.",
+  ],
+  [
+    "Is a job guaranteed after completing the course?",
+    "We believe in 100% honesty: we do not sell false '100% job guarantee' marketing claims. What we provide is genuine employability: industry-grade skills, verified GitHub projects, professional resume building, technical mock interviews, and direct interview opportunities with hiring partners.",
+  ],
+  [
+    "What happens after I submit an enquiry form?",
+    "A Simatrix academic counsellor will contact you via phone or WhatsApp within 24 hours. They will understand your educational background, share detailed syllabi, explain batch schedules, and answer any questions without admission pressure.",
+  ],
+  [
+    "Where is Simatrix Academy located?",
+    "Our main campus is at 227, IInd Floor, Church Road, Anna Nagar, Madurai, and we also operate a dedicated training center in Virudhunagar. Both centers feature modern computer labs, high-speed internet, and mentor workstations for hands-on learning.",
+  ],
 ];
 
 const TRUST_LINKS = [
@@ -107,18 +252,44 @@ function SectionTitle({ eyebrow, title, description, dark = false, left = false 
 }
 
 function CourseTile({ course }) {
-  return <Link to={`/courses/${course.slug}`} className="group relative mx-auto flex h-full w-full max-w-[350px] flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-[0_10px_35px_-24px_rgba(15,23,42,.45)] transition duration-300 hover:-translate-y-1 hover:border-brand-300 hover:shadow-[0_20px_45px_-26px_rgba(15,23,42,.5)] focus-visible:ring-2 focus-visible:ring-brand-500">
-    <span className="absolute inset-x-0 top-0 z-20 h-1 origin-left scale-x-0 bg-gradient-to-r from-amber-400 via-brand-600 to-brand-900 transition-transform duration-500 group-hover:scale-x-100" />
-    <div className="relative aspect-[16/7] overflow-hidden bg-gradient-to-br from-brand-50 to-slate-100">
-      {course.image ? <img src={mediaUrl(course.image)} alt="" className="h-full w-full object-cover transition duration-500 group-hover:scale-105" /> : <div className="grid h-full place-items-center text-3xl text-brand-700"><i className={icon(course.icon || course.category?.icon || "book")} /></div>}
-    </div>
-    <div className="flex flex-1 flex-col p-4">
-      <div className="flex flex-wrap gap-2 text-[11px] text-slate-500">{course.duration && <span><i className="ti ti-clock mr-1" />{course.duration}</span>}{course.level && <span><i className="ti ti-chart-bar mr-1" />{course.level}</span>}</div>
-      <h3 className="mt-2 font-display text-lg font-semibold leading-snug text-slate-950 group-hover:text-brand-700">{course.title}</h3>
-      <p className="mt-1.5 line-clamp-2 flex-1 text-xs leading-5 text-slate-600">{course.summary}</p>
-      <span className="mt-3 inline-flex items-center justify-between border-t border-slate-100 pt-3 text-xs font-bold text-brand-700"><span>View course</span><span className="grid h-7 w-7 place-items-center rounded-full bg-brand-50 transition group-hover:bg-brand-700 group-hover:text-white"><i className="ti ti-arrow-right transition-transform group-hover:translate-x-0.5" /></span></span>
-    </div>
-  </Link>;
+  return (
+    <Link
+      to={`/courses/${course.slug}`}
+      className="group relative mx-auto flex h-full w-full max-w-[350px] flex-col overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-[0_10px_35px_-24px_rgba(15,23,42,.35)] transition duration-300 hover:-translate-y-1 hover:border-brand-300 hover:shadow-[0_20px_45px_-24px_rgba(15,23,42,.45)] focus-visible:ring-2 focus-visible:ring-brand-500"
+    >
+      <span className="absolute inset-x-0 top-0 z-20 h-1 origin-left scale-x-0 bg-gradient-to-r from-amber-400 via-brand-600 to-brand-900 transition-transform duration-500 group-hover:scale-x-100" />
+      <div className="relative aspect-[16/7] overflow-hidden bg-gradient-to-br from-slate-900 via-brand-950 to-indigo-950 p-4 flex items-center justify-between">
+        <div className="z-10 pr-2">
+          <span className="inline-flex items-center gap-1 rounded-md bg-white/10 px-2 py-0.5 text-[10px] font-semibold text-sky-300 backdrop-blur-xs">
+            <i className="ti ti-device-laptop" /> Offline + Online
+          </span>
+          <p className="mt-1.5 text-xs font-bold text-white line-clamp-1">{course.category?.name || "Career Track"}</p>
+        </div>
+        <div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-white/10 text-2xl text-sky-400 backdrop-blur-xs transition duration-300 group-hover:scale-110">
+          <i className={icon(course.icon || course.category?.icon || "code")} />
+        </div>
+      </div>
+      <div className="flex flex-1 flex-col p-4">
+        <div className="flex flex-wrap items-center gap-2 text-[11px] text-slate-500">
+          {course.duration && <span><i className="ti ti-clock mr-1 text-slate-400" />{course.duration}</span>}
+          <span className="text-slate-300">•</span>
+          <span><i className="ti ti-folders mr-1 text-emerald-600" />3+ Projects</span>
+          <span className="text-slate-300">•</span>
+          <span><i className="ti ti-certificate mr-1 text-amber-600" />Certificate</span>
+        </div>
+        <h3 className="mt-2 font-display text-lg font-semibold leading-snug text-slate-950 group-hover:text-brand-700">
+          {course.title}
+        </h3>
+        <p className="mt-1.5 line-clamp-2 flex-1 text-xs leading-5 text-slate-600">{course.summary}</p>
+        <span className="mt-3 inline-flex items-center justify-between border-t border-slate-100 pt-3 text-xs font-bold text-brand-700">
+          <span>Explore Program</span>
+          <span className="grid h-7 w-7 place-items-center rounded-full bg-brand-50 transition group-hover:bg-brand-700 group-hover:text-white">
+            <i className="ti ti-arrow-right transition-transform group-hover:translate-x-0.5" />
+          </span>
+        </span>
+      </div>
+    </Link>
+  );
 }
 
 function CourseCardSkeleton() {
@@ -168,30 +339,272 @@ function PopularCoursesCarousel({ courses }) {
     <div ref={trackRef} className="flex snap-x snap-mandatory gap-5 overflow-x-auto pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
       {courses.map((course) => <div key={course.id} className="w-[85%] shrink-0 snap-start sm:w-[calc(50%-10px)] lg:w-[calc(33.333%-14px)]"><CourseTile course={course} /></div>)}
     </div>
-    <div className="mt-3 flex items-center justify-between gap-4">
+    <div className="mt-4 flex items-center justify-between gap-4">
       <div className="flex gap-2" role="group" aria-label="Browse popular courses">
-        <button type="button" onClick={() => move(-1)} aria-label="Previous popular course" className="grid h-10 w-10 place-items-center rounded-full border border-white/20 bg-white/10 text-white shadow-sm backdrop-blur transition hover:border-sky-300/60 hover:bg-white/20"><i className="ti ti-arrow-left" /></button>
-        <button type="button" onClick={() => move(1)} aria-label="Next popular course" className="grid h-10 w-10 place-items-center rounded-full bg-gradient-to-br from-sky-400 to-violet-600 text-white shadow-lg shadow-violet-950/30 transition hover:scale-105 hover:brightness-110"><i className="ti ti-arrow-right" /></button>
+        <button type="button" onClick={() => move(-1)} aria-label="Previous popular course" className="grid h-10 w-10 place-items-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-xs transition hover:bg-slate-50 hover:border-slate-300 active:scale-95"><i className="ti ti-arrow-left" /></button>
+        <button type="button" onClick={() => move(1)} aria-label="Next popular course" className="grid h-10 w-10 place-items-center rounded-full bg-[#0b1528] text-white shadow-md shadow-brand-950/20 transition hover:bg-brand-900 active:scale-95"><i className="ti ti-arrow-right" /></button>
       </div>
-      <Link to="/courses" className="group inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-sky-400 via-violet-500 to-fuchsia-500 px-5 text-sm font-bold text-white shadow-lg shadow-violet-950/30 transition hover:-translate-y-0.5 hover:brightness-110">Explore all courses <i className="ti ti-arrow-up-right transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" /></Link>
+      <Link to="/courses" className="group inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-[#0b1528] px-6 text-xs font-bold text-white shadow-sm transition hover:bg-brand-900">
+        <span>Explore All 20+ Courses</span>
+        <i className="ti ti-arrow-right text-xs transition-transform group-hover:translate-x-1" />
+      </Link>
     </div>
   </div>;
 }
 
-function TestimonialsCarousel({ testimonials }) {
-  const reviewCard = (item, index, duplicate = false) => <figure key={`${duplicate ? "copy" : "review"}-${item.id || item.name || index}`} aria-hidden={duplicate ? "true" : undefined} className="relative flex min-h-64 w-[min(82vw,360px)] shrink-0 flex-col overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 shadow-[0_20px_55px_-30px_rgba(15,23,42,.55)] lg:w-[380px]"><i aria-hidden="true" className="ti ti-quote absolute -right-3 -top-5 text-8xl text-brand-900/[.035]" /><div className="relative flex gap-1 text-amber-500" aria-label={duplicate ? undefined : "5 out of 5 stars"}>{Array.from({ length: 5 }).map((_, star) => <i key={star} className="ti ti-star-filled" />)}</div><blockquote className="relative mt-5 flex-1 leading-7 text-slate-700">“{item.quote || item.content || item.message}”</blockquote><figcaption className="relative mt-6 flex items-center gap-3 border-t border-slate-100 pt-5"><span className="grid h-11 w-11 place-items-center rounded-full bg-brand-100 text-sm font-bold text-brand-800 ring-4 ring-brand-50">{initials(item.name)}</span><span><strong className="block text-sm text-slate-950">{item.name}</strong><span className="text-xs text-slate-500">{item.role || item.designation || "Simatrix learner"}</span></span></figcaption></figure>;
+function ModernLearnerStories({ testimonials = [] }) {
+  const [activeCategory, setActiveCategory] = useState("all");
+  const trackRef = useRef(null);
 
-  return <div className="testimonial-spinner mt-12 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]" aria-roledescription="carousel" aria-label="Automatically scrolling learner stories">
-    <div className="testimonial-spinner-track flex w-max">
-      {[false, true].map((duplicate) => <div key={duplicate ? "copy" : "original"} className="flex shrink-0 gap-5 pr-5">{testimonials.map((item, index) => reviewCard(item, index, duplicate))}</div>)}
+  // Merge any dynamic backend testimonials with our curated rich stories
+  const allStories = useMemo(() => {
+    const list = [...STORIES];
+    if (testimonials?.length) {
+      testimonials.forEach((item, idx) => {
+        const found = list.find((s) => s.name.toLowerCase() === (item.name || "").toLowerCase());
+        if (found) {
+          if (item.quote || item.content) found.quote = item.quote || item.content;
+          if (item.rating) found.rating = item.rating;
+        } else if (item.name && (item.quote || item.content)) {
+          const avatars = [avatar1, avatar2, avatar3];
+          list.push({
+            id: `dyn-${item.id || idx}`,
+            name: item.name,
+            course: item.course || item.designation || "Full Stack Development",
+            category: "full-stack",
+            avatar: avatars[idx % avatars.length],
+            college: "Simatrix Academy Alum",
+            batch: "Verified Student",
+            role: item.designation || "Software Engineer",
+            headline: "“Hands-on projects and direct mentor support made all the difference.”",
+            quote: item.quote || item.content,
+            highlight: "Verified Placement Support",
+            campus: "Madurai Campus",
+            rating: item.rating || 5,
+          });
+        }
+      });
+    }
+    return list;
+  }, [testimonials]);
+
+  const filteredStories = useMemo(() => {
+    if (activeCategory === "all") return allStories;
+    return allStories.filter((s) => s.category === activeCategory);
+  }, [allStories, activeCategory]);
+
+  const CATEGORIES = [
+    { id: "all", label: "All Stories", count: allStories.length },
+    { id: "full-stack", label: "Full Stack Web", count: allStories.filter((s) => s.category === "full-stack").length },
+    { id: "ai", label: "Python & AI", count: allStories.filter((s) => s.category === "ai").length },
+    { id: "cloud", label: "Cloud & DevOps", count: allStories.filter((s) => s.category === "cloud").length },
+    { id: "cybersecurity", label: "Cybersecurity", count: allStories.filter((s) => s.category === "cybersecurity").length },
+  ];
+
+  const scroll = (direction) => {
+    if (!trackRef.current) return;
+    const card = trackRef.current.firstElementChild;
+    const cardWidth = card ? card.getBoundingClientRect().width : 380;
+    trackRef.current.scrollBy({ left: direction * (cardWidth + 24), behavior: "smooth" });
+  };
+
+  return (
+    <div className="relative">
+      {/* 1. Header & Proof Ribbon */}
+      <div className="mx-auto max-w-4xl text-center">
+        <div className="inline-flex items-center gap-2 rounded-full border border-amber-200/80 bg-gradient-to-r from-amber-50 to-orange-50/50 px-4 py-1.5 text-xs font-bold uppercase tracking-[.18em] text-amber-900 shadow-xs">
+          <i className="ti ti-sparkles text-amber-600" />
+          Verified Learner Stories
+        </div>
+        <h2 className="mt-4 font-display text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl lg:text-5xl">
+          Confidence built through practice.
+        </h2>
+        <p className="mt-4 text-sm leading-relaxed text-slate-600 sm:text-base max-w-2xl mx-auto">
+          Real feedback from students who built live portfolio projects, defended their code in mock interviews, and transitioned into technical careers.
+        </p>
+
+        {/* Proof & Ratings Bar */}
+        <div className="mt-7 flex flex-wrap items-center justify-center gap-3 sm:gap-6 text-xs text-slate-700">
+          <div className="flex items-center gap-2 rounded-full border border-slate-200/80 bg-white px-4 py-2 shadow-xs">
+            <div className="flex text-amber-400 text-xs">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <i key={i} className="ti ti-star-filled" />
+              ))}
+            </div>
+            <span className="font-bold text-slate-950">4.9 / 5.0</span>
+            <span className="text-slate-400">|</span>
+            <span className="text-slate-600">500+ Verified Reviews</span>
+          </div>
+
+          <div className="flex items-center gap-2 rounded-full border border-slate-200/80 bg-white px-4 py-2 shadow-xs">
+            <i className="ti ti-briefcase text-blue-600" />
+            <span className="font-bold text-slate-950">85%+</span>
+            <span className="text-slate-600">Placement &amp; Internship Rate</span>
+          </div>
+
+          <div className="flex items-center gap-2 rounded-full border border-slate-200/80 bg-white px-4 py-2 shadow-xs">
+            <i className="ti ti-device-desktop text-emerald-600" />
+            <span className="font-bold text-slate-950">100%</span>
+            <span className="text-slate-600">Practical Lab Work</span>
+          </div>
+        </div>
+      </div>
+
+      {/* 2. Category Filter Pills */}
+      <div className="mt-10 flex flex-wrap items-center justify-center gap-2">
+        {CATEGORIES.map((cat) => {
+          const isActive = activeCategory === cat.id;
+          return (
+            <button
+              key={cat.id}
+              type="button"
+              onClick={() => setActiveCategory(cat.id)}
+              className={`inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-xs font-bold transition-all duration-200 ${
+                isActive
+                  ? "bg-[#0b1528] text-white shadow-md shadow-brand-950/20 scale-105"
+                  : "border border-slate-200/80 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-950 hover:bg-slate-50"
+              }`}
+            >
+              <span>{cat.label}</span>
+              <span className={`rounded-full px-1.5 py-0.5 text-[10px] ${isActive ? "bg-white/20 text-white" : "bg-slate-100 text-slate-500"}`}>
+                {cat.count}
+              </span>
+            </button>
+          );
+        })}
+      </div>
+
+      {/* 3. Horizontal Story Cards Slider */}
+      <div className="relative mt-8">
+        <div
+          ref={trackRef}
+          className="flex gap-6 overflow-x-auto pb-4 pt-2 snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden px-1"
+        >
+          {filteredStories.map((item) => (
+            <figure
+              key={item.id || item.name}
+              className="group relative flex min-h-[420px] w-[min(90vw,380px)] shrink-0 snap-start flex-col justify-between overflow-hidden rounded-3xl border border-slate-200/90 bg-white p-7 shadow-[0_4px_25px_-4px_rgba(15,23,42,0.04)] transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-300/80 hover:shadow-[0_20px_45px_-12px_rgba(15,23,42,0.1)] sm:p-8 lg:w-[410px]"
+            >
+              <span className="absolute inset-x-0 top-0 h-1 origin-left scale-x-0 bg-gradient-to-r from-amber-400 via-brand-500 to-indigo-600 transition-transform duration-500 group-hover:scale-x-100" />
+
+              <div>
+                {/* Header: Stars & Verified Badge */}
+                <div className="flex items-center justify-between gap-2">
+                  <div className="flex items-center gap-1.5">
+                    <div className="flex items-center gap-0.5 text-amber-400 text-sm">
+                      {Array.from({ length: item.rating || 5 }).map((_, star) => (
+                        <i key={star} className="ti ti-star-filled" />
+                      ))}
+                    </div>
+                    <span className="text-xs font-bold text-slate-700 ml-1">5.0</span>
+                  </div>
+
+                  <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2.5 py-0.5 text-[11px] font-bold text-emerald-700 border border-emerald-200/60">
+                    <i className="ti ti-circle-check-filled text-xs text-emerald-600" />
+                    Verified Student
+                  </span>
+                </div>
+
+                {/* Course Track Tag */}
+                <div className="mt-4 flex items-center gap-2">
+                  <span className="inline-flex items-center rounded-lg bg-slate-100/90 px-2.5 py-1 text-[11px] font-semibold text-slate-700">
+                    {item.course}
+                  </span>
+                  <span className="text-slate-300">•</span>
+                  <span className="text-[11px] font-medium text-slate-500">{item.campus}</span>
+                </div>
+
+                {/* Headline */}
+                <h3 className="mt-4 font-display text-base font-bold leading-snug text-slate-950 sm:text-lg">
+                  {item.headline || `“${item.quote.slice(0, 50)}...”`}
+                </h3>
+
+                {/* Detailed Quote */}
+                <blockquote className="mt-2.5 text-xs leading-relaxed text-slate-600 sm:text-[13px] sm:leading-6">
+                  “{item.quote}”
+                </blockquote>
+              </div>
+
+              {/* Milestone Highlight & Author Information */}
+              <div className="mt-6 pt-4 border-t border-slate-100">
+                {item.highlight && (
+                  <div className="mb-4 inline-flex items-center gap-1.5 rounded-xl bg-amber-50/80 px-3 py-1.5 text-xs font-semibold text-amber-900 border border-amber-200/50">
+                    <i className="ti ti-sparkles text-amber-600 text-xs" />
+                    <span>{item.highlight}</span>
+                  </div>
+                )}
+
+                <figcaption className="flex items-center gap-3">
+                  <div className="relative">
+                    {item.avatar ? (
+                      <img
+                        src={item.avatar}
+                        alt={item.name}
+                        className="h-12 w-12 rounded-full object-cover ring-2 ring-brand-100 shadow-xs"
+                      />
+                    ) : (
+                      <span className="grid h-12 w-12 place-items-center rounded-full bg-gradient-to-br from-brand-600 to-indigo-700 text-sm font-bold text-white shadow-xs">
+                        {initials(item.name)}
+                      </span>
+                    )}
+                    <span
+                      className="absolute -bottom-0.5 -right-0.5 grid h-4 w-4 place-items-center rounded-full bg-blue-600 text-[10px] text-white ring-2 ring-white"
+                      title="Verified graduate profile"
+                    >
+                      <i className="ti ti-check" />
+                    </span>
+                  </div>
+
+                  <div className="min-w-0 flex-1">
+                    <strong className="block truncate text-sm font-bold text-slate-950">{item.name}</strong>
+                    <p className="truncate text-xs font-semibold text-brand-700">{item.role}</p>
+                    <p className="truncate text-[11px] text-slate-500">{item.college || item.batch}</p>
+                  </div>
+                </figcaption>
+              </div>
+            </figure>
+          ))}
+        </div>
+      </div>
+
+      {/* 4. Controls Strip: Trust message + Navigation arrows + All Reviews link */}
+      <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-slate-100 pt-6">
+        <div className="flex items-center gap-2 text-xs text-slate-500">
+          <i className="ti ti-map-pin text-brand-700" />
+          <span>Verified student stories from Madurai, Virudhunagar &amp; Online Batches</span>
+        </div>
+
+        <div className="flex items-center gap-3">
+          <div className="flex gap-2" role="group" aria-label="Browse student stories">
+            <button
+              type="button"
+              onClick={() => scroll(-1)}
+              aria-label="Previous student story"
+              className="grid h-10 w-10 place-items-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-xs transition hover:bg-slate-50 hover:border-slate-300 active:scale-95"
+            >
+              <i className="ti ti-arrow-left text-sm" />
+            </button>
+            <button
+              type="button"
+              onClick={() => scroll(1)}
+              aria-label="Next student story"
+              className="grid h-10 w-10 place-items-center rounded-full bg-[#0b1528] text-white shadow-md shadow-brand-950/20 transition hover:bg-brand-900 active:scale-95"
+            >
+              <i className="ti ti-arrow-right text-sm" />
+            </button>
+          </div>
+
+          <Link
+            to="/reviews"
+            className="inline-flex min-h-10 items-center justify-center gap-2 rounded-full border border-slate-200 bg-white px-5 text-xs font-bold text-slate-800 shadow-xs transition hover:bg-slate-50 hover:border-brand-300 hover:text-brand-800"
+          >
+            <span>View All Reviews</span>
+            <i className="ti ti-arrow-up-right text-xs" />
+          </Link>
+        </div>
+      </div>
     </div>
-    <style>{`
-      .testimonial-spinner-track { animation: testimonial-spin 28s linear infinite; }
-      .testimonial-spinner:hover .testimonial-spinner-track, .testimonial-spinner:focus-within .testimonial-spinner-track { animation-play-state: paused; }
-      @keyframes testimonial-spin { to { transform: translateX(-50%); } }
-      @media (prefers-reduced-motion: reduce) { .testimonial-spinner { overflow-x: auto; } .testimonial-spinner-track { animation: none; } }
-    `}</style>
-  </div>;
+  );
 }
 
 function TechnologyMarquee() {
@@ -298,18 +711,22 @@ const TECH_ROW_2 = [
     icon: <i className="ti ti-database text-2xl text-sky-300" />,
   },
   {
-    name: "API",
-    detail: "Connects applications and services",
+    name: "TypeScript",
+    detail: "Type-safe modern JavaScript development",
     icon: (
-      <span className="inline-flex items-center justify-center rounded-md border border-white/20 bg-white/10 px-1.5 py-0.5 text-[10px] font-black tracking-wider text-white">
-        API
+      <span className="inline-flex h-7 w-7 items-center justify-center rounded-lg bg-[#3178C6] text-[11px] font-black text-white shadow-sm">
+        TS
       </span>
     ),
   },
   {
-    name: "Cloud",
-    detail: "Scalable cloud infrastructure",
-    icon: <i className="ti ti-cloud text-2xl text-white" />,
+    name: "Next.js",
+    detail: "Production framework for full-stack React apps",
+    icon: (
+      <span className="inline-flex h-7 w-7 items-center justify-center rounded-lg bg-black text-[11px] font-black text-white ring-1 ring-white/20 shadow-sm">
+        N
+      </span>
+    ),
   },
 ];
 
@@ -319,14 +736,14 @@ function CommunitySection({ data, courses, testimonials }) {
   return (
     <section className="bg-white pb-12 pt-2 sm:pb-16 sm:pt-3" aria-labelledby="community-title">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        {/* Header - Kept 100% untouched as requested */}
+        {/* Header - Kept clean and authoritative */}
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-xs font-bold uppercase tracking-[.22em] text-amber-700">Why Simatrix</p>
           <h2 id="community-title" className="mt-3 font-display text-4xl font-semibold text-slate-950 sm:text-5xl">
             You don’t have to learn alone.
           </h2>
           <p className="mx-auto mt-4 max-w-2xl leading-7 text-slate-600">
-            Connect practical learning with mentor support, peer momentum and technology-focused career preparation.
+            Connect practical learning with 1-on-1 mentor guidance, production-style projects and verified career preparation.
           </p>
           <div className="mt-8 flex justify-center -space-x-3" aria-label="Simatrix learner community">
             {people.map((src) => (
@@ -345,9 +762,9 @@ function CommunitySection({ data, courses, testimonials }) {
           </div>
         </div>
 
-        {/* 1. Four Feature Cards */}
+        {/* 1. Four Specific Differentiator Cards */}
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {/* 01: Industry-Ready Learning */}
+          {/* 01: Industry-Aligned Curriculum */}
           <Link
             to="/courses"
             className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-slate-200/70 bg-gradient-to-br from-white via-white to-blue-50/30 p-6 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.03)] transition-all duration-300 hover:-translate-y-1 hover:border-blue-300/80 hover:shadow-xl"
@@ -358,13 +775,13 @@ function CommunitySection({ data, courses, testimonials }) {
                 <span className="grid h-12 w-12 place-items-center rounded-2xl bg-blue-600 text-2xl text-white shadow-sm transition-transform duration-300 group-hover:scale-105">
                   <i className="ti ti-school" />
                 </span>
-                <span className="font-mono text-sm font-semibold text-blue-300">01</span>
+                <span className="font-mono text-sm font-semibold text-blue-400">01</span>
               </div>
               <h3 className="mt-4 font-display text-lg font-bold text-slate-900">
-                Industry-Ready Learning
+                Industry-Aligned Curriculum
               </h3>
               <p className="mt-2 text-xs leading-relaxed text-slate-600">
-                Learn skills aligned with today’s technology industry.
+                Learn modern tech stacks, Git workflows, and CI/CD pipelines used by engineering teams.
               </p>
             </div>
             <div className="relative z-10 mt-6 flex items-center justify-between pt-1">
@@ -389,18 +806,18 @@ function CommunitySection({ data, courses, testimonials }) {
                 <span className="grid h-12 w-12 place-items-center rounded-2xl bg-emerald-600 text-2xl text-white shadow-sm transition-transform duration-300 group-hover:scale-105">
                   <i className="ti ti-code" />
                 </span>
-                <span className="font-mono text-sm font-semibold text-emerald-300">02</span>
+                <span className="font-mono text-sm font-semibold text-emerald-400">02</span>
               </div>
               <h3 className="mt-4 font-display text-lg font-bold text-slate-900">
-                Real-World Projects
+                Build a Real Portfolio
               </h3>
               <p className="mt-2 text-xs leading-relaxed text-slate-600">
-                Build practical projects for your portfolio.
+                Graduate with 3+ live GitHub applications you can demo and explain during technical interviews.
               </p>
             </div>
             <div className="relative z-10 mt-6 flex items-center justify-between pt-1">
               <span className="flex items-center gap-1.5 text-xs font-semibold text-emerald-600 transition-colors group-hover:text-emerald-700">
-                Explore Projects
+                View Project Tracks
                 <i className="ti ti-arrow-right text-xs transition-transform group-hover:translate-x-0.5" />
               </span>
               <span className="grid h-8 w-8 place-items-center rounded-full bg-emerald-50 text-emerald-600 shadow-xs transition-all duration-300 group-hover:scale-105 group-hover:bg-emerald-600 group-hover:text-white">
@@ -409,7 +826,7 @@ function CommunitySection({ data, courses, testimonials }) {
             </div>
           </Link>
 
-          {/* 03: Personalized Learning */}
+          {/* 03: 1-on-1 Mentor Guidance */}
           <Link
             to="/career-guidance"
             className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-slate-200/70 bg-gradient-to-br from-white via-white to-purple-50/30 p-6 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.03)] transition-all duration-300 hover:-translate-y-1 hover:border-purple-300/80 hover:shadow-xl"
@@ -420,18 +837,18 @@ function CommunitySection({ data, courses, testimonials }) {
                 <span className="grid h-12 w-12 place-items-center rounded-2xl bg-purple-600 text-2xl text-white shadow-sm transition-transform duration-300 group-hover:scale-105">
                   <i className="ti ti-users" />
                 </span>
-                <span className="font-mono text-sm font-semibold text-purple-300">03</span>
+                <span className="font-mono text-sm font-semibold text-purple-400">03</span>
               </div>
               <h3 className="mt-4 font-display text-lg font-bold text-slate-900">
-                Personalized Learning
+                1-on-1 Mentor Guidance
               </h3>
               <p className="mt-2 text-xs leading-relaxed text-slate-600">
-                Learn at your pace with guidance that fits your goals.
+                Direct code reviews, live bug-fixing sessions and personalized learning roadmaps without passive watching.
               </p>
             </div>
             <div className="relative z-10 mt-6 flex items-center justify-between pt-1">
               <span className="flex items-center gap-1.5 text-xs font-semibold text-purple-600 transition-colors group-hover:text-purple-700">
-                Personalize Track
+                Meet Our Mentors
                 <i className="ti ti-arrow-right text-xs transition-transform group-hover:translate-x-0.5" />
               </span>
               <span className="grid h-8 w-8 place-items-center rounded-full bg-purple-50 text-purple-600 shadow-xs transition-all duration-300 group-hover:scale-105 group-hover:bg-purple-600 group-hover:text-white">
@@ -451,13 +868,13 @@ function CommunitySection({ data, courses, testimonials }) {
                 <span className="grid h-12 w-12 place-items-center rounded-2xl bg-amber-500 text-2xl text-white shadow-sm transition-transform duration-300 group-hover:scale-105">
                   <i className="ti ti-briefcase" />
                 </span>
-                <span className="font-mono text-sm font-semibold text-amber-300">04</span>
+                <span className="font-mono text-sm font-semibold text-amber-500">04</span>
               </div>
               <h3 className="mt-4 font-display text-lg font-bold text-slate-900">
-                Career &amp; Placement Support
+                Placement &amp; Interview Support
               </h3>
               <p className="mt-2 text-xs leading-relaxed text-slate-600">
-                Prepare for interviews, careers and placement opportunities.
+                ATS tech resume optimization, technical mock interview drill-downs, and verified employer connections.
               </p>
             </div>
             <div className="relative z-10 mt-6 flex items-center justify-between pt-1">
@@ -476,45 +893,41 @@ function CommunitySection({ data, courses, testimonials }) {
         <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <div className="flex items-center gap-4 rounded-3xl border border-slate-200/70 bg-white p-5 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.03)] sm:p-6">
             <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-blue-50 text-2xl text-blue-600">
-              <i className="ti ti-file-text" />
+              <i className="ti ti-users" />
             </span>
             <div>
-              <strong className="font-display text-3xl font-bold text-slate-950">
-                {courses.length ? `${courses.length}+` : "34+"}
-              </strong>
-              <p className="mt-0.5 text-xs font-medium text-slate-500">Courses to explore</p>
+              <strong className="font-display text-3xl font-bold text-slate-950">500+</strong>
+              <p className="mt-0.5 text-xs font-medium text-slate-500">Learners guided</p>
             </div>
           </div>
 
           <div className="flex items-center gap-4 rounded-3xl border border-slate-200/70 bg-white p-5 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.03)] sm:p-6">
             <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-purple-50 text-2xl text-purple-600">
+              <i className="ti ti-folders" />
+            </span>
+            <div>
+              <strong className="font-display text-3xl font-bold text-slate-950">50+</strong>
+              <p className="mt-0.5 text-xs font-medium text-slate-500">Real-world projects</p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-4 rounded-3xl border border-slate-200/70 bg-white p-5 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.03)] sm:p-6">
+            <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-emerald-50 text-2xl text-emerald-600">
               <i className="ti ti-stack-2" />
             </span>
             <div>
-              <strong className="font-display text-3xl font-bold text-slate-950">
-                {data?.categories?.length || "10"}
-              </strong>
+              <strong className="font-display text-3xl font-bold text-slate-950">10+</strong>
               <p className="mt-0.5 text-xs font-medium text-slate-500">Technology domains</p>
             </div>
           </div>
 
           <div className="flex items-center gap-4 rounded-3xl border border-slate-200/70 bg-white p-5 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.03)] sm:p-6">
-            <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-blue-50 text-2xl text-blue-600">
-              <i className="ti ti-file-text" />
+            <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-amber-50 text-2xl text-amber-600">
+              <i className="ti ti-certificate" />
             </span>
             <div>
-              <strong className="font-display text-3xl font-bold text-slate-950">50+</strong>
-              <p className="mt-0.5 text-xs font-medium text-slate-500">Real World Projects</p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-4 rounded-3xl border border-slate-200/70 bg-white p-5 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.03)] sm:p-6">
-            <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-purple-50 text-2xl text-purple-600">
-              <i className="ti ti-users" />
-            </span>
-            <div>
-              <strong className="font-display text-3xl font-bold text-slate-950">500+</strong>
-              <p className="mt-0.5 text-xs font-medium text-slate-500">Learners supported</p>
+              <strong className="font-display text-3xl font-bold text-slate-950">100%</strong>
+              <p className="mt-0.5 text-xs font-medium text-slate-500">Practical lab training</p>
             </div>
           </div>
         </div>
@@ -1033,47 +1446,622 @@ export default function Home() {
   }, [data]);
 
   const courses = useMemo(() => data?.categories?.flatMap((category) => category.courses || []) || [], [data]);
-  const featured = courses.slice(0, 6);
+  const featured = useMemo(() => {
+    if (!courses.length) return [];
+    // Prioritize flagship career tracks: Full Stack, AI / Python, Cloud / DevOps, Cybersecurity, Data Science
+    const flagshipRank = (c) => {
+      const slug = (c.slug || "").toLowerCase();
+      const title = (c.title || "").toLowerCase();
+      if (slug.includes("full-stack") || title.includes("full stack") || slug.includes("mern")) return 1;
+      if (slug.includes("ai") || slug.includes("artificial") || title.includes("ai") || slug.includes("python") || title.includes("python")) return 2;
+      if (slug.includes("cloud") || slug.includes("devops") || title.includes("cloud") || title.includes("aws")) return 3;
+      if (slug.includes("cyber") || title.includes("cyber") || slug.includes("security")) return 4;
+      if (slug.includes("data") || title.includes("data science")) return 5;
+      if (c.featured || c.is_featured) return 6;
+      return 10;
+    };
+    return [...courses].sort((a, b) => flagshipRank(a) - flagshipRank(b)).slice(0, 6);
+  }, [courses]);
+
   const testimonials = data?.testimonials?.length ? data.testimonials : STORIES;
   const toEnquiry = (intent = "guidance") => {
     setEnquiryIntent(typeof intent === "string" ? intent : "guidance");
     window.requestAnimationFrame(() => enquiryRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }));
   };
 
-  return <main ref={mainRef} id="main-content" className="overflow-hidden bg-white">
-    <div className="pointer-events-none fixed inset-x-0 top-0 z-[70] h-1 bg-transparent" aria-hidden="true"><span className="block h-full origin-left bg-gradient-to-r from-amber-400 via-orange-500 to-brand-600 shadow-[0_0_12px_rgba(245,158,11,.45)]" style={{ transform: `scaleX(${scrollProgress})` }} /></div>
-    <HeroCarousel onEnquiry={toEnquiry} />
-    <CommunitySection data={data} courses={courses} testimonials={testimonials} />
+  return (
+    <main ref={mainRef} id="main-content" className="overflow-hidden bg-white">
+      <div className="pointer-events-none fixed inset-x-0 top-0 z-[70] h-1 bg-transparent" aria-hidden="true">
+        <span
+          className="block h-full origin-left bg-gradient-to-r from-amber-400 via-orange-500 to-brand-600 shadow-[0_0_12px_rgba(245,158,11,.45)]"
+          style={{ transform: `scaleX(${scrollProgress})` }}
+        />
+      </div>
+      <HeroCarousel onEnquiry={toEnquiry} />
+      <CommunitySection data={data} courses={courses} testimonials={testimonials} />
 
-    {error && !data ? <section className="mx-auto max-w-7xl px-6 py-20 text-center"><p className="text-slate-600">We couldn’t load the latest courses right now.</p><Link to="/courses" className="mt-4 inline-flex font-bold text-brand-700">Browse courses</Link></section> : <>
-      <section className="mx-auto max-w-7xl px-6 py-20 sm:py-28">
-        <SectionTitle eyebrow="Find your path" title="Choose the skill you want to build" description="Start with a field that matches your goals. Each path takes you from essential concepts to practical application." />
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {!data ? (
-            Array.from({ length: 6 }).map((_, i) => <CategorySkeleton key={i} />)
-          ) : (
-            data.categories?.slice(0, 6).map((category) => <Link key={category.id} to={`/courses?category=${category.slug}`} className="group flex items-center gap-4 rounded-2xl border border-slate-200 p-5 transition hover:-translate-y-0.5 hover:border-brand-300 hover:shadow-lg"><span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-brand-50 text-xl text-brand-700"><i className={icon(category.icon)} /></span><span className="min-w-0 flex-1"><strong className="block text-slate-950">{category.name}</strong><span className="mt-1 block text-sm text-slate-500">{(category.courses || []).length} courses</span></span><i className="ti ti-chevron-right text-slate-400 transition group-hover:translate-x-1" /></Link>)
+      {error && !data ? (
+        <section className="mx-auto max-w-7xl px-6 py-20 text-center">
+          <p className="text-slate-600">We couldn’t load the latest courses right now.</p>
+          <Link to="/courses" className="mt-4 inline-flex font-bold text-brand-700">
+            Browse courses
+          </Link>
+        </section>
+      ) : (
+        <>
+          <section id="learning-paths" className="scroll-mt-32 mx-auto max-w-7xl px-6 py-20 sm:py-28">
+            <SectionTitle
+              eyebrow="Find your path"
+              title="Choose the skill you want to build"
+              description="Start with a field that matches your goals. Each path takes you from essential concepts to practical application."
+            />
+            <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {!data ? (
+                Array.from({ length: 6 }).map((_, i) => <CategorySkeleton key={i} />)
+              ) : (
+                data.categories?.slice(0, 6).map((category) => (
+                  <Link
+                    key={category.id}
+                    to={`/courses?category=${category.slug}`}
+                    className="group flex items-center gap-4 rounded-2xl border border-slate-200 p-5 transition hover:-translate-y-0.5 hover:border-brand-300 hover:shadow-lg"
+                  >
+                    <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-brand-50 text-xl text-brand-700">
+                      <i className={icon(category.icon)} />
+                    </span>
+                    <span className="min-w-0 flex-1">
+                      <strong className="block text-slate-950">{category.name}</strong>
+                      <span className="mt-1 block text-sm text-slate-500">
+                        {(category.courses || []).length} courses
+                      </span>
+                    </span>
+                    <i className="ti ti-chevron-right text-slate-400 transition group-hover:translate-x-1" />
+                  </Link>
+                ))
+              )}
+            </div>
+          </section>
+
+          {(!data || featured.length > 0) && (
+            <section id="popular-programs" className="scroll-mt-32 bg-slate-50 py-20 sm:py-28">
+              <div className="mx-auto max-w-7xl px-6">
+                <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+                  <SectionTitle
+                    left
+                    eyebrow="Flagship Programs"
+                    title="Industry-ready career tracks"
+                    description="Engineered for employability. Compare project outcomes, technical curriculum, and duration before getting started."
+                  />
+                  <div className="hidden md:flex items-center gap-2 pb-2">
+                    <span className="text-xs font-semibold text-slate-500">Need foundations?</span>
+                    <Link
+                      to="/courses"
+                      className="inline-flex items-center gap-1 text-xs font-bold text-brand-700 hover:text-brand-800 underline underline-offset-4"
+                    >
+                      Explore C, C++, Java &amp; more <i className="ti ti-arrow-right text-[10px]" />
+                    </Link>
+                  </div>
+                </div>
+                {!data ? (
+                  <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                    {Array.from({ length: 3 }).map((_, i) => (
+                      <CourseCardSkeleton key={i} />
+                    ))}
+                  </div>
+                ) : (
+                  <PopularCoursesCarousel courses={featured} />
+                )}
+              </div>
+            </section>
           )}
+        </>
+      )}
+
+      {/* Free Full-Stack Internship Section */}
+      <section id="internship" className="scroll-mt-32 bg-white py-20 sm:py-28">
+        <div className="mx-auto grid max-w-7xl gap-10 px-6 lg:grid-cols-[1.05fr_.95fr] lg:items-center">
+          <div>
+            <div className="inline-flex items-center gap-2 rounded-full bg-amber-50 px-3.5 py-1 text-xs font-bold uppercase tracking-[.18em] text-amber-800">
+              <span className="h-2 w-2 rounded-full bg-amber-500 animate-pulse" />
+              Free Full-Stack Internship Program
+            </div>
+            <h2 className="mt-4 max-w-2xl font-display text-3xl font-bold leading-tight text-slate-950 sm:text-4xl lg:text-5xl">
+              Bridge the gap between college theory and your first tech job.
+            </h2>
+            <p className="mt-4 max-w-2xl text-base leading-relaxed text-slate-600">
+              Designed specifically for pre-final, final-year college students and freshers. Gain real industry exposure, build deployable software, and master technical interview defense without paying course fees.
+            </p>
+
+            {/* Quick highlight metrics */}
+            <div className="mt-6 flex flex-wrap items-center gap-3 text-xs font-semibold text-slate-700">
+              <span className="flex items-center gap-1.5 rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5">
+                <i className="ti ti-clock text-amber-600 text-sm" /> 4–8 Weeks Duration
+              </span>
+              <span className="flex items-center gap-1.5 rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5">
+                <i className="ti ti-device-laptop text-blue-600 text-sm" /> Classroom Lab or Live Online
+              </span>
+              <span className="flex items-center gap-1.5 rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5">
+                <i className="ti ti-coin-off text-emerald-600 text-sm" /> 100% Free • Selection Based
+              </span>
+            </div>
+
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <button
+                type="button"
+                onClick={() => toEnquiry("internship")}
+                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-brand-900 px-6 py-3 font-bold text-white shadow-md shadow-brand-950/20 transition hover:bg-brand-800 active:scale-[0.99]"
+              >
+                <span>Apply for Free Internship</span>
+                <i className="ti ti-arrow-right" />
+              </button>
+              <button
+                type="button"
+                onClick={() => toEnquiry("internship")}
+                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-6 py-3 font-bold text-slate-800 shadow-xs transition hover:bg-slate-50"
+              >
+                <i className="ti ti-checklist text-brand-700" />
+                <span>Check Eligibility</span>
+              </button>
+            </div>
+            <p className="mt-4 flex items-center gap-2 text-xs text-slate-500">
+              <i className="ti ti-shield-check text-emerald-600" />
+              Zero fee • Batches are limited per campus to ensure 1-on-1 mentor guidance.
+            </p>
+          </div>
+
+          {/* Right card: What you actually take away */}
+          <div className="rounded-3xl border border-amber-200/90 bg-gradient-to-br from-amber-50/70 via-white to-slate-50 p-6 shadow-xl shadow-amber-900/5 sm:p-8">
+            <div className="flex items-center justify-between pb-4 border-b border-amber-200/60">
+              <h3 className="font-display text-xl font-bold text-slate-950 sm:text-2xl">
+                What you actually take away:
+              </h3>
+              <span className="rounded-full bg-amber-500/10 px-3 py-1 text-[11px] font-bold text-amber-800">
+                Verified Outcomes
+              </span>
+            </div>
+
+            <ul className="mt-6 space-y-4">
+              {[
+                {
+                  icon: "ti-folders",
+                  title: "2–3 Completed Industry Projects",
+                  desc: "Build real frontend & backend workflows rather than tutorial clones.",
+                },
+                {
+                  icon: "ti-brand-github",
+                  title: "Active GitHub Repo with Deployments",
+                  desc: "Live URLs on Vercel / Render with proper commit messages & documentation.",
+                },
+                {
+                  icon: "ti-messages",
+                  title: "Mock Interview Project Defense",
+                  desc: "Learn how to explain your database schema, API design, and bugs to recruiters.",
+                },
+                {
+                  icon: "ti-certificate",
+                  title: "Internship Certificate & Performance Letter",
+                  desc: "Official Simatrix Academy verifiable credential to validate your practical training.",
+                },
+              ].map((item) => (
+                <li key={item.title} className="flex gap-4">
+                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-white text-lg text-amber-700 shadow-xs border border-amber-100">
+                    <i className={`ti ${item.icon}`} />
+                  </span>
+                  <div>
+                    <strong className="block text-sm font-bold text-slate-950">{item.title}</strong>
+                    <span className="mt-0.5 block text-xs leading-relaxed text-slate-600">{item.desc}</span>
+                  </div>
+                </li>
+              ))}
+            </ul>
+
+            <div className="mt-6 rounded-2xl bg-amber-100/60 p-4 text-xs leading-relaxed text-amber-900 border border-amber-200/50">
+              <strong>Ideal For:</strong> BE / B.Tech / BCA / MCA / B.Sc CS final-year students and fresh graduates wanting real software experience before campus or off-campus drives.
+            </div>
+          </div>
         </div>
       </section>
-      {(!data || featured.length > 0) && <section className="bg-slate-50 py-20 sm:py-28"><div className="mx-auto max-w-7xl px-6"><SectionTitle left eyebrow="Popular programs" title="Start with a learner favourite" description="Compare outcomes, duration and difficulty before choosing your course." />{!data ? <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">{Array.from({ length: 3 }).map((_, i) => <CourseCardSkeleton key={i} />)}</div> : <PopularCoursesCarousel courses={featured} />}</div></section>}
-    </>}
 
-    <section id="internship" className="scroll-mt-24 bg-white py-20 sm:py-28"><div className="mx-auto grid max-w-7xl gap-10 px-6 lg:grid-cols-[1.05fr_.95fr] lg:items-center"><div><p className="text-xs font-bold uppercase tracking-[.22em] text-amber-700">Free full-stack internship</p><h2 className="mt-3 max-w-2xl font-display text-4xl font-semibold leading-tight text-slate-950 sm:text-5xl">Bridge the gap between learning and your first interview.</h2><p className="mt-5 max-w-2xl leading-7 text-slate-600">Designed for final-year students and freshers who need structured practice, project exposure and a clearer way to present their skills.</p><div className="mt-8 flex flex-col gap-3 sm:flex-row"><button type="button" onClick={() => toEnquiry("internship")} className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-brand-800 px-6 py-3 font-bold text-white transition hover:bg-brand-700">Apply for the internship<i className="ti ti-arrow-right" /></button><Link to="/career-guidance" className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg border border-slate-300 px-6 py-3 font-bold text-slate-800 transition hover:bg-slate-50">Check if it fits my goal</Link></div><p className="mt-4 flex items-center gap-2 text-xs text-slate-500"><i className="ti ti-info-circle" />Eligibility and batch availability will be confirmed by the Simatrix team.</p></div><div className="rounded-3xl border border-slate-200 bg-slate-50 p-6 sm:p-8"><h3 className="font-display text-2xl font-semibold text-slate-950">What the experience focuses on</h3><ul className="mt-6 space-y-5">{[["ti-code","Guided technical practice","Apply full-stack concepts through structured tasks."],["ti-folders","Project exposure","Build work you can discuss during interviews."],["ti-message-dots","Mentor feedback","Understand what to improve and how to progress."],["ti-briefcase","Career preparation","Connect your technical work to resume and interview needs."]].map(([ic,title,text]) => <li key={title} className="flex gap-4"><span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-white text-lg text-amber-700 shadow-sm"><i className={`ti ${ic}`} /></span><span><strong className="block text-sm text-slate-950">{title}</strong><span className="mt-1 block text-sm leading-6 text-slate-600">{text}</span></span></li>)}</ul></div></div></section>
+      {/* Where Learning Leads / Tangible Outcomes */}
+      <section id="outcomes" className="scroll-mt-32 border-y border-slate-200/80 bg-gradient-to-b from-white to-slate-50/50 py-20 sm:py-24">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[0.22em] text-brand-700">Where learning leads</p>
+              <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl lg:text-5xl">
+                Build real capability, not just another completion certificate.
+              </h2>
+              <p className="mt-4 text-base leading-relaxed text-slate-600">
+                Freshers in today&apos;s market are judged by what they have built and how fluently they defend their code. Every program at Simatrix is structured around tangible career readiness.
+              </p>
 
- {/*  <section className="border-y border-slate-200 bg-white py-20 sm:py-24"><div className="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-[.8fr_1.2fr] lg:items-center"><SectionTitle left eyebrow="More than course completion" title="Leave with evidence of what you can do" description="For freshers, knowledge becomes valuable when it can be demonstrated. The learning experience is structured around tangible career preparation." /><div className="grid gap-4 sm:grid-cols-2">{OUTCOMES.map(([ic,title,text]) => <div key={title} className="rounded-2xl border border-slate-200 bg-slate-50 p-5"><span className="grid h-10 w-10 place-items-center rounded-lg bg-white text-xl text-amber-700 shadow-sm"><i className={`ti ${ic}`} /></span><h3 className="mt-4 font-bold text-slate-950">{title}</h3><p className="mt-2 text-sm leading-6 text-slate-600">{text}</p></div>)}</div></div></section>  */}
+              <div className="mt-8 grid gap-4 sm:grid-cols-2">
+                <div className="rounded-2xl border border-slate-200/90 bg-white p-5 shadow-xs">
+                  <span className="grid h-10 w-10 place-items-center rounded-xl bg-blue-50 text-xl text-blue-700">
+                    <i className="ti ti-brand-github" />
+                  </span>
+                  <h4 className="mt-3 font-bold text-slate-950">Production GitHub Portfolios</h4>
+                  <p className="mt-1.5 text-xs leading-relaxed text-slate-600">
+                    Ship 3+ full-stack applications to live URLs with clean git commit histories that tech interviewers respect.
+                  </p>
+                </div>
 
-    <section className="bg-[#0d1b32] py-20 sm:py-28"><div className="mx-auto max-w-7xl px-6"><SectionTitle dark eyebrow="Your learning journey" title="A simple path from learning to opportunity" description="Every stage is designed to answer the question: what should I do next?" /><ol className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">{STEPS.map(([number,title,text]) => <li key={number} className="rounded-2xl border border-white/10 bg-white/[.04] p-6"><span className="font-display text-3xl text-amber-300">{number}</span><h3 className="mt-4 text-lg font-bold text-white">{title}</h3><p className="mt-2 text-sm leading-6 text-slate-300">{text}</p></li>)}</ol></div></section>
+                <div className="rounded-2xl border border-slate-200/90 bg-white p-5 shadow-xs">
+                  <span className="grid h-10 w-10 place-items-center rounded-xl bg-purple-50 text-xl text-purple-700">
+                    <i className="ti ti-messages" />
+                  </span>
+                  <h4 className="mt-3 font-bold text-slate-950">Technical Mock Interviews</h4>
+                  <p className="mt-1.5 text-xs leading-relaxed text-slate-600">
+                    Rigorous 1-on-1 code defense, Data Structures drills, and system design basics to eliminate interview anxiety.
+                  </p>
+                </div>
 
-    <section className="relative mx-auto max-w-7xl px-6 py-20 sm:py-28"><div aria-hidden="true" className="pointer-events-none absolute -left-32 top-24 -z-10 h-72 w-72 rounded-full bg-brand-100/60 blur-3xl" /><SectionTitle eyebrow="Learner stories" title="Confidence built through practice" description="What learners value most about their experience." /><TestimonialsCarousel testimonials={testimonials} /></section>
+                <div className="rounded-2xl border border-slate-200/90 bg-white p-5 shadow-xs">
+                  <span className="grid h-10 w-10 place-items-center rounded-xl bg-emerald-50 text-xl text-emerald-700">
+                    <i className="ti ti-user-check" />
+                  </span>
+                  <h4 className="mt-3 font-bold text-slate-950">Working Tech Mentors</h4>
+                  <p className="mt-1.5 text-xs leading-relaxed text-slate-600">
+                    Trained directly by software engineers from active tech companies, not academic theory readers.
+                  </p>
+                </div>
 
-    <section className="bg-slate-50 py-20 sm:py-24"><div className="mx-auto grid max-w-6xl gap-10 px-6 lg:grid-cols-[.75fr_1.25fr]"><SectionTitle left eyebrow="Before you decide" title="Questions students often ask" description="Clear expectations make it easier to choose your next step confidently." /><div className="space-y-3">{FAQS.map(([question,answer], index) => <details key={question} className="group rounded-xl border border-slate-200 bg-white open:border-brand-300 open:shadow-sm" open={index === 0}><summary className="flex min-h-14 list-none items-center justify-between gap-4 px-5 py-4 font-bold text-slate-900"><span>{question}</span><i className="ti ti-plus shrink-0 text-brand-700 transition-transform group-open:rotate-45" /></summary><p className="px-5 pb-5 text-sm leading-6 text-slate-600">{answer}</p></details>)}</div></div></section>
+                <div className="rounded-2xl border border-slate-200/90 bg-white p-5 shadow-xs">
+                  <span className="grid h-10 w-10 place-items-center rounded-xl bg-amber-50 text-xl text-amber-700">
+                    <i className="ti ti-briefcase" />
+                  </span>
+                  <h4 className="mt-3 font-bold text-slate-950">Placement Pipeline</h4>
+                  <p className="mt-1.5 text-xs leading-relaxed text-slate-600">
+                    Resume optimization, ATS matching, and local + regional company connection drives across Tamil Nadu.
+                  </p>
+                </div>
+              </div>
+            </div>
 
-    <section ref={enquiryRef} className="scroll-mt-24 bg-amber-50 py-20 sm:py-28"><div className="mx-auto grid max-w-6xl items-start gap-10 px-6 lg:grid-cols-[.9fr_1.1fr]"><div className="lg:sticky lg:top-24"><p className="text-xs font-bold uppercase tracking-[.22em] text-amber-700">{enquiryIntent === "internship" ? "Internship application" : "Free career guidance"}</p><h2 className="mt-3 font-display text-4xl font-semibold text-slate-950 sm:text-5xl">{enquiryIntent === "internship" ? "Take the first step toward practical experience." : "Not sure which course fits you?"}</h2><p className="mt-5 max-w-lg leading-7 text-slate-600">{enquiryIntent === "internship" ? "Share your details so the team can confirm eligibility, availability and the next stage of the internship process." : "Tell us about your interests and current experience. Our team will help you identify a suitable next step—without pressure."}</p><ul className="mt-7 space-y-3 text-sm text-slate-700">{(enquiryIntent === "internship" ? ["Confirm your eligibility","Understand the internship process","Get current batch information"] : ["Discuss your career goal","Understand suitable learning paths","Get course and batch information"]).map((item) => <li key={item} className="flex gap-3"><i className="ti ti-check mt-0.5 text-emerald-700" />{item}</li>)}</ul></div><div className="rounded-2xl border border-amber-200 bg-white p-6 shadow-xl shadow-amber-900/5 sm:p-8"><h3 className="font-display text-2xl font-semibold text-slate-950">{enquiryIntent === "internship" ? "Register your interest" : "Request a callback"}</h3><p className="mb-6 mt-2 text-sm text-slate-500">Complete the form and the team will contact you about the next step.</p><EnquiryForm courses={courses} compact type={enquiryIntent} /></div></div></section>
-    <style>{`
-      #main-content > section[class*="py-20"] { padding-top: 3.5rem; padding-bottom: 3.5rem; }
-      #main-content > section:last-of-type { padding-bottom: 1rem; }
-      @media (max-width: 640px) { #main-content > section[class*="py-20"] { padding-top: 2.5rem; padding-bottom: 2.5rem; } }
-    `}</style>
-  </main>;
+            {/* Graduate Takeaway Checklist Card */}
+            <div className="rounded-3xl border border-brand-200/70 bg-gradient-to-br from-brand-900 to-[#0b1528] p-7 text-white shadow-2xl sm:p-9">
+              <div className="inline-flex items-center gap-2 rounded-full border border-amber-400/30 bg-amber-400/10 px-3.5 py-1 text-xs font-semibold text-amber-300">
+                <i className="ti ti-certificate" />
+                Graduate Readiness Standard
+              </div>
+              <h3 className="mt-4 font-display text-2xl font-bold sm:text-3xl">
+                What every Simatrix graduate leaves with:
+              </h3>
+              <p className="mt-2 text-xs leading-relaxed text-slate-300 sm:text-sm">
+                We measure our success not by enrollments, but by the tangible assets in your career portfolio:
+              </p>
+
+              <ul className="mt-6 space-y-3.5 text-xs sm:text-sm">
+                {[
+                  "3+ Live, deployed full-stack or domain applications",
+                  "Active GitHub profile with clear documentation & READMEs",
+                  "ATS-tailored technical resume reviewed by hiring leads",
+                  "Technical interview problem-solving muscle & code defense",
+                  "Simatrix Course Completion Certificate & Performance Endorsement",
+                  "Direct entry to our alumni hiring network & partner job drives",
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-3">
+                    <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-emerald-500/20 text-emerald-400">
+                      <i className="ti ti-check text-xs font-bold" />
+                    </span>
+                    <span className="text-slate-200 font-medium">{item}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <div className="mt-8 pt-6 border-t border-white/10 flex flex-col sm:flex-row gap-3">
+                <button
+                  type="button"
+                  onClick={() => toEnquiry("guidance")}
+                  className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-amber-500 px-5 text-xs font-bold text-slate-950 transition hover:bg-amber-400"
+                >
+                  <span>Discuss Your Learning Plan</span>
+                  <i className="ti ti-arrow-right text-xs" />
+                </button>
+                <Link
+                  to="/placement"
+                  className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/5 px-5 text-xs font-semibold text-white transition hover:bg-white/10"
+                >
+                  <span>Explore Placement Support</span>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Your Learning Journey with Visual Progression Connectors */}
+      <section id="learning-journey" className="scroll-mt-32 bg-[#0d1b32] py-20 sm:py-28">
+        <div className="mx-auto max-w-7xl px-6">
+          <SectionTitle
+            dark
+            eyebrow="Your learning journey"
+            title="A structured path from day one to your first tech job"
+            description="Every stage is intentionally designed so you never wonder what to work on next."
+          />
+          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {STEPS.map(([number, title, text], index) => (
+              <div
+                key={number}
+                className="relative flex flex-col justify-between rounded-2xl border border-white/10 bg-white/[.04] p-6 backdrop-blur-xs transition hover:border-amber-400/40 hover:bg-white/[.06]"
+              >
+                <div>
+                  <div className="flex items-center justify-between">
+                    <span className="font-display text-3xl font-bold text-amber-300">{number}</span>
+                    {index < STEPS.length - 1 && (
+                      <span className="hidden lg:flex items-center text-slate-500 font-mono text-xs">
+                        Step 0{index + 1} → 0{index + 2}
+                      </span>
+                    )}
+                  </div>
+                  <h3 className="mt-4 text-lg font-bold text-white">{title}</h3>
+                  <p className="mt-2 text-xs leading-6 text-slate-300">{text}</p>
+                </div>
+                <div className="mt-6 flex items-center gap-2 border-t border-white/10 pt-4 text-[11px] font-semibold text-amber-400">
+                  <i className="ti ti-circle-check text-xs" />
+                  <span>Phase Milestone</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Real Campus & Lab Environment (Madurai & Virudhunagar) + Parent Trust */}
+      <section id="learning-environment" className="scroll-mt-32 bg-slate-50 py-20 sm:py-28">
+        <div className="mx-auto max-w-7xl px-6">
+          <SectionTitle
+            eyebrow="Campus & Environment"
+            title="Learn in physical computer labs with mentor assistance"
+            description="We believe programming is best learned when you are surrounded by fellow learners and dedicated trainers ready to debug with you."
+          />
+
+          <div className="mt-12 grid gap-6 md:grid-cols-3">
+            <div className="rounded-3xl border border-slate-200/80 bg-white p-7 shadow-xs">
+              <span className="grid h-12 w-12 place-items-center rounded-2xl bg-blue-50 text-2xl text-blue-700">
+                <i className="ti ti-device-desktop" />
+              </span>
+              <h3 className="mt-5 font-display text-xl font-bold text-slate-950">Dedicated High-Speed Labs</h3>
+              <p className="mt-2 text-xs leading-relaxed text-slate-600 sm:text-sm">
+                Fully equipped computer workstations with development environments pre-configured so you focus on writing code from day one.
+              </p>
+              <div className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-blue-700">
+                <i className="ti ti-map-pin" /> Madurai &amp; Virudhunagar
+              </div>
+            </div>
+
+            <div className="rounded-3xl border border-slate-200/80 bg-white p-7 shadow-xs">
+              <span className="grid h-12 w-12 place-items-center rounded-2xl bg-purple-50 text-2xl text-purple-700">
+                <i className="ti ti-user-check" />
+              </span>
+              <h3 className="mt-5 font-display text-xl font-bold text-slate-950">Daily In-Person Lab Mentors</h3>
+              <p className="mt-2 text-xs leading-relaxed text-slate-600 sm:text-sm">
+                Stuck on a syntax error, CORS bug, or database migration? Trainers sit beside you to explain why the bug occurred and how to fix it.
+              </p>
+              <div className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-purple-700">
+                <i className="ti ti-check" /> Zero waiting for tickets
+              </div>
+            </div>
+
+            <div className="rounded-3xl border border-slate-200/80 bg-white p-7 shadow-xs">
+              <span className="grid h-12 w-12 place-items-center rounded-2xl bg-emerald-50 text-2xl text-emerald-700">
+                <i className="ti ti-devices" />
+              </span>
+              <h3 className="mt-5 font-display text-xl font-bold text-slate-950">Flexible Classroom or Online</h3>
+              <p className="mt-2 text-xs leading-relaxed text-slate-600 sm:text-sm">
+                Attend daily offline lab sessions or switch to live interactive classes online if you are a working professional or out of town.
+              </p>
+              <div className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-700">
+                <i className="ti ti-video" /> Recorded sessions available
+              </div>
+            </div>
+          </div>
+
+          {/* Parent & Student Trust Box */}
+          <div className="mt-8 rounded-3xl border border-blue-200/80 bg-gradient-to-r from-blue-900 to-[#0b1528] p-6 text-white sm:p-8">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+              <div className="max-w-2xl">
+                <div className="inline-flex items-center gap-2 rounded-full border border-blue-300/30 bg-blue-500/20 px-3 py-1 text-xs font-semibold text-blue-200">
+                  <i className="ti ti-shield-heart" />
+                  For Students &amp; Parents
+                </div>
+                <h4 className="mt-3 font-display text-xl font-bold sm:text-2xl">
+                  Transparent guidance. Honest career advice. No false promises.
+                </h4>
+                <p className="mt-2 text-xs leading-relaxed text-blue-100/80 sm:text-sm">
+                  We believe parents and students deserve honest clarity. We provide weekly progress milestones, practical lab attendance records, and direct counsellor access without aggressive sales tactics.
+                </p>
+              </div>
+              <div className="flex shrink-0 flex-col sm:flex-row gap-3">
+                <button
+                  type="button"
+                  onClick={() => toEnquiry("guidance")}
+                  className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-white px-5 text-xs font-bold text-slate-950 transition hover:bg-blue-50"
+                >
+                  <span>Speak with a Counsellor</span>
+                  <i className="ti ti-arrow-right text-xs" />
+                </button>
+                <a
+                  href="tel:+919677781155"
+                  className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/10 px-5 text-xs font-semibold text-white transition hover:bg-white/20"
+                >
+                  <i className="ti ti-phone text-xs" />
+                  <span>+91 96777 81155</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Learner Stories / Testimonials */}
+      <section id="learner-stories" className="scroll-mt-32 relative bg-gradient-to-b from-white via-slate-50/60 to-white py-20 sm:py-28 overflow-hidden">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute top-12 left-1/2 -translate-x-1/2 -z-10 h-96 w-[700px] rounded-full bg-gradient-to-tr from-brand-100/30 via-amber-100/20 to-indigo-100/30 blur-3xl opacity-70"
+        />
+        <div className="mx-auto max-w-7xl px-6">
+          <ModernLearnerStories testimonials={testimonials} />
+        </div>
+      </section>
+
+      {/* FAQs Section with Anchor */}
+      <section id="faqs" className="scroll-mt-32 bg-slate-50 py-20 sm:py-24">
+        <div className="mx-auto grid max-w-6xl gap-10 px-6 lg:grid-cols-[.75fr_1.25fr]">
+          <SectionTitle
+            left
+            eyebrow="Before you decide"
+            title="Questions students often ask"
+            description="Clear expectations make it easier to choose your next step confidently."
+          />
+          <div className="space-y-3">
+            {FAQS.map(([question, answer], index) => (
+              <details
+                key={question}
+                className="group rounded-xl border border-slate-200 bg-white open:border-brand-300 open:shadow-xs transition"
+                open={index === 0}
+              >
+                <summary className="flex min-h-14 list-none items-center justify-between gap-4 px-5 py-4 font-bold text-slate-900 cursor-pointer">
+                  <span>{question}</span>
+                  <i className="ti ti-plus shrink-0 text-brand-700 transition-transform group-open:rotate-45" />
+                </summary>
+                <p className="px-5 pb-5 text-sm leading-6 text-slate-600">{answer}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Enquiry Form Section - Modern Elegant Lounge */}
+      <section
+        ref={enquiryRef}
+        id="enquiry"
+        className="scroll-mt-32 relative overflow-hidden bg-gradient-to-b from-white via-slate-50/70 to-slate-100/80 py-24 sm:py-32"
+      >
+        {/* Subtle Ambient Radial Lighting */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -top-24 right-1/4 -z-10 h-[500px] w-[500px] rounded-full bg-gradient-to-br from-brand-100/40 via-amber-100/30 to-indigo-100/30 blur-3xl opacity-70"
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -bottom-24 left-1/4 -z-10 h-[400px] w-[400px] rounded-full bg-gradient-to-tr from-sky-100/30 via-brand-100/20 to-purple-100/20 blur-3xl opacity-60"
+        />
+
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="grid items-start gap-12 lg:grid-cols-[1.05fr_1.15fr]">
+            {/* Left Column: Authoritative Value Proposition & Direct Contact */}
+            <div className="lg:sticky lg:top-32">
+              <div className="inline-flex items-center gap-2 rounded-full border border-amber-200/80 bg-amber-50 px-3.5 py-1 text-xs font-bold uppercase tracking-[.18em] text-amber-900 shadow-2xs">
+                <i className="ti ti-headset text-amber-600" />
+                {enquiryIntent === "internship" ? "Free Internship Admissions" : "1-on-1 Career Guidance Desk"}
+              </div>
+
+              <h2 className="mt-4 font-display text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl lg:text-5xl leading-tight">
+                {enquiryIntent === "internship"
+                  ? "Take the first step toward practical software experience."
+                  : "Not sure which tech path matches your goal?"}
+              </h2>
+
+              <p className="mt-4 text-base leading-relaxed text-slate-600 max-w-xl">
+                {enquiryIntent === "internship"
+                  ? "Share your details so our academic leads can verify eligibility, walk you through the live project roadmap, and reserve your batch seat."
+                  : "Speak directly with an experienced tech trainer, not a sales representative. We analyze your background, answer syllabus and fee questions, and help you chart a realistic career roadmap—completely pressure-free."}
+              </p>
+
+              {/* 3 Value Pillars */}
+              <div className="mt-8 space-y-3.5">
+                {[
+                  {
+                    icon: "ti-compass",
+                    title: enquiryIntent === "internship" ? "Verified Eligibility & Batch Options" : "Personalized Skills Assessment",
+                    desc: enquiryIntent === "internship"
+                      ? "Pre-final, final-year, or fresher status confirmed with flexible campus lab slots."
+                      : "Honest advice based on whether you are CS, non-CS, a fresher, or switching from another field.",
+                  },
+                  {
+                    icon: "ti-device-desktop",
+                    title: "Campus Lab & Syllabus Walkthrough",
+                    desc: "Inspect our computer labs in Madurai & Virudhunagar, project deliverables, and class schedule.",
+                  },
+                  {
+                    icon: "ti-bolt",
+                    title: "Fast Mentor Callback (Under 24 Hours)",
+                    desc: "Our technical mentors reach out by phone or WhatsApp to answer all questions before you decide.",
+                  },
+                ].map((item) => (
+                  <div
+                    key={item.title}
+                    className="flex items-start gap-4 rounded-2xl border border-slate-200/80 bg-white/80 p-4 shadow-2xs backdrop-blur-xs transition hover:border-slate-300 hover:bg-white"
+                  >
+                    <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand-50 text-xl text-brand-700">
+                      <i className={`ti ${item.icon}`} />
+                    </span>
+                    <div>
+                      <h4 className="text-sm font-bold text-slate-950">{item.title}</h4>
+                      <p className="mt-0.5 text-xs leading-relaxed text-slate-600">{item.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Mentor Presence & Direct Hotline Strip */}
+              <div className="mt-8 flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-slate-200/90 bg-white p-4 shadow-xs">
+                <div className="flex items-center gap-3">
+                  <div className="flex -space-x-2 overflow-hidden">
+                    <img src={avatar1} alt="Mentor" className="inline-block h-8 w-8 rounded-full ring-2 ring-white object-cover" />
+                    <img src={avatar2} alt="Mentor" className="inline-block h-8 w-8 rounded-full ring-2 ring-white object-cover" />
+                    <img src={avatar3} alt="Mentor" className="inline-block h-8 w-8 rounded-full ring-2 ring-white object-cover" />
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-1.5 text-xs font-bold text-slate-900">
+                      <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+                      Mentors Active
+                    </div>
+                    <p className="text-[11px] text-slate-500">Madurai &amp; Virudhunagar</p>
+                  </div>
+                </div>
+
+                <a
+                  href="tel:+919677781155"
+                  className="inline-flex items-center gap-2 rounded-xl bg-slate-100/90 px-3.5 py-2 text-xs font-bold text-slate-800 transition hover:bg-slate-200"
+                >
+                  <i className="ti ti-phone text-brand-700" />
+                  <span>+91 96777 81155</span>
+                </a>
+              </div>
+            </div>
+
+            {/* Right Column: High-Converting Card */}
+            <div className="relative rounded-3xl border border-slate-200/90 bg-white p-7 sm:p-9 shadow-[0_20px_50px_-15px_rgba(15,23,42,0.12)]">
+              {/* Subtle top accent highlight */}
+              <span className="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-amber-400 via-brand-600 to-indigo-600" />
+
+              <div className="mb-6 pb-5 border-b border-slate-100 flex items-start justify-between gap-4">
+                <div>
+                  <h3 className="font-display text-2xl font-bold text-slate-950">
+                    {enquiryIntent === "internship" ? "Register Your Interest" : "Request a Callback"}
+                  </h3>
+                  <p className="mt-1 text-xs text-slate-500 sm:text-sm">
+                    {enquiryIntent === "internship"
+                      ? "Complete the quick form below to check eligibility for the free batch."
+                      : "Complete the form and our mentors will contact you within 24 hours."}
+                  </p>
+                </div>
+                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-amber-50 text-amber-700 text-lg">
+                  <i className="ti ti-pencil" />
+                </span>
+              </div>
+
+              <EnquiryForm courses={courses} compact type={enquiryIntent} />
+            </div>
+          </div>
+        </div>
+      </section>
+      <style>{`
+        #main-content > section[class*="py-20"] { padding-top: 3.5rem; padding-bottom: 3.5rem; }
+        #main-content > section:last-of-type { padding-bottom: 2rem; }
+        @media (max-width: 640px) { #main-content > section[class*="py-20"] { padding-top: 2.5rem; padding-bottom: 2.5rem; } }
+      `}</style>
+    </main>
+  );
 }

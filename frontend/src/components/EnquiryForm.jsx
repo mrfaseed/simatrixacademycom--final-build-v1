@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 import { api } from "../api/client";
 import { useToast } from "./ui";
-import { Button, Field } from "./ui";
 
-const EMPTY = { name: "", phone: "", email: "", course_id: "", message: "" };
-
-// Classic refined palette
-const NAVY = "#0A0A1F";
-const SLATE_GRAY = "#4A4A6F";
-const LIGHT_GRAY = "#ECECF1";
-const PURE_WHITE = "#FFFFFF";
-const ACCENT_PURPLE = "#9800E8";
+const EMPTY = {
+  name: "",
+  phone: "",
+  email: "",
+  course_id: "",
+  current_status: "",
+  preferred_mode: "",
+  message: "",
+};
 
 export default function EnquiryForm({ courses = [], compact = false, type = "contact" }) {
   const toast = useToast();
@@ -36,12 +36,20 @@ export default function EnquiryForm({ courses = [], compact = false, type = "con
     }
     setSubmitting(true);
     try {
+      const details = [];
+      if (form.current_status) details.push(`Status: ${form.current_status}`);
+      if (form.preferred_mode) details.push(`Mode: ${form.preferred_mode}`);
+      const enrichedMessage = [details.join(" | "), form.message].filter(Boolean).join("\n\n");
+
       const res = await api.createEnquiry({
         ...form,
+        degree: form.current_status || undefined,
+        college: form.preferred_mode ? `Mode: ${form.preferred_mode}` : undefined,
         course_id: form.course_id || null,
+        message: enrichedMessage,
         type,
       });
-      toast.success(res.message || "Enquiry submitted!");
+      toast.success(res.message || "Enquiry submitted! A counsellor will contact you shortly.");
       setForm(EMPTY);
     } catch (err) {
       toast.error(err.message);
@@ -51,176 +59,220 @@ export default function EnquiryForm({ courses = [], compact = false, type = "con
   };
 
   return (
-    <form onSubmit={submit} className="space-y-5">
-      <div className={compact ? "space-y-4" : "grid gap-4 sm:grid-cols-2"}>
-        <FormField label="Full Name" required>
-          <input
-            name="name"
-            autoComplete="name"
-            required
-            className="form-input"
-            value={form.name}
-            onChange={set("name")}
-            placeholder="Your full name"
-            style={{
-              borderColor: "rgba(10,10,31,0.15)",
-              color: NAVY,
-              "--focus-color": ACCENT_PURPLE,
-            }}
-          />
-        </FormField>
-
-        <FormField label="Phone" required>
-          <input
-            name="phone"
-            type="tel"
-            inputMode="tel"
-            autoComplete="tel"
-            required
-            className="form-input"
-            value={form.phone}
-            onChange={set("phone")}
-            placeholder="Mobile number"
-            style={{
-              borderColor: "rgba(10,10,31,0.15)",
-              color: NAVY,
-              "--focus-color": ACCENT_PURPLE,
-            }}
-          />
-        </FormField>
-
-        <FormField label="Email">
-          <input
-            name="email"
-            type="email"
-            autoComplete="email"
-            className="form-input"
-            value={form.email}
-            onChange={set("email")}
-            placeholder="you@email.com"
-            style={{
-              borderColor: "rgba(10,10,31,0.15)",
-              color: NAVY,
-              "--focus-color": ACCENT_PURPLE,
-            }}
-          />
-        </FormField>
-
-        {courses.length > 1 ? (
-          <FormField label="Interested Course">
-            <select
-              name="course_id"
-              className="form-input"
-              value={form.course_id}
-              onChange={set("course_id")}
-              style={{
-                borderColor: "rgba(10,10,31,0.15)",
-                color: NAVY,
-                "--focus-color": ACCENT_PURPLE,
-              }}
-            >
-              <option value="">Select a course</option>
-              {courses.map((c) => (
-                <option key={c.id} value={c.id}>
-                  {c.title}
-                </option>
-              ))}
-            </select>
-          </FormField>
-        ) : courses.length === 1 ? (
-          <FormField label="Interested Course">
+    <form onSubmit={submit} className="space-y-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+        {/* Full Name */}
+        <label className="block">
+          <span className="mb-1.5 block text-xs font-semibold text-slate-700">
+            Full Name <span className="text-rose-500">*</span>
+          </span>
+          <div className="relative">
+            <span className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400 text-sm">
+              <i className="ti ti-user" />
+            </span>
             <input
-              className="form-input"
-              type="text"
+              name="name"
+              autoComplete="name"
+              required
+              className="w-full rounded-xl border border-slate-200 bg-white py-2.5 pl-9 pr-3 text-xs text-slate-900 shadow-2xs outline-none transition placeholder:text-slate-400 hover:border-slate-300 focus:border-brand-600 focus:ring-4 focus:ring-brand-500/10 sm:text-sm"
+              value={form.name}
+              onChange={set("name")}
+              placeholder="Your full name"
+            />
+          </div>
+        </label>
+
+        {/* Phone Number */}
+        <label className="block">
+          <span className="mb-1.5 block text-xs font-semibold text-slate-700">
+            Phone Number <span className="text-rose-500">*</span>
+          </span>
+          <div className="relative">
+            <span className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400 text-sm">
+              <i className="ti ti-phone" />
+            </span>
+            <input
+              name="phone"
+              type="tel"
+              inputMode="tel"
+              autoComplete="tel"
+              required
+              className="w-full rounded-xl border border-slate-200 bg-white py-2.5 pl-9 pr-3 text-xs text-slate-900 shadow-2xs outline-none transition placeholder:text-slate-400 hover:border-slate-300 focus:border-brand-600 focus:ring-4 focus:ring-brand-500/10 sm:text-sm"
+              value={form.phone}
+              onChange={set("phone")}
+              placeholder="Mobile number"
+            />
+          </div>
+        </label>
+
+        {/* Email Address */}
+        <label className="block">
+          <span className="mb-1.5 block text-xs font-semibold text-slate-700">
+            Email Address <span className="text-slate-400 font-normal">(Optional)</span>
+          </span>
+          <div className="relative">
+            <span className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400 text-sm">
+              <i className="ti ti-mail" />
+            </span>
+            <input
+              name="email"
+              type="email"
+              autoComplete="email"
+              className="w-full rounded-xl border border-slate-200 bg-white py-2.5 pl-9 pr-3 text-xs text-slate-900 shadow-2xs outline-none transition placeholder:text-slate-400 hover:border-slate-300 focus:border-brand-600 focus:ring-4 focus:ring-brand-500/10 sm:text-sm"
+              value={form.email}
+              onChange={set("email")}
+              placeholder="you@email.com"
+            />
+          </div>
+        </label>
+
+        {/* Interested Track */}
+        {courses.length > 1 ? (
+          <label className="block">
+            <span className="mb-1.5 block text-xs font-semibold text-slate-700">Interested Track</span>
+            <div className="relative">
+              <span className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400 text-sm">
+                <i className="ti ti-folders" />
+              </span>
+              <select
+                name="course_id"
+                className="w-full rounded-xl border border-slate-200 bg-white py-2.5 pl-9 pr-8 text-xs text-slate-900 shadow-2xs outline-none transition hover:border-slate-300 focus:border-brand-600 focus:ring-4 focus:ring-brand-500/10 sm:text-sm appearance-none"
+                value={form.course_id}
+                onChange={set("course_id")}
+              >
+                <option value="">Select a course (or Discuss All)</option>
+                {courses.map((c) => (
+                  <option key={c.id} value={c.id}>
+                    {c.title}
+                  </option>
+                ))}
+              </select>
+              <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3 text-slate-400 text-xs">
+                <i className="ti ti-chevron-down" />
+              </span>
+            </div>
+          </label>
+        ) : courses.length === 1 ? (
+          <label className="block">
+            <span className="mb-1.5 block text-xs font-semibold text-slate-700">Course</span>
+            <input
+              className="w-full rounded-xl border border-slate-200 bg-slate-50 py-2.5 px-3 text-xs text-slate-700 sm:text-sm"
               value={courses[0].title}
               readOnly
-              style={{
-                borderColor: "rgba(10,10,31,0.15)",
-                color: NAVY,
-                background: LIGHT_GRAY,
-              }}
             />
-            <input type="hidden" name="course_id" value={form.course_id} />
-          </FormField>
+          </label>
         ) : null}
+
+        {/* Current Status */}
+        <label className="block">
+          <span className="mb-1.5 block text-xs font-semibold text-slate-700">Current Status</span>
+          <div className="relative">
+            <span className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400 text-sm">
+              <i className="ti ti-school" />
+            </span>
+            <select
+              name="current_status"
+              className="w-full rounded-xl border border-slate-200 bg-white py-2.5 pl-9 pr-8 text-xs text-slate-900 shadow-2xs outline-none transition hover:border-slate-300 focus:border-brand-600 focus:ring-4 focus:ring-brand-500/10 sm:text-sm appearance-none"
+              value={form.current_status}
+              onChange={set("current_status")}
+            >
+              <option value="">Select your status</option>
+              <option value="College Student (Pre-Final Year)">College Student (Pre-Final Year)</option>
+              <option value="Final-Year Student">Final-Year Student</option>
+              <option value="Recent Graduate (Fresher)">Recent Graduate (Fresher)</option>
+              <option value="Working Professional">Working Professional</option>
+              <option value="Career Switcher">Career Switcher (Non-IT to IT)</option>
+            </select>
+            <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3 text-slate-400 text-xs">
+              <i className="ti ti-chevron-down" />
+            </span>
+          </div>
+        </label>
+
+        {/* Preferred Mode */}
+        <label className="block">
+          <span className="mb-1.5 block text-xs font-semibold text-slate-700">Preferred Learning Mode</span>
+          <div className="relative">
+            <span className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400 text-sm">
+              <i className="ti ti-device-desktop" />
+            </span>
+            <select
+              name="preferred_mode"
+              className="w-full rounded-xl border border-slate-200 bg-white py-2.5 pl-9 pr-8 text-xs text-slate-900 shadow-2xs outline-none transition hover:border-slate-300 focus:border-brand-600 focus:ring-4 focus:ring-brand-500/10 sm:text-sm appearance-none"
+              value={form.preferred_mode}
+              onChange={set("preferred_mode")}
+            >
+              <option value="">Select learning mode</option>
+              <option value="Classroom Offline (Madurai / Virudhunagar Labs)">Classroom Labs (Madurai / Virudhunagar)</option>
+              <option value="Live Interactive Online">Live Interactive Online</option>
+              <option value="Flexible / Hybrid">Flexible / Discuss with Advisor</option>
+            </select>
+            <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3 text-slate-400 text-xs">
+              <i className="ti ti-chevron-down" />
+            </span>
+          </div>
+        </label>
       </div>
 
-      <FormField label="Message">
+      {/* Message */}
+      <label className="block">
+        <span className="mb-1.5 block text-xs font-semibold text-slate-700">
+          Message or Questions <span className="text-slate-400 font-normal">(Optional)</span>
+        </span>
         <textarea
           name="message"
-          className="form-input resize-none"
+          className="w-full rounded-xl border border-slate-200 bg-white p-3 text-xs text-slate-900 shadow-2xs outline-none transition placeholder:text-slate-400 hover:border-slate-300 focus:border-brand-600 focus:ring-4 focus:ring-brand-500/10 sm:text-sm resize-none"
           rows={compact ? 2 : 3}
           value={form.message}
           onChange={set("message")}
-          placeholder="Tell us what you'd like to learn..."
-          style={{
-            borderColor: "rgba(10,10,31,0.15)",
-            color: NAVY,
-            "--focus-color": ACCENT_PURPLE,
-          }}
+          placeholder="Any specific goal, batch timing preference, or questions..."
         />
-      </FormField>
+      </label>
 
+      {/* Submit Button */}
       <button
         type="submit"
         disabled={submitting}
         aria-busy={submitting}
-        className="w-full py-3 px-6 rounded-lg font-semibold text-white text-sm transition-all hover:-translate-y-0.5 disabled:opacity-60 disabled:hover:translate-y-0"
-        style={{
-          background: NAVY,
-          boxShadow: `0 8px 20px rgba(10,10,31,0.2)`,
-        }}
-        onMouseEnter={(e) => {
-          if (!submitting) e.currentTarget.style.background = `linear-gradient(135deg, ${NAVY}, ${ACCENT_PURPLE})`;
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.background = NAVY;
-        }}
+        className="w-full py-3.5 px-6 rounded-xl font-bold text-white text-xs sm:text-sm transition-all duration-200 bg-[#0b1528] hover:bg-brand-900 hover:shadow-lg hover:shadow-brand-950/20 active:scale-[0.99] disabled:opacity-60 flex items-center justify-center gap-2"
       >
         {submitting ? (
           <>
-            <i className="ti ti-loader-2 animate-spin mr-2" />
-            Submitting…
+            <i className="ti ti-loader-2 animate-spin text-sm" />
+            <span>Sending your request…</span>
           </>
         ) : (
           <>
-            Submit Enquiry
-            <i className="ti ti-send ml-2" style={{ color: "#00A0F8" }} />
+            <span>
+              {type === "internship"
+                ? "Apply for Free Internship"
+                : type === "guidance"
+                ? "Get Free Career Guidance"
+                : "Request Free Callback"}
+            </span>
+            <i className="ti ti-arrow-right text-xs" />
           </>
         )}
       </button>
 
-      <style>{`
-        .form-input {
-          width: 100%;
-          border-radius: 0.5rem;
-          border: 1.5px solid;
-          padding: 0.75rem 1rem;
-          font-size: 0.875rem;
-          background: ${PURE_WHITE};
-          outline: none;
-          transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-        .form-input:hover {
-          border-color: rgba(10,10,31,0.25);
-        }
-        .form-input:focus {
-          border-color: ${ACCENT_PURPLE};
-          background: rgba(152, 0, 232, 0.08);
-          box-shadow: 0 0 0 3px rgba(152, 0, 232, 0.1);
-        }
-      `}</style>
-    </form>
-  );
-}
+      {/* WhatsApp Conversion Alternative */}
+      <div className="pt-2 border-t border-slate-100 text-center">
+        <p className="text-[11px] text-slate-500 font-medium">Need instant answers about fees &amp; batch availability?</p>
+        <a
+          href="https://wa.me/919677781155?text=Hello%20Simatrix%20Academy%2C%20I%20would%20like%20to%20know%20more%20about%20your%20courses%20and%20admissions"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-xl border border-emerald-200 bg-emerald-50/70 py-2.5 px-4 text-xs font-bold text-emerald-800 transition hover:bg-emerald-100 hover:border-emerald-300 shadow-2xs"
+        >
+          <i className="ti ti-brand-whatsapp text-emerald-600 text-base" />
+          <span>Chat Directly on WhatsApp (+91 96777 81155)</span>
+        </a>
+      </div>
 
-function FormField({ label, required, children }) {
-  return (
-    <label className="block">
-      <span className="mb-2 block text-xs font-semibold tracking-wide" style={{ color: SLATE_GRAY }}>
-        {label} {required && <span style={{ color: ACCENT_PURPLE }}>*</span>}
-      </span>
-      {children}
-    </label>
+      <div className="flex items-center justify-center gap-2 text-[11px] text-slate-400 pt-1">
+        <i className="ti ti-shield-lock text-emerald-600 text-xs" />
+        <span>100% Privacy Guaranteed · No spam · Direct advisor response</span>
+      </div>
+    </form>
   );
 }

@@ -392,7 +392,7 @@ export default function Navbar() {
             />
           </button>
 
-          {/* Trigger 3: Career & Support */}
+          {/* Trigger 3: Career & Placement */}
           <button
             ref={triggerRefs.support}
             type="button"
@@ -415,7 +415,7 @@ export default function Navbar() {
                 : "text-slate-600 hover:text-slate-950"
             }`}
           >
-            <span>Career & Support</span>
+            <span>Career & Placement</span>
             <i
               className={`ti ti-chevron-down text-xs text-slate-400 transition-transform duration-200 ${
                 activeMenu === "support" ? "rotate-180 text-sky-600 font-bold" : ""
@@ -444,12 +444,23 @@ export default function Navbar() {
           </NavLink>
         </nav>
 
-        {/* Right Actions: Phone + Enquire Now CTA */}
+        {/* Right Actions: WhatsApp + Phone + Get Course Details CTA */}
         <div
           onMouseEnter={() => setHoveredNav("actions")}
           onMouseLeave={() => setHoveredNav(null)}
-          className="hidden items-center gap-5 lg:flex"
+          className="hidden items-center gap-4 lg:flex"
         >
+          <a
+            href="https://wa.me/919677781155?text=Hello%20Simatrix%20Academy%2C%20I%20would%20like%20to%20know%20more%20about%20your%20courses"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 text-xs font-semibold text-emerald-600 transition hover:text-emerald-700"
+            title="Chat on WhatsApp"
+          >
+            <i className="ti ti-brand-whatsapp text-base text-emerald-600" />
+            <span className="hidden xl:inline">WhatsApp</span>
+          </a>
+
           <a
             href="tel:+919677781155"
             className="flex items-center gap-1.5 text-xs font-medium text-slate-600 transition hover:text-slate-950"
@@ -463,7 +474,7 @@ export default function Navbar() {
             to="/contact"
             className="inline-flex items-center gap-1.5 rounded-lg bg-sky-600 px-4 py-2 text-xs font-bold text-white shadow-md shadow-sky-600/20 transition-all duration-150 hover:-translate-y-0.5 hover:bg-sky-500 hover:shadow-sky-600/30 active:translate-y-0"
           >
-            <span>Enquire Now</span>
+            <span>Get Course Details</span>
             <i className="ti ti-arrow-right text-xs" />
           </Link>
         </div>
@@ -871,8 +882,8 @@ export default function Navbar() {
               </div>
             </MobileAccordion>
 
-            {/* Mobile Career & Support Accordion */}
-            <MobileAccordion label="Career & Support" iconName="ti-briefcase">
+            {/* Mobile Career & Placement Accordion */}
+            <MobileAccordion label="Career & Placement" iconName="ti-briefcase">
               <div className="space-y-1 pt-1 pb-2">
                 {CAREER_PRIMARY_LINKS.map((l) => (
                   <Link
@@ -918,6 +929,15 @@ export default function Navbar() {
           {/* Mobile Bottom Actions */}
           <div className="mt-6 space-y-2.5 border-t border-slate-200 pt-5">
             <a
+              href="https://wa.me/919677781155?text=Hello%20Simatrix%20Academy%2C%20I%20would%20like%20to%20know%20more%20about%20your%20courses"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-2 rounded-lg border border-emerald-200 bg-emerald-50 py-2.5 text-sm font-semibold text-emerald-800 transition hover:bg-emerald-100"
+            >
+              <i className="ti ti-brand-whatsapp text-emerald-600 text-base" />
+              <span>Chat on WhatsApp</span>
+            </a>
+            <a
               href="tel:+919677781155"
               className="flex items-center justify-center gap-2 rounded-lg border border-slate-200 bg-slate-50 py-2.5 text-sm font-medium text-slate-800 transition hover:bg-slate-100"
             >
@@ -929,7 +949,7 @@ export default function Navbar() {
               onClick={() => setMobileOpen(false)}
               className="flex items-center justify-center gap-2 rounded-lg bg-sky-600 py-2.5 text-sm font-bold text-white transition hover:bg-sky-500"
             >
-              <span>Enquire Now</span>
+              <span>Get Course Details</span>
               <i className="ti ti-arrow-right text-xs" />
             </Link>
           </div>

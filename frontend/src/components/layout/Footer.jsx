@@ -192,8 +192,10 @@ export default function Footer() {
               <li className="flex items-start gap-3">
                 <ContactIcon icon="ti-map-pin" />
                 <div>
-                  <span className="block text-[11px] font-bold uppercase tracking-wider text-slate-500">Madurai Campus (HQ)</span>
+                  <span className="block text-[11px] font-bold uppercase tracking-wider text-slate-500">Madurai Campus</span>
                   <p className="mt-0.5 text-xs leading-relaxed text-slate-300">{address}</p>
+                  <span className="mt-2 block text-[11px] font-bold uppercase tracking-wider text-slate-500">Virudhunagar Training Center</span>
+                  <p className="mt-0.5 text-xs text-slate-400">Classroom batches & guided lab practice</p>
                 </div>
               </li>
             </ul>
@@ -202,14 +204,14 @@ export default function Footer() {
       </div>
 
       {/* ================================================================= */}
-      {/* GRAND ARCHITECTURAL WATERMARK (Vercel / Google UX Fog Spotlight)  */}
+      {/* GRAND ARCHITECTURAL WATERMARK (Refined 50% scale)                */}
       {/* ================================================================= */}
       <div
         ref={watermarkRef}
         onMouseMove={handleMouseMove}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        className="relative w-full overflow-hidden border-t border-white/[0.06] pt-10 pb-4 select-none cursor-default"
+        className="relative w-full overflow-hidden border-t border-white/[0.06] pt-6 pb-2 select-none cursor-default"
         style={{
           "--mouse-x": "50%",
           "--mouse-y": "50%",
@@ -219,7 +221,7 @@ export default function Footer() {
       >
         {/* Soft persistent ambient backlighting beam */}
         <div
-          className="pointer-events-none absolute bottom-0 left-1/2 h-44 w-[70rem] -translate-x-1/2 rounded-full opacity-20 blur-[120px]"
+          className="pointer-events-none absolute bottom-0 left-1/2 h-28 w-[50rem] -translate-x-1/2 rounded-full opacity-15 blur-[100px]"
           style={{
             background: "linear-gradient(90deg, #38BDF8, #6366F1, #C026D3)",
           }}
@@ -232,7 +234,7 @@ export default function Footer() {
           style={{
             opacity: "var(--mouse-active, 0)",
             background:
-              "radial-gradient(700px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(var(--fog-rgb), 0.16) 0%, rgba(var(--fog-rgb), 0.05) 45%, transparent 75%)",
+              "radial-gradient(500px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(var(--fog-rgb), 0.12) 0%, rgba(var(--fog-rgb), 0.03) 45%, transparent 75%)",
             WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%)",
             maskImage: "linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%)",
           }}
@@ -241,15 +243,15 @@ export default function Footer() {
 
         <div className="relative mx-auto flex flex-col items-center justify-center text-center">
           <span
-            className="simatrix-grand-watermark block font-sans font-black leading-none tracking-[-0.05em] text-transparent"
+            className="simatrix-grand-watermark block font-sans font-black leading-none tracking-[-0.03em] text-transparent"
             style={{
-              fontSize: "clamp(4.5rem, 16vw, 13.5rem)",
+              fontSize: "clamp(2.5rem, 8vw, 6.5rem)",
             }}
           >
             SIMATRIX
           </span>
 
-          <div className="-mt-3 sm:-mt-6 flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.35em] text-slate-500">
+          <div className="-mt-1 sm:-mt-2 flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.35em] text-slate-500">
             <span className="h-px w-6 bg-slate-700" />
             <span>Excellence in Technology Education</span>
             <span className="h-px w-6 bg-slate-700" />
