@@ -185,39 +185,88 @@ const OUTCOMES = [
   ["ti-route", "A clearer career roadmap", "Know which skills to build now and what your next milestone should be."],
 ];
 
-const FAQS = [
-  [
-    "Am I eligible to join Simatrix Academy?",
-    "Yes! Our programs are designed for college students, final-year students, recent graduates (engineering, arts & science), and working professionals seeking an IT career switch. We provide foundational modules as well as advanced industry tracks.",
-  ],
-  [
-    "Which technology course is right for my background?",
-    "If you enjoy creating visible interfaces and web apps, Full Stack Development is a great fit. If you prefer data analysis and problem-solving, Python & AI / Data Science is ideal. For systems and infrastructure, choose Cloud Computing or Cybersecurity. You can also book a free 1-on-1 session with our counsellors.",
-  ],
-  [
-    "Do you offer classroom (offline) and live online classes?",
-    "Yes. We offer fully equipped physical classroom training with dedicated computer labs at our Madurai and Virudhunagar centers, as well as interactive live online batches with screen-sharing, mentor debugging, and recorded sessions.",
-  ],
-  [
-    "Is there really a free program available?",
-    "Yes! We offer a Free Full-Stack Internship for eligible college students and freshers. It focuses on structured practical exercises, guided project exposure, and interview readiness. Our admissions team evaluates eligibility based on current batch capacity.",
-  ],
-  [
-    "Will I build real projects for my GitHub portfolio?",
-    "Absolutely. Every course includes 2 to 4 end-to-end portfolio projects. You will write clean code, use Git version control, deploy applications to the cloud, and document them properly so recruiters can inspect your real work.",
-  ],
-  [
-    "Is a job guaranteed after completing the course?",
-    "We believe in 100% honesty: we do not sell false '100% job guarantee' marketing claims. What we provide is genuine employability: industry-grade skills, verified GitHub projects, professional resume building, technical mock interviews, and direct interview opportunities with hiring partners.",
-  ],
-  [
-    "What happens after I submit an enquiry form?",
-    "A Simatrix academic counsellor will contact you via phone or WhatsApp within 24 hours. They will understand your educational background, share detailed syllabi, explain batch schedules, and answer any questions without admission pressure.",
-  ],
-  [
-    "Where is Simatrix Academy located?",
-    "Our campus is located at 1/2A, 1st Floor, AA Road, Near Head Post Office, Virudhunagar – 626001. Our facility features modern computer labs, high-speed internet, and mentor workstations for hands-on learning.",
-  ],
+const FAQ_CATEGORIES = [
+  "All Questions",
+  "Admissions & Fees",
+  "Courses & Labs",
+  "Placements & Internships",
+];
+
+const FAQ_ITEMS = [
+  {
+    id: "faq-1",
+    num: "01",
+    category: "Admissions & Fees",
+    tag: "Eligibility",
+    question: "Am I eligible to join Simatrix Academy?",
+    answer: "Yes! Our programs are designed for college students, final-year students, recent graduates (engineering, arts & science), and working professionals seeking an IT career switch. We provide foundational beginner modules as well as advanced industry tracks.",
+    actionText: "Explore Courses & Syllabi",
+    actionTo: "/courses",
+  },
+  {
+    id: "faq-2",
+    num: "02",
+    category: "Courses & Labs",
+    tag: "Career Guidance",
+    question: "Which technology course is right for my background?",
+    answer: "If you enjoy creating visible interfaces and web apps, Full Stack Development is a great fit. If you prefer data analysis and problem-solving, Python & AI / Data Science is ideal. For systems and infrastructure, choose Cloud Computing or Cybersecurity. You can also book a free 1-on-1 session with our counsellors.",
+    actionText: "Book Free 1-on-1 Guidance",
+    actionTo: "/career-guidance",
+  },
+  {
+    id: "faq-3",
+    num: "03",
+    category: "Courses & Labs",
+    tag: "Training Modes",
+    question: "Do you offer classroom (offline) and live online classes?",
+    answer: "Yes. We offer fully equipped physical classroom training with dedicated computer labs at our Madurai and Virudhunagar centers, as well as interactive live online batches with screen-sharing, mentor debugging, and recorded sessions.",
+  },
+  {
+    id: "faq-4",
+    num: "04",
+    category: "Placements & Internships",
+    tag: "Free Internship",
+    question: "Is there really a free program available?",
+    answer: "Yes! We offer a Free Full-Stack Internship for eligible college students and freshers. It focuses on structured practical exercises, guided project exposure, and interview readiness. Our admissions team evaluates eligibility based on current batch capacity.",
+    actionText: "Apply for Free Internship",
+    actionEnquiry: "internship",
+  },
+  {
+    id: "faq-5",
+    num: "05",
+    category: "Courses & Labs",
+    tag: "GitHub Projects",
+    question: "Will I build real projects for my GitHub portfolio?",
+    answer: "Absolutely. Every course includes 2 to 4 end-to-end portfolio projects. You will write clean code, use Git version control, deploy applications to the cloud, and document them properly so recruiters can inspect your real work.",
+  },
+  {
+    id: "faq-6",
+    num: "06",
+    category: "Placements & Internships",
+    tag: "Placement Support",
+    question: "Is a job guaranteed after completing the course?",
+    answer: "We believe in 100% honesty: we do not sell false '100% job guarantee' marketing claims. What we provide is genuine employability: industry-grade skills, verified GitHub projects, professional resume building, technical mock interviews, and direct interview opportunities with hiring partners.",
+    actionText: "View Placement Assistance",
+    actionTo: "/placement",
+  },
+  {
+    id: "faq-7",
+    num: "07",
+    category: "Admissions & Fees",
+    tag: "Admission Process",
+    question: "What happens after I submit an enquiry form?",
+    answer: "A Simatrix academic counsellor will contact you via phone or WhatsApp within 24 hours. They will understand your educational background, share detailed syllabi, explain batch schedules, and answer any questions without admission pressure.",
+  },
+  {
+    id: "faq-8",
+    num: "08",
+    category: "Admissions & Fees",
+    tag: "Campus Location",
+    question: "Where is Simatrix Academy located?",
+    answer: "Our campus is located at 1/2A, 1st Floor, AA Road, Near Head Post Office, Virudhunagar – 626001. Our facility features modern computer labs, high-speed internet, and mentor workstations for hands-on learning.",
+    actionText: "Get Directions on Google Maps",
+    actionHref: "https://www.google.com/maps/search/?api=1&query=1%2F2A+1st+Floor%2C+AA+Road%2C+Near+Head+Post+Office%2C+Virudhunagar%2C+Tamil+Nadu+626001",
+  },
 ];
 
 const TRUST_LINKS = [
@@ -707,9 +756,8 @@ function CommunitySection({ data, courses, testimonials }) {
           {/* 01: Industry-Aligned Curriculum */}
           <Link
             to="/courses"
-            className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-slate-200/70 bg-gradient-to-br from-white via-white to-blue-50/30 p-6 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.03)] transition-all duration-300 hover:-translate-y-1 hover:border-blue-300/80 hover:shadow-xl"
+            className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-slate-200/80 bg-white p-6 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.03)] transition-all duration-300 hover:-translate-y-1 hover:border-blue-300/80 hover:shadow-xl"
           >
-            <div className="pointer-events-none absolute -bottom-8 -right-8 h-28 w-28 rounded-full bg-blue-100/60 blur-xl transition-all duration-300 group-hover:scale-125 group-hover:bg-blue-200/70" />
             <div className="relative z-10">
               <div className="flex items-center justify-between">
                 <span className="grid h-12 w-12 place-items-center rounded-2xl bg-blue-600 text-2xl text-white shadow-sm transition-transform duration-300 group-hover:scale-105">
@@ -738,9 +786,8 @@ function CommunitySection({ data, courses, testimonials }) {
           {/* 02: Real-World Projects */}
           <Link
             to="/courses"
-            className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-slate-200/70 bg-gradient-to-br from-white via-white to-emerald-50/30 p-6 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.03)] transition-all duration-300 hover:-translate-y-1 hover:border-emerald-300/80 hover:shadow-xl"
+            className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-slate-200/80 bg-white p-6 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.03)] transition-all duration-300 hover:-translate-y-1 hover:border-emerald-300/80 hover:shadow-xl"
           >
-            <div className="pointer-events-none absolute -bottom-8 -right-8 h-28 w-28 rounded-full bg-emerald-100/60 blur-xl transition-all duration-300 group-hover:scale-125 group-hover:bg-emerald-200/70" />
             <div className="relative z-10">
               <div className="flex items-center justify-between">
                 <span className="grid h-12 w-12 place-items-center rounded-2xl bg-emerald-600 text-2xl text-white shadow-sm transition-transform duration-300 group-hover:scale-105">
@@ -769,9 +816,8 @@ function CommunitySection({ data, courses, testimonials }) {
           {/* 03: 1-on-1 Mentor Guidance */}
           <Link
             to="/career-guidance"
-            className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-slate-200/70 bg-gradient-to-br from-white via-white to-purple-50/30 p-6 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.03)] transition-all duration-300 hover:-translate-y-1 hover:border-purple-300/80 hover:shadow-xl"
+            className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-slate-200/80 bg-white p-6 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.03)] transition-all duration-300 hover:-translate-y-1 hover:border-purple-300/80 hover:shadow-xl"
           >
-            <div className="pointer-events-none absolute -bottom-8 -right-8 h-28 w-28 rounded-full bg-purple-100/60 blur-xl transition-all duration-300 group-hover:scale-125 group-hover:bg-purple-200/70" />
             <div className="relative z-10">
               <div className="flex items-center justify-between">
                 <span className="grid h-12 w-12 place-items-center rounded-2xl bg-purple-600 text-2xl text-white shadow-sm transition-transform duration-300 group-hover:scale-105">
@@ -800,9 +846,8 @@ function CommunitySection({ data, courses, testimonials }) {
           {/* 04: Career & Placement Support */}
           <Link
             to="/placement"
-            className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-slate-200/70 bg-gradient-to-br from-white via-white to-amber-50/30 p-6 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.03)] transition-all duration-300 hover:-translate-y-1 hover:border-amber-300/80 hover:shadow-xl"
+            className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-slate-200/80 bg-white p-6 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.03)] transition-all duration-300 hover:-translate-y-1 hover:border-amber-300/80 hover:shadow-xl"
           >
-            <div className="pointer-events-none absolute -bottom-8 -right-8 h-28 w-28 rounded-full bg-amber-100/60 blur-xl transition-all duration-300 group-hover:scale-125 group-hover:bg-amber-200/70" />
             <div className="relative z-10">
               <div className="flex items-center justify-between">
                 <span className="grid h-12 w-12 place-items-center rounded-2xl bg-amber-500 text-2xl text-white shadow-sm transition-transform duration-300 group-hover:scale-105">
@@ -925,7 +970,7 @@ function CommunitySection({ data, courses, testimonials }) {
                     <i className="ti ti-brand-discord text-lg" />
                   </a>
                   <a
-                    href="https://wa.me/919363793854"
+                    href="https://wa.me/919363793954"
                     target="_blank"
                     rel="noreferrer"
                     title="WhatsApp"
@@ -1299,7 +1344,7 @@ function HeroCarousel({ onEnquiry }) {
             return (
               <article
                 key={banner.keyId || `${banner.id}-${index}`}
-                className="relative w-full shrink-0 aspect-square sm:aspect-auto h-auto sm:h-[240px] md:h-[320px] lg:h-[470px] max-h-[85vh]"
+                className="relative w-full shrink-0 aspect-square sm:aspect-auto h-auto sm:h-[220px] md:h-[300px] lg:h-[400px] max-h-[85vh]"
                 aria-hidden={!isCurrent}
                 inert={!isCurrent ? "" : undefined}
               >
@@ -1328,6 +1373,220 @@ function HeroCarousel({ onEnquiry }) {
               </article>
             );
           })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function FaqSection({ toEnquiry }) {
+  const [openId, setOpenId] = useState("faq-1");
+  const [activeCategory, setActiveCategory] = useState("All Questions");
+
+  const filteredFaqs = useMemo(() => {
+    if (activeCategory === "All Questions") return FAQ_ITEMS;
+    return FAQ_ITEMS.filter((item) => item.category === activeCategory);
+  }, [activeCategory]);
+
+  const toggleFaq = (id) => {
+    setOpenId((prev) => (prev === id ? null : id));
+  };
+
+  return (
+    <section id="faqs" className="scroll-mt-32 border-t border-slate-200/80 bg-slate-50/70 py-20 sm:py-28">
+      <div className="mx-auto max-w-6xl px-6">
+        <div className="grid gap-10 lg:grid-cols-[.8fr_1.2fr]">
+          {/* Left Column: Heading & Enhanced Quick Help Desk */}
+          <div>
+            <SectionTitle
+              left
+              eyebrow="Before you decide"
+              title="Frequently asked questions"
+              description="Clear expectations make it easier to choose your learning path with confidence."
+            />
+
+            {/* Quick Contact Card for unresolved questions */}
+            <div className="mt-8 rounded-3xl border border-slate-200/90 bg-white p-6 shadow-xs transition hover:shadow-md">
+              <div className="flex items-center justify-between">
+                <span className="grid h-11 w-11 place-items-center rounded-2xl bg-brand-50 text-xl text-brand-700 shadow-2xs">
+                  <i className="ti ti-help" />
+                </span>
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-200/80 bg-emerald-50 px-2.5 py-1 text-[11px] font-bold text-emerald-700">
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                  Counsellors Active
+                </span>
+              </div>
+
+              <h4 className="mt-4 font-display text-lg font-bold text-slate-950">Have a different question?</h4>
+              <p className="mt-1.5 text-xs leading-relaxed text-slate-600">
+                Our counsellors are available to answer fee queries, batch timings, or syllabus details directly.
+              </p>
+
+              <div className="mt-5 flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5">
+                <a
+                  href="https://wa.me/919363793954?text=Hi%20Simatrix%20Academy%2C%20I%20have%20a%20question%20about%20your%20courses."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-600 px-4 py-2.5 text-xs font-bold text-white shadow-xs transition hover:bg-emerald-700"
+                >
+                  <i className="ti ti-brand-whatsapp text-sm" />
+                  <span>WhatsApp Us</span>
+                </a>
+                <a
+                  href="tel:+919363793954"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200/90 bg-slate-50 px-4 py-2.5 text-xs font-bold text-slate-800 transition hover:bg-slate-100"
+                >
+                  <i className="ti ti-phone text-sm text-brand-700" />
+                  <span>+91 93637 93954</span>
+                </a>
+              </div>
+
+              <div className="mt-5 border-t border-slate-100 pt-3.5 space-y-2">
+                <p className="text-[11px] text-slate-500 flex items-center gap-1.5">
+                  <i className="ti ti-clock text-xs text-amber-600 shrink-0" />
+                  <span>Avg response: &lt;20 mins (9:00 AM – 7:30 PM IST)</span>
+                </p>
+                <p className="text-[11px] text-slate-500 flex items-center gap-1.5">
+                  <i className="ti ti-map-pin text-xs text-blue-600 shrink-0" />
+                  <span>Walk-in lab tour at Virudhunagar &amp; Madurai centers.</span>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Column: Category Tabs + Accordion */}
+          <div>
+            {/* Category Filter Pills */}
+            <div className="flex flex-wrap items-center gap-2 pb-5">
+              {FAQ_CATEGORIES.map((cat) => {
+                const isActive = activeCategory === cat;
+                const count = cat === "All Questions" ? FAQ_ITEMS.length : FAQ_ITEMS.filter((i) => i.category === cat).length;
+                return (
+                  <button
+                    key={cat}
+                    type="button"
+                    onClick={() => {
+                      setActiveCategory(cat);
+                    }}
+                    className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all duration-200 cursor-pointer ${
+                      isActive
+                        ? "bg-brand-900 text-white shadow-xs"
+                        : "border border-slate-200/90 bg-white text-slate-600 hover:border-slate-300 hover:bg-slate-50"
+                    }`}
+                  >
+                    <span>{cat}</span>
+                    <span
+                      className={`grid h-4 min-w-4 place-items-center rounded-full px-1 text-[10px] font-bold ${
+                        isActive ? "bg-white/20 text-white" : "bg-slate-100 text-slate-600"
+                      }`}
+                    >
+                      {count}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Accordion Items */}
+            <div className="space-y-3">
+              {filteredFaqs.map((faq) => {
+                const isOpen = openId === faq.id;
+                return (
+                  <div
+                    key={faq.id}
+                    className={`rounded-2xl border transition-all duration-200 ${
+                      isOpen
+                        ? "border-brand-500/50 bg-white shadow-md shadow-brand-900/5 ring-1 ring-brand-500/15"
+                        : "border-slate-200/90 bg-white hover:border-slate-300 hover:shadow-2xs"
+                    }`}
+                  >
+                    <button
+                      type="button"
+                      onClick={() => toggleFaq(faq.id)}
+                      className="flex w-full items-start justify-between gap-4 p-5 text-left cursor-pointer group"
+                      aria-expanded={isOpen}
+                    >
+                      <div className="flex items-start gap-3">
+                        <span className="mt-0.5 font-mono text-xs font-bold text-slate-400 group-hover:text-brand-600 transition">
+                          {faq.num}
+                        </span>
+                        <div>
+                          <div className="flex items-center gap-2 mb-1">
+                            <span className="inline-flex items-center rounded-md bg-slate-100 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-slate-600">
+                              {faq.tag}
+                            </span>
+                          </div>
+                          <h4 className="text-sm font-bold text-slate-900 sm:text-base leading-snug group-hover:text-brand-800 transition">
+                            {faq.question}
+                          </h4>
+                        </div>
+                      </div>
+                      <span
+                        className={`mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-full transition-all duration-300 ${
+                          isOpen
+                            ? "bg-brand-700 text-white rotate-180 shadow-xs"
+                            : "bg-slate-100 text-slate-500 group-hover:bg-brand-50 group-hover:text-brand-700"
+                        }`}
+                      >
+                        <i className="ti ti-chevron-down text-sm" />
+                      </span>
+                    </button>
+
+                    {/* Smooth Animated Accordion Body */}
+                    <div
+                      className={`grid transition-all duration-300 ease-in-out ${
+                        isOpen
+                          ? "grid-rows-[1fr] opacity-100"
+                          : "grid-rows-[0fr] opacity-0"
+                      }`}
+                    >
+                      <div className="overflow-hidden">
+                        <div className="px-5 pb-5 pt-1 border-t border-slate-100 ml-8">
+                          <p className="text-xs sm:text-sm leading-relaxed text-slate-600">
+                            {faq.answer}
+                          </p>
+
+                          {/* Contextual Action Pill if provided */}
+                          {faq.actionText && (
+                            <div className="mt-3.5 pt-2 flex items-center">
+                              {faq.actionTo ? (
+                                <Link
+                                  to={faq.actionTo}
+                                  className="inline-flex items-center gap-1.5 text-xs font-bold text-brand-700 hover:text-brand-800 hover:underline"
+                                >
+                                  <span>{faq.actionText}</span>
+                                  <i className="ti ti-arrow-right text-xs" />
+                                </Link>
+                              ) : faq.actionEnquiry ? (
+                                <button
+                                  type="button"
+                                  onClick={() => toEnquiry?.(faq.actionEnquiry)}
+                                  className="inline-flex items-center gap-1.5 text-xs font-bold text-brand-700 hover:text-brand-800 hover:underline cursor-pointer"
+                                >
+                                  <span>{faq.actionText}</span>
+                                  <i className="ti ti-arrow-right text-xs" />
+                                </button>
+                              ) : faq.actionHref ? (
+                                <a
+                                  href={faq.actionHref}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="inline-flex items-center gap-1.5 text-xs font-bold text-brand-700 hover:text-brand-800 hover:underline"
+                                >
+                                  <span>{faq.actionText}</span>
+                                  <i className="ti ti-arrow-up-right text-xs" />
+                                </a>
+                              ) : null}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -1821,11 +2080,11 @@ export default function Home() {
                   <i className="ti ti-arrow-right text-xs" />
                 </button>
                 <a
-                  href="tel:+919363793854"
+                  href="tel:+919363793954"
                   className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/10 px-5 text-xs font-semibold text-white transition hover:bg-white/20"
                 >
                   <i className="ti ti-phone text-xs" />
-                  <span>+91 93637 93854</span>
+                  <span>+91 93637 93954</span>
                 </a>
               </div>
             </div>
@@ -1931,11 +2190,11 @@ export default function Home() {
                 </div>
 
                 <a
-                  href="tel:+919363793854"
+                  href="tel:+919363793954"
                   className="inline-flex items-center gap-2 rounded-xl bg-slate-100/90 px-3.5 py-2 text-xs font-bold text-slate-800 transition hover:bg-slate-200"
                 >
                   <i className="ti ti-phone text-brand-700" />
-                  <span>+91 93637 93854</span>
+                  <span>+91 93637 93954</span>
                 </a>
               </div>
             </div>
@@ -1967,64 +2226,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FAQs Section - Placed right above footer */}
-      <section id="faqs" className="scroll-mt-32 border-t border-slate-200/80 bg-slate-50/70 py-20 sm:py-28">
-        <div className="mx-auto grid max-w-6xl gap-10 px-6 lg:grid-cols-[.8fr_1.2fr]">
-          <div>
-            <SectionTitle
-              left
-              eyebrow="Before you decide"
-              title="Frequently asked questions"
-              description="Clear expectations make it easier to choose your learning path with confidence."
-            />
-
-            {/* Quick Contact Card for unresolved questions */}
-            <div className="mt-8 rounded-2xl border border-slate-200/80 bg-white p-5 shadow-2xs">
-              <span className="grid h-10 w-10 place-items-center rounded-xl bg-brand-50 text-xl text-brand-700">
-                <i className="ti ti-help" />
-              </span>
-              <h4 className="mt-3 text-sm font-bold text-slate-950">Have a different question?</h4>
-              <p className="mt-1 text-xs leading-relaxed text-slate-600">
-                Our counsellors are available to answer fee queries, batch timings, or syllabus details directly.
-              </p>
-              <div className="mt-4 flex flex-wrap items-center gap-2">
-                <a
-                  href="https://wa.me/919363793854"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-1.5 text-xs font-bold text-emerald-800 transition hover:bg-emerald-100"
-                >
-                  <i className="ti ti-brand-whatsapp text-emerald-600" /> WhatsApp Us
-                </a>
-                <a
-                  href="tel:+919363793854"
-                  className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-bold text-slate-800 transition hover:bg-slate-100"
-                >
-                  <i className="ti ti-phone text-brand-700" /> +91 93637 93854
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div className="space-y-3">
-            {FAQS.map(([question, answer], index) => (
-              <details
-                key={question}
-                className="group rounded-2xl border border-slate-200/90 bg-white open:border-brand-300 open:shadow-xs transition-all duration-200"
-                open={index === 0}
-              >
-                <summary className="flex min-h-14 list-none items-center justify-between gap-4 px-5 py-4 font-bold text-slate-900 cursor-pointer hover:text-brand-800 transition">
-                  <span className="text-sm sm:text-base">{question}</span>
-                  <i className="ti ti-plus shrink-0 text-brand-700 transition-transform group-open:rotate-45" />
-                </summary>
-                <p className="px-5 pb-5 text-xs sm:text-sm leading-relaxed text-slate-600 border-t border-slate-50 pt-3">
-                  {answer}
-                </p>
-              </details>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* FAQs Section with Single-Open Accordion & Category Filters */}
+      <FaqSection toEnquiry={toEnquiry} />
       <style>{`
         #main-content > section[class*="py-20"] { padding-top: 3.5rem; padding-bottom: 3.5rem; }
         #main-content > section:last-of-type { padding-bottom: 2rem; }

@@ -52,7 +52,7 @@ export default function Footer() {
     }
   };
 
-  const phone = "+91 93637 93854";
+  const phone = "+91 93637 93954";
   const rawEmail = s.contact_email || "info@simatrixacademy.com";
   const email = rawEmail.includes("elysiumacademy") ? "info@simatrixacademy.com" : rawEmail;
   const address = "1/2A, 1st Floor, AA Road, Near Head Post Office, Virudhunagar – 626001";
@@ -81,7 +81,7 @@ export default function Footer() {
     { icon: "ti-brand-instagram", href: s.social_instagram || "https://instagram.com/simatrixacademy", label: "Instagram" },
     { icon: "ti-brand-youtube", href: s.social_youtube || "https://youtube.com/@simatrixacademy", label: "YouTube" },
     { icon: "ti-brand-facebook", href: s.social_facebook || "https://facebook.com/simatrixacademy", label: "Facebook" },
-    { icon: "ti-brand-whatsapp", href: "https://wa.me/919363793854", label: "WhatsApp" },
+    { icon: "ti-brand-whatsapp", href: "https://wa.me/919363793954", label: "WhatsApp" },
   ];
 
   return (

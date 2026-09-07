@@ -11,17 +11,17 @@ export function loadSettings() {
         const s = r.data?.settings || {};
         return {
           ...s,
-          contact_phone: "+91 93637 93854",
-          contact_phone2: "+91 93637 93854",
+          contact_phone: "+91 93637 93954",
+          contact_phone2: "+91 93637 93954",
           contact_address: "1/2A, 1st Floor, AA Road, Near Head Post Office, Virudhunagar – 626001",
-          whatsapp: "919363793854",
+          whatsapp: "919363793954",
         };
       })
       .catch(() => ({
-        contact_phone: "+91 93637 93854",
-        contact_phone2: "+91 93637 93854",
+        contact_phone: "+91 93637 93954",
+        contact_phone2: "+91 93637 93954",
         contact_address: "1/2A, 1st Floor, AA Road, Near Head Post Office, Virudhunagar – 626001",
-        whatsapp: "919363793854",
+        whatsapp: "919363793954",
       }));
   }
   return cache;

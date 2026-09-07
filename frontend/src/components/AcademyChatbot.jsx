@@ -9,7 +9,7 @@ function answerFor(input) {
   if (/course|learn|program|explore/.test(text)) return { text: "You can explore our practical technology programs and compare their duration, level and learning outcomes.", label: "View all courses", to: "/courses" };
   if (/fee|cost|price|batch|schedule|timing/.test(text)) return { text: "Fees and batch schedules vary by program. Send the Virudhunagar team an enquiry and they’ll share the latest details.", label: "Make an enquiry", to: "/contact" };
   if (/career|guidance|job|placement/.test(text)) return { text: "Our career guidance resources can help you choose a learning path and prepare for your next role.", label: "Career guidance", to: "/career-guidance" };
-  if (/contact|phone|call|address|location|campus|virud/.test(text)) return { text: "We’re at 1/2A, 1st Floor, AA Road, Near Head Post Office, Virudhunagar – 626001. Call us on +91 93637 93854.", label: "Contact & directions", to: "/contact" };
+  if (/contact|phone|call|address|location|campus|virud/.test(text)) return { text: "We’re at 1/2A, 1st Floor, AA Road, Near Head Post Office, Virudhunagar – 626001. Call us on +91 93637 93954.", label: "Contact & directions", to: "/contact" };
   if (/review|student|experience/.test(text)) return { text: "Read first-hand experiences shared by learners from the Simatrix community.", label: "Student reviews", to: "/reviews" };
   if (/hello|hi|hey/.test(text)) return { text: "Hello! Ask me about courses, fees, career guidance or our Virudhunagar campus." };
   return { text: "I can help with courses, fees and batches, career guidance, or our Virudhunagar campus. Choose an option below or contact our team for a specific question.", label: "Talk to our team", to: "/contact" };

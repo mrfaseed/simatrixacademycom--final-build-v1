@@ -322,13 +322,13 @@ export default function Navbar() {
         {/* Desktop Navigation Links */}
         <nav
           onMouseLeave={() => setHoveredNav(null)}
-          className="hidden items-center gap-6 lg:flex xl:gap-8"
+          className="hidden items-center gap-7 lg:flex xl:gap-8"
         >
           <NavLink
             to="/"
             end
             onMouseEnter={() => setHoveredNav("home")}
-            className={`relative py-1 text-[13.5px] font-medium transition-colors ${
+            className={`relative py-1 text-sm font-medium transition-colors ${
               showHomeIndicator
                 ? "font-semibold text-slate-950"
                 : "text-slate-600 hover:text-slate-950"
@@ -337,7 +337,7 @@ export default function Navbar() {
             <span>Home</span>
             <span
               aria-hidden="true"
-              className={`absolute -bottom-1 left-0 right-0 h-0.5 rounded-full bg-sky-600 transition-all duration-200 ${
+              className={`absolute -bottom-2.5 left-0 right-0 h-0.5 rounded-full bg-blue-600 transition-all duration-200 ${
                 showHomeIndicator
                   ? "opacity-100 scale-x-100"
                   : "opacity-0 scale-x-0 pointer-events-none"
@@ -353,7 +353,7 @@ export default function Navbar() {
             onMouseLeave={handleTriggerLeave}
             onClick={() => toggleMenu("courses")}
             aria-expanded={activeMenu === "courses"}
-            className={`flex items-center gap-1.5 py-1 text-[13.5px] font-medium transition-colors ${
+            className={`flex items-center gap-1.5 py-1 text-sm font-medium transition-colors cursor-pointer ${
               activeMenu === "courses" || pathname.startsWith("/courses")
                 ? "font-semibold text-slate-950"
                 : "text-slate-600 hover:text-slate-950"
@@ -362,7 +362,7 @@ export default function Navbar() {
             <span>Courses</span>
             <i
               className={`ti ti-chevron-down text-xs text-slate-400 transition-transform duration-200 ${
-                activeMenu === "courses" ? "rotate-180 text-sky-600 font-bold" : ""
+                activeMenu === "courses" ? "rotate-180 text-blue-600 font-bold" : ""
               }`}
             />
           </button>
@@ -375,7 +375,7 @@ export default function Navbar() {
             onMouseLeave={handleTriggerLeave}
             onClick={() => toggleMenu("about")}
             aria-expanded={activeMenu === "about"}
-            className={`flex items-center gap-1.5 py-1 text-[13.5px] font-medium transition-colors ${
+            className={`flex items-center gap-1.5 py-1 text-sm font-medium transition-colors cursor-pointer ${
               activeMenu === "about" ||
               pathname.startsWith("/about") ||
               pathname === "/awards" ||
@@ -387,7 +387,7 @@ export default function Navbar() {
             <span>About</span>
             <i
               className={`ti ti-chevron-down text-xs text-slate-400 transition-transform duration-200 ${
-                activeMenu === "about" ? "rotate-180 text-sky-600 font-bold" : ""
+                activeMenu === "about" ? "rotate-180 text-blue-600 font-bold" : ""
               }`}
             />
           </button>
@@ -400,7 +400,7 @@ export default function Navbar() {
             onMouseLeave={handleTriggerLeave}
             onClick={() => toggleMenu("support")}
             aria-expanded={activeMenu === "support"}
-            className={`flex items-center gap-1.5 py-1 text-[13.5px] font-medium transition-colors ${
+            className={`flex items-center gap-1.5 py-1 text-sm font-medium transition-colors cursor-pointer ${
               activeMenu === "support" ||
               [
                 "/placement",
@@ -418,7 +418,7 @@ export default function Navbar() {
             <span>Career & Placement</span>
             <i
               className={`ti ti-chevron-down text-xs text-slate-400 transition-transform duration-200 ${
-                activeMenu === "support" ? "rotate-180 text-sky-600 font-bold" : ""
+                activeMenu === "support" ? "rotate-180 text-blue-600 font-bold" : ""
               }`}
             />
           </button>
@@ -426,7 +426,7 @@ export default function Navbar() {
           <NavLink
             to="/contact"
             onMouseEnter={() => setHoveredNav("contact")}
-            className={`relative py-1 text-[13.5px] font-medium transition-colors ${
+            className={`relative py-1 text-sm font-medium transition-colors ${
               showContactIndicator
                 ? "font-semibold text-slate-950"
                 : "text-slate-600 hover:text-slate-950"
@@ -435,7 +435,7 @@ export default function Navbar() {
             <span>Contact</span>
             <span
               aria-hidden="true"
-              className={`absolute -bottom-1 left-0 right-0 h-0.5 rounded-full bg-sky-600 transition-all duration-200 ${
+              className={`absolute -bottom-2.5 left-0 right-0 h-0.5 rounded-full bg-blue-600 transition-all duration-200 ${
                 showContactIndicator
                   ? "opacity-100 scale-x-100"
                   : "opacity-0 scale-x-0 pointer-events-none"
@@ -444,11 +444,11 @@ export default function Navbar() {
           </NavLink>
         </nav>
 
-        {/* Right Actions: WhatsApp + Phone + Get Course Details CTA */}
+        {/* Right Actions: WhatsApp + Divider + Phone + Smaller Cleaner CTA */}
         <div
           onMouseEnter={() => setHoveredNav("actions")}
           onMouseLeave={() => setHoveredNav(null)}
-          className="hidden items-center gap-4 lg:flex"
+          className="hidden items-center gap-4 xl:gap-5 lg:flex"
         >
           <a
             href="https://wa.me/919363793854?text=Hello%20Simatrix%20Academy%2C%20I%20would%20like%20to%20know%20more%20about%20your%20courses"
@@ -457,13 +457,16 @@ export default function Navbar() {
             className="flex items-center gap-1.5 text-xs font-semibold text-emerald-600 transition hover:text-emerald-700"
             title="Chat on WhatsApp"
           >
-            <i className="ti ti-brand-whatsapp text-base text-emerald-600" />
-            <span className="hidden xl:inline">WhatsApp</span>
+            <i className="ti ti-brand-whatsapp text-lg text-emerald-600" />
+            <span>WhatsApp</span>
           </a>
+
+          {/* Clean Vertical Divider */}
+          <span className="h-4 w-px bg-slate-200" aria-hidden="true" />
 
           <a
             href="tel:+919363793854"
-            className="flex items-center gap-1.5 text-xs font-medium text-slate-600 transition hover:text-slate-950"
+            className="flex items-center gap-1.5 text-xs font-semibold text-slate-700 transition hover:text-slate-950"
             title="Call Admissions"
           >
             <i className="ti ti-phone text-sm text-sky-600" />
@@ -472,7 +475,7 @@ export default function Navbar() {
 
           <Link
             to="/contact"
-            className="inline-flex items-center gap-1.5 rounded-lg bg-sky-600 px-4 py-2 text-xs font-bold text-white shadow-md shadow-sky-600/20 transition-all duration-150 hover:-translate-y-0.5 hover:bg-sky-500 hover:shadow-sky-600/30 active:translate-y-0"
+            className="inline-flex items-center gap-1.5 rounded-lg bg-[#0070e0] px-3.5 py-2 text-xs font-semibold text-white shadow-xs transition-all duration-150 hover:bg-[#0060c0] active:translate-y-0"
           >
             <span>Get Course Details</span>
             <i className="ti ti-arrow-right text-xs" />
@@ -757,11 +760,11 @@ export default function Navbar() {
                     Admissions Helpline
                   </div>
                   <a
-                    href="tel:+919363793854"
+                    href="tel:+919363793954"
                     className="mt-1 flex items-center gap-1.5 text-xs font-bold text-slate-900 hover:text-sky-700 transition"
                   >
                     <i className="ti ti-phone text-sky-600 text-xs" />
-                    <span>+91 93637 93854</span>
+                    <span>+91 93637 93954</span>
                   </a>
                 </div>
               </div>
@@ -929,7 +932,7 @@ export default function Navbar() {
           {/* Mobile Bottom Actions */}
           <div className="mt-6 space-y-2.5 border-t border-slate-200 pt-5">
             <a
-              href="https://wa.me/919363793854?text=Hello%20Simatrix%20Academy%2C%20I%20would%20like%20to%20know%20more%20about%20your%20courses"
+              href="https://wa.me/919363793954?text=Hello%20Simatrix%20Academy%2C%20I%20would%20like%20to%20know%20more%20about%20your%20courses"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-2 rounded-lg border border-emerald-200 bg-emerald-50 py-2.5 text-sm font-semibold text-emerald-800 transition hover:bg-emerald-100"
@@ -938,11 +941,11 @@ export default function Navbar() {
               <span>Chat on WhatsApp</span>
             </a>
             <a
-              href="tel:+919363793854"
+              href="tel:+919363793954"
               className="flex items-center justify-center gap-2 rounded-lg border border-slate-200 bg-slate-50 py-2.5 text-sm font-medium text-slate-800 transition hover:bg-slate-100"
             >
               <i className="ti ti-phone text-sky-600" />
-              <span>Call +91 93637 93854</span>
+              <span>Call +91 93637 93954</span>
             </a>
             <Link
               to="/contact"

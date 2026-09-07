@@ -49,10 +49,10 @@ class DatabaseSeeder extends Seeder
                 ]);
             }
         }
-        DB::table('branches')->updateOrInsert(['name'=>'Virudhunagar (Head Office)'],['city'=>'Virudhunagar','address'=>'1/2A, 1st Floor, AA Road, Near Head Post Office, Virudhunagar – 626001, Tamil Nadu','phone'=>'+91 93637 93854','email'=>'info@simatrixacademy.com','hours'=>'Mon-Sat: 9 AM - 7 PM','is_primary'=>1,'order'=>0]);
+        DB::table('branches')->updateOrInsert(['name'=>'Virudhunagar (Head Office)'],['city'=>'Virudhunagar','address'=>'1/2A, 1st Floor, AA Road, Near Head Post Office, Virudhunagar – 626001, Tamil Nadu','phone'=>'+91 93637 93954','email'=>'info@simatrixacademy.com','hours'=>'Mon-Sat: 9 AM - 7 PM','is_primary'=>1,'order'=>0]);
         $reviews=[['Priya R.','MERN Full Stack Graduate','The hands-on projects and mentor support made all the difference.'],['Karthik S.','Data Science Student','Trainers explain complex topics simply and the placement team genuinely cares.'],['Divya M.','CCNA Certified','Great lab access and real equipment practice.']];
         foreach($reviews as $i=>$r) DB::table('testimonials')->updateOrInsert(['name'=>$r[0]],['role'=>$r[1],'content'=>$r[2],'rating'=>5,'is_active'=>1,'order'=>$i]);
-        $settings=['contact_phone'=>'+91 93637 93854','contact_phone2'=>'+91 93637 93854','contact_email'=>'info@simatrixacademy.com','contact_address'=>'1/2A, 1st Floor, AA Road, Near Head Post Office, Virudhunagar – 626001','whatsapp'=>'919363793854','hero_slides'=>'[]'];
+        $settings=['contact_phone'=>'+91 93637 93954','contact_phone2'=>'+91 93637 93954','contact_email'=>'info@simatrixacademy.com','contact_address'=>'1/2A, 1st Floor, AA Road, Near Head Post Office, Virudhunagar – 626001','whatsapp'=>'919363793954','hero_slides'=>'[]'];
         foreach($settings as $key=>$value) DB::table('settings')->updateOrInsert(['key'=>$key],['value'=>$value]);
     }
 
