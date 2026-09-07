@@ -259,13 +259,13 @@ export default function EnquiryForm({ courses = [], compact = false, type = "con
       <div className="pt-2 border-t border-slate-100 text-center">
         <p className="text-[11px] text-slate-500 font-medium">Need instant answers about fees &amp; batch availability?</p>
         <a
-          href="https://wa.me/919677781155?text=Hello%20Simatrix%20Academy%2C%20I%20would%20like%20to%20know%20more%20about%20your%20courses%20and%20admissions"
+          href="https://wa.me/919363793854?text=Hello%20Simatrix%20Academy%2C%20I%20would%20like%20to%20know%20more%20about%20your%20courses%20and%20admissions"
           target="_blank"
           rel="noopener noreferrer"
           className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-xl border border-emerald-200 bg-emerald-50/70 py-2.5 px-4 text-xs font-bold text-emerald-800 transition hover:bg-emerald-100 hover:border-emerald-300 shadow-2xs"
         >
           <i className="ti ti-brand-whatsapp text-emerald-600 text-base" />
-          <span>Chat Directly on WhatsApp (+91 96777 81155)</span>
+          <span>Chat Directly on WhatsApp (+91 93637 93854)</span>
         </a>
       </div>
 

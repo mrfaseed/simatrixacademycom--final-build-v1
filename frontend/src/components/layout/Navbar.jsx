@@ -451,7 +451,7 @@ export default function Navbar() {
           className="hidden items-center gap-4 lg:flex"
         >
           <a
-            href="https://wa.me/919677781155?text=Hello%20Simatrix%20Academy%2C%20I%20would%20like%20to%20know%20more%20about%20your%20courses"
+            href="https://wa.me/919363793854?text=Hello%20Simatrix%20Academy%2C%20I%20would%20like%20to%20know%20more%20about%20your%20courses"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-1.5 text-xs font-semibold text-emerald-600 transition hover:text-emerald-700"
@@ -462,12 +462,12 @@ export default function Navbar() {
           </a>
 
           <a
-            href="tel:+919677781155"
+            href="tel:+919363793854"
             className="flex items-center gap-1.5 text-xs font-medium text-slate-600 transition hover:text-slate-950"
             title="Call Admissions"
           >
             <i className="ti ti-phone text-sm text-sky-600" />
-            <span>+91 96777 81155</span>
+            <span>+91 93637 93854</span>
           </a>
 
           <Link
@@ -757,11 +757,11 @@ export default function Navbar() {
                     Admissions Helpline
                   </div>
                   <a
-                    href="tel:+919677781155"
+                    href="tel:+919363793854"
                     className="mt-1 flex items-center gap-1.5 text-xs font-bold text-slate-900 hover:text-sky-700 transition"
                   >
                     <i className="ti ti-phone text-sky-600 text-xs" />
-                    <span>+91 96777 81155</span>
+                    <span>+91 93637 93854</span>
                   </a>
                 </div>
               </div>
@@ -929,7 +929,7 @@ export default function Navbar() {
           {/* Mobile Bottom Actions */}
           <div className="mt-6 space-y-2.5 border-t border-slate-200 pt-5">
             <a
-              href="https://wa.me/919677781155?text=Hello%20Simatrix%20Academy%2C%20I%20would%20like%20to%20know%20more%20about%20your%20courses"
+              href="https://wa.me/919363793854?text=Hello%20Simatrix%20Academy%2C%20I%20would%20like%20to%20know%20more%20about%20your%20courses"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-2 rounded-lg border border-emerald-200 bg-emerald-50 py-2.5 text-sm font-semibold text-emerald-800 transition hover:bg-emerald-100"
@@ -938,11 +938,11 @@ export default function Navbar() {
               <span>Chat on WhatsApp</span>
             </a>
             <a
-              href="tel:+919677781155"
+              href="tel:+919363793854"
               className="flex items-center justify-center gap-2 rounded-lg border border-slate-200 bg-slate-50 py-2.5 text-sm font-medium text-slate-800 transition hover:bg-slate-100"
             >
               <i className="ti ti-phone text-sky-600" />
-              <span>Call +91 96777 81155</span>
+              <span>Call +91 93637 93854</span>
             </a>
             <Link
               to="/contact"

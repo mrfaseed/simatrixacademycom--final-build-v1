@@ -10,7 +10,7 @@ const GROUPS = [
       ["contact_phone", "Primary Phone"],
       ["contact_phone2", "Secondary Phone"],
       ["contact_email", "Email"],
-      ["whatsapp", "WhatsApp number (e.g. 919677781155)"],
+      ["whatsapp", "WhatsApp number (e.g. 919363793854)"],
       ["contact_address", "Address", "textarea"],
     ],
   },

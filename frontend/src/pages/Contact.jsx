@@ -7,12 +7,12 @@ import { useSeo } from "../lib/useSeo";
 
 const location = {
   name: "Simatrix Academy, Virudhunagar",
-  address: "1/2A, 1st Floor, AA Road, Near Head Post Office, Virudhunagar, Tamil Nadu 626001",
-  phoneOne: "89033 90051",
-  phoneTwo: "93637 93954",
+  address: "1/2A, 1st Floor, AA Road, Near Head Post Office, Virudhunagar – 626001",
+  phone: "+91 93637 93854",
+  phoneOne: "+91 93637 93854",
   email: "info@simatrixacademy.com",
-  map: "https://www.google.com/maps?q=1%2F2A%201st%20Floor%2C%20AA%20Road%2C%20Near%20Head%20Post%20Office%2C%20Virudhunagar%2C%20Tamil%20Nadu%20625001&output=embed",
-  directions: "https://www.google.com/maps/search/?api=1&query=1%2F2A+1st+Floor%2C+AA+Road%2C+Near+Head+Post+Office%2C+Virudhunagar%2C+Tamil+Nadu+625001",
+  map: "https://www.google.com/maps?q=1%2F2A%201st%20Floor%2C%20AA%20Road%2C%20Near%20Head%20Post%20Office%2C%20Virudhunagar%2C%20Tamil%20Nadu%20626001&output=embed",
+  directions: "https://www.google.com/maps/search/?api=1&query=1%2F2A+1st+Floor%2C+AA+Road%2C+Near+Head+Post+Office%2C+Virudhunagar%2C+Tamil+Nadu+626001",
 };
 
 export default function Contact() {
@@ -44,8 +44,8 @@ export default function Contact() {
           <h1 className="reveal mt-6 font-display text-4xl font-semibold leading-tight tracking-tight sm:text-6xl" style={{ "--d": "80ms" }}>Let’s talk about your next step.</h1>
           <p className="reveal mt-5 max-w-2xl text-base leading-7 text-brand-100 sm:text-lg" style={{ "--d": "150ms" }}>Connect with our Virudhunagar team for course guidance, batch schedules and answers tailored to your learning goals.</p>
           <div className="reveal mt-8 flex flex-col gap-3 sm:flex-row" style={{ "--d": "220ms" }}>
-            <a href="tel:+919677781155" className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-accent-400 px-6 font-bold text-brand-950 shadow-lg shadow-black/20 transition hover:-translate-y-0.5 hover:bg-accent-300"><i className="ti ti-phone-call" /> Call our team</a>
-            <a href="https://wa.me/919677781155" target="_blank" rel="noreferrer" className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/10 px-6 font-bold text-white backdrop-blur transition hover:bg-white/15"><i className="ti ti-brand-whatsapp text-lg text-emerald-300" /> Chat on WhatsApp</a>
+            <a href="tel:+919363793854" className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-accent-400 px-6 font-bold text-brand-950 shadow-lg shadow-black/20 transition hover:-translate-y-0.5 hover:bg-accent-300"><i className="ti ti-phone-call" /> Call our team</a>
+            <a href="https://wa.me/919363793854" target="_blank" rel="noreferrer" className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/10 px-6 font-bold text-white backdrop-blur transition hover:bg-white/15"><i className="ti ti-brand-whatsapp text-lg text-emerald-300" /> Chat on WhatsApp</a>
           </div>
         </div>
       </Section>
@@ -67,7 +67,7 @@ export default function Contact() {
           </Reveal>
 
           <div className="grid gap-4 sm:grid-cols-3">
-            <InfoCard icon="ti-phone" title="Call us" delay={60}><a href="tel:+919677781155">{location.phoneOne}</a><br /><a href="tel:+919677724437">{location.phoneTwo}</a></InfoCard>
+            <InfoCard icon="ti-phone" title="Call us" delay={60}><a href="tel:+919363793854">{location.phone}</a></InfoCard>
             <InfoCard icon="ti-mail" title="Email us" delay={120}><a className="break-all" href={`mailto:${location.email}`}>{location.email}</a></InfoCard>
             <InfoCard icon="ti-clock" title="Opening hours" delay={180}>Mon – Sat: 9 AM – 7 PM<br />Sunday: 10 AM – 3 PM</InfoCard>
           </div>

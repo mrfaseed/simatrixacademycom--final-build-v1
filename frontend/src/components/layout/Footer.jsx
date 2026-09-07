@@ -52,10 +52,10 @@ export default function Footer() {
     }
   };
 
-  const phone = s.contact_phone || "096777 81155";
+  const phone = "+91 93637 93854";
   const rawEmail = s.contact_email || "info@simatrixacademy.com";
   const email = rawEmail.includes("elysiumacademy") ? "info@simatrixacademy.com" : rawEmail;
-  const address = s.contact_address || "227, IInd Floor, Church Road, Anna Nagar, Madurai - 625020";
+  const address = "1/2A, 1st Floor, AA Road, Near Head Post Office, Virudhunagar – 626001";
 
   const explore = [
     ["About Academy", "/about"],
@@ -81,7 +81,7 @@ export default function Footer() {
     { icon: "ti-brand-instagram", href: s.social_instagram || "https://instagram.com/simatrixacademy", label: "Instagram" },
     { icon: "ti-brand-youtube", href: s.social_youtube || "https://youtube.com/@simatrixacademy", label: "YouTube" },
     { icon: "ti-brand-facebook", href: s.social_facebook || "https://facebook.com/simatrixacademy", label: "Facebook" },
-    { icon: "ti-brand-whatsapp", href: s.whatsapp ? `https://wa.me/${s.whatsapp}` : "https://wa.me/919677781155", label: "WhatsApp" },
+    { icon: "ti-brand-whatsapp", href: "https://wa.me/919363793854", label: "WhatsApp" },
   ];
 
   return (
@@ -192,10 +192,8 @@ export default function Footer() {
               <li className="flex items-start gap-3">
                 <ContactIcon icon="ti-map-pin" />
                 <div>
-                  <span className="block text-[11px] font-bold uppercase tracking-wider text-slate-500">Madurai Campus</span>
+                  <span className="block text-[11px] font-bold uppercase tracking-wider text-slate-500">Campus Address</span>
                   <p className="mt-0.5 text-xs leading-relaxed text-slate-300">{address}</p>
-                  <span className="mt-2 block text-[11px] font-bold uppercase tracking-wider text-slate-500">Virudhunagar Training Center</span>
-                  <p className="mt-0.5 text-xs text-slate-400">Classroom batches & guided lab practice</p>
                 </div>
               </li>
             </ul>
