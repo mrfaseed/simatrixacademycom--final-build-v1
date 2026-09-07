@@ -300,42 +300,118 @@ function SectionTitle({ eyebrow, title, description, dark = false, left = false 
   </div>;
 }
 
+function getCourseImage(course) {
+  if (course?.image) {
+    if (course.image.startsWith("/") || course.image.startsWith("http")) {
+      return course.image;
+    }
+    return mediaUrl(course.image);
+  }
+  const slug = (course?.slug || "").toLowerCase();
+  const title = (course?.title || "").toLowerCase();
+
+  if (slug.includes("data-science") || title.includes("data science") || slug.includes("data-analytics")) {
+    return "/courses/MasterDataScienceCourseWithIitmPravartakCertification310.webp";
+  }
+  if (slug.includes("ai") || slug.includes("artificial") || title.includes("machine learning") || slug.includes("machine-learning")) {
+    return "/courses/ArtificialIntelligenceMachineLearningCertifiedByIntelIitmPravartak334.webp";
+  }
+  if (slug.includes("gen-ai") || slug.includes("python") || slug.includes("software")) {
+    return "/courses/GenAiSoftwareDevelopmentProgramCertifiedByMongodbIitmPravartak334.webp";
+  }
+  if (slug.includes("mern") || slug.includes("mean") || slug.includes("full-stack") || title.includes("full stack")) {
+    return "/courses/FullStackDevelopmentCourseWithAiTools310.webp";
+  }
+  if (slug.includes("uiux") || slug.includes("ui-ux") || slug.includes("design") || slug.includes("mobile") || slug.includes("flutter") || slug.includes("android") || slug.includes("react-native")) {
+    return "/courses/UiuxDesignCourse310.webp";
+  }
+  if (slug.includes("devops") || slug.includes("cloud") || slug.includes("aws") || slug.includes("azure") || slug.includes("security") || slug.includes("cyber") || slug.includes("ccna")) {
+    return "/courses/DevopsCourse310.webp";
+  }
+  if (slug.includes("marketing") || slug.includes("business") || slug.includes("analytics") || slug.includes("sap")) {
+    return "/courses/BusinessAndMarketingAnalyticsWithAiTools310.webp";
+  }
+
+  return "/courses/FullStackDevelopmentCourseWithAiTools310.webp";
+}
+
 function CourseTile({ course }) {
+  const courseImg = getCourseImage(course);
+
   return (
     <Link
       to={`/courses/${course.slug}`}
-      className="group relative mx-auto flex h-full w-full max-w-[350px] flex-col overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-[0_10px_35px_-24px_rgba(15,23,42,.35)] transition duration-300 hover:-translate-y-1 hover:border-brand-300 hover:shadow-[0_20px_45px_-24px_rgba(15,23,42,.45)] focus-visible:ring-2 focus-visible:ring-brand-500"
+      className="group relative mx-auto flex h-full w-full flex-col overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] transition-all duration-300 hover:-translate-y-1 hover:border-blue-400/80 hover:shadow-xl focus-visible:ring-2 focus-visible:ring-blue-500"
     >
-      <span className="absolute inset-x-0 top-0 z-20 h-1 origin-left scale-x-0 bg-gradient-to-r from-amber-400 via-brand-600 to-brand-900 transition-transform duration-500 group-hover:scale-x-100" />
-      <div className="relative aspect-[16/7] overflow-hidden bg-gradient-to-br from-slate-900 via-brand-950 to-indigo-950 p-4 flex items-center justify-between">
-        <div className="z-10 pr-2">
-          <span className="inline-flex items-center gap-1 rounded-md bg-white/10 px-2 py-0.5 text-[10px] font-semibold text-sky-300 backdrop-blur-xs">
+      {/* Top Banner with Image in the Background & Gradient Overlay */}
+      <div className="relative aspect-[16/8] w-full overflow-hidden bg-slate-900 p-4 flex items-center justify-between">
+        <img
+          src={courseImg}
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+          className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+          onError={(e) => {
+            e.currentTarget.style.display = "none";
+          }}
+        />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-900/60 to-slate-950/70"
+        />
+
+        {/* Badges & Icons floating cleanly over the background image */}
+        <div className="relative z-10 pr-2">
+          <span className="inline-flex items-center gap-1 rounded-md bg-white/15 px-2 py-0.5 text-[10px] font-semibold text-sky-300 backdrop-blur-sm border border-white/10">
             <i className="ti ti-device-laptop" /> Offline + Online
           </span>
-          <p className="mt-1.5 text-xs font-bold text-white line-clamp-1">{course.category?.name || "Career Track"}</p>
+          <p className="mt-1.5 text-xs font-bold text-white drop-shadow-sm line-clamp-1">
+            {course.category?.name || "Career Track"}
+          </p>
         </div>
-        <div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-white/10 text-2xl text-sky-400 backdrop-blur-xs transition duration-300 group-hover:scale-110">
+        <div className="relative z-10 grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-white/15 text-xl text-sky-300 backdrop-blur-sm border border-white/10 transition-transform duration-300 group-hover:scale-110">
           <i className={icon(course.icon || course.category?.icon || "code")} />
         </div>
       </div>
-      <div className="flex flex-1 flex-col p-4">
-        <div className="flex flex-wrap items-center gap-2 text-[11px] text-slate-500">
-          {course.duration && <span><i className="ti ti-clock mr-1 text-slate-400" />{course.duration}</span>}
-          <span className="text-slate-300">•</span>
-          <span><i className="ti ti-folders mr-1 text-emerald-600" />3+ Projects</span>
-          <span className="text-slate-300">•</span>
-          <span><i className="ti ti-certificate mr-1 text-amber-600" />Certificate</span>
+
+      {/* Card Body - Simatrix Design */}
+      <div className="flex flex-1 flex-col justify-between p-5">
+        <div>
+          <div className="flex flex-wrap items-center gap-2 text-[11px] font-medium text-slate-500">
+            <span>
+              <i className="ti ti-clock mr-1 text-slate-400" />
+              {course.duration || "3 Months"}
+            </span>
+            <span className="text-slate-300">•</span>
+            <span>
+              <i className="ti ti-folders mr-1 text-emerald-600" />
+              3+ Projects
+            </span>
+            <span className="text-slate-300">•</span>
+            <span>
+              <i className="ti ti-certificate mr-1 text-amber-600" />
+              Certificate
+            </span>
+          </div>
+
+          <h3 className="mt-2.5 font-display text-base sm:text-lg font-bold leading-snug text-slate-950 transition-colors group-hover:text-blue-600 line-clamp-1">
+            {course.title}
+          </h3>
+
+          <p className="mt-1.5 line-clamp-2 text-xs leading-relaxed text-slate-600">
+            {course.summary || `Hands-on ${course.title} training with guided labs and industry-oriented projects.`}
+          </p>
         </div>
-        <h3 className="mt-2 font-display text-lg font-semibold leading-snug text-slate-950 group-hover:text-brand-700">
-          {course.title}
-        </h3>
-        <p className="mt-1.5 line-clamp-2 flex-1 text-xs leading-5 text-slate-600">{course.summary}</p>
-        <span className="mt-3 inline-flex items-center justify-between border-t border-slate-100 pt-3 text-xs font-bold text-brand-700">
-          <span>Explore Program</span>
-          <span className="grid h-7 w-7 place-items-center rounded-full bg-brand-50 transition group-hover:bg-brand-700 group-hover:text-white">
-            <i className="ti ti-arrow-right transition-transform group-hover:translate-x-0.5" />
+
+        {/* Explore Program CTA Bar */}
+        <div className="mt-5 flex items-center justify-between border-t border-slate-100 pt-3 text-xs font-bold text-blue-600">
+          <span className="transition-colors group-hover:text-blue-700">
+            Explore Program
           </span>
-        </span>
+          <span className="grid h-8 w-8 place-items-center rounded-full bg-blue-50 text-blue-600 shadow-2xs transition-all duration-300 group-hover:scale-105 group-hover:bg-blue-600 group-hover:text-white">
+            <i className="ti ti-arrow-right text-xs transition-transform group-hover:translate-x-0.5" />
+          </span>
+        </div>
       </div>
     </Link>
   );
@@ -344,8 +420,8 @@ function CourseTile({ course }) {
 function CourseCardSkeleton() {
   return (
     <div className="relative mx-auto flex h-full w-full max-w-[350px] animate-pulse flex-col overflow-hidden rounded-2xl border border-slate-200/80 bg-white p-0 shadow-sm">
-      <div className="aspect-[16/7] w-full bg-slate-200/70" />
-      <div className="flex flex-1 flex-col p-4">
+      <div className="aspect-[16/8] w-full bg-slate-200/70" />
+      <div className="flex flex-1 flex-col p-5">
         <div className="flex gap-2">
           <div className="h-3 w-16 rounded bg-slate-200/70" />
           <div className="h-3 w-20 rounded bg-slate-200/70" />
@@ -354,8 +430,8 @@ function CourseCardSkeleton() {
         <div className="mt-2.5 h-3.5 w-full rounded bg-slate-200/60" />
         <div className="mt-1.5 h-3.5 w-2/3 rounded bg-slate-200/60" />
         <div className="mt-5 flex items-center justify-between border-t border-slate-100 pt-3">
-          <div className="h-3 w-16 rounded bg-slate-200/70" />
-          <div className="h-7 w-7 rounded-full bg-slate-200/70" />
+          <div className="h-3 w-20 rounded bg-slate-200/70" />
+          <div className="h-8 w-8 rounded-full bg-slate-200/70" />
         </div>
       </div>
     </div>
@@ -377,28 +453,110 @@ function CategorySkeleton() {
 
 function PopularCoursesCarousel({ courses }) {
   const trackRef = useRef(null);
-  const move = (direction) => {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const totalDots = Math.min(5, Math.max(courses.length, 1));
+
+  const updateActiveDot = () => {
     const track = trackRef.current;
-    const card = track?.firstElementChild;
-    if (!track || !card) return;
-    track.scrollBy({ left: direction * (card.getBoundingClientRect().width + 20), behavior: "smooth" });
+    if (!track) return;
+    const maxScroll = track.scrollWidth - track.clientWidth;
+    if (maxScroll <= 0) {
+      setActiveIndex(0);
+      return;
+    }
+    const ratio = track.scrollLeft / maxScroll;
+    const index = Math.min(totalDots - 1, Math.max(0, Math.round(ratio * (totalDots - 1))));
+    setActiveIndex(index);
   };
 
-  return <div className="mt-8">
-    <div ref={trackRef} className="flex snap-x snap-mandatory gap-5 overflow-x-auto pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-      {courses.map((course) => <div key={course.id} className="w-[85%] shrink-0 snap-start sm:w-[calc(50%-10px)] lg:w-[calc(33.333%-14px)]"><CourseTile course={course} /></div>)}
-    </div>
-    <div className="mt-4 flex items-center justify-between gap-4">
-      <div className="flex gap-2" role="group" aria-label="Browse popular courses">
-        <button type="button" onClick={() => move(-1)} aria-label="Previous popular course" className="grid h-10 w-10 place-items-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-xs transition hover:bg-slate-50 hover:border-slate-300 active:scale-95"><i className="ti ti-arrow-left" /></button>
-        <button type="button" onClick={() => move(1)} aria-label="Next popular course" className="grid h-10 w-10 place-items-center rounded-full bg-[#0b1528] text-white shadow-md shadow-brand-950/20 transition hover:bg-brand-900 active:scale-95"><i className="ti ti-arrow-right" /></button>
+  const scrollToDot = (idx) => {
+    const track = trackRef.current;
+    if (!track) return;
+    const maxScroll = track.scrollWidth - track.clientWidth;
+    const target = (idx / (totalDots - 1)) * maxScroll;
+    track.scrollTo({ left: target, behavior: "smooth" });
+    setActiveIndex(idx);
+  };
+
+  const move = (direction) => {
+    const track = trackRef.current;
+    if (!track) return;
+    const card = track.firstElementChild;
+    const scrollAmount = card ? card.getBoundingClientRect().width + 20 : 340;
+    track.scrollBy({ left: direction * scrollAmount, behavior: "smooth" });
+  };
+
+  return (
+    <div className="mt-8">
+      {/* Scrollable Track */}
+      <div
+        ref={trackRef}
+        onScroll={updateActiveDot}
+        className="flex snap-x snap-mandatory gap-5 overflow-x-auto pb-4 scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+      >
+        {courses.map((course) => (
+          <div
+            key={course.id}
+            className="w-[85%] shrink-0 snap-start sm:w-[calc(50%-10px)] lg:w-[calc(33.333%-14px)]"
+          >
+            <CourseTile course={course} />
+          </div>
+        ))}
       </div>
-      <Link to="/courses" className="group inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-[#0b1528] px-6 text-xs font-bold text-white shadow-sm transition hover:bg-brand-900">
-        <span>Explore All 20+ Courses</span>
-        <i className="ti ti-arrow-right text-xs transition-transform group-hover:translate-x-1" />
-      </Link>
+
+      {/* Navigation Controls in Simatrix Blue/Dark Style */}
+      <div className="mt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="flex items-center gap-3">
+          <button
+            type="button"
+            onClick={() => move(-1)}
+            aria-label="Previous courses"
+            className="grid h-10 w-10 place-items-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-xs transition hover:bg-blue-50 hover:border-blue-300 hover:text-blue-600 active:scale-95 cursor-pointer"
+          >
+            <i className="ti ti-arrow-left text-sm" />
+          </button>
+
+          {/* Dots Indicator in Simatrix Blue */}
+          <div className="flex items-center gap-1.5 px-2" role="tablist" aria-label="Course pagination">
+            {Array.from({ length: totalDots }).map((_, idx) => (
+              <button
+                key={idx}
+                type="button"
+                role="tab"
+                aria-selected={activeIndex === idx}
+                aria-label={`Go to slide ${idx + 1}`}
+                onClick={() => scrollToDot(idx)}
+                className={`transition-all duration-300 rounded-full cursor-pointer ${
+                  activeIndex === idx
+                    ? "h-2 w-6 bg-blue-600 shadow-xs"
+                    : "h-2 w-2 bg-slate-200 hover:bg-blue-200"
+                }`}
+              />
+            ))}
+          </div>
+
+          <button
+            type="button"
+            onClick={() => move(1)}
+            aria-label="Next courses"
+            className="grid h-10 w-10 place-items-center rounded-full bg-[#0b1528] text-white shadow-md shadow-brand-950/20 transition hover:bg-blue-600 active:scale-95 cursor-pointer"
+          >
+            <i className="ti ti-arrow-right text-sm" />
+          </button>
+        </div>
+
+        {/* Explore All Courses Button */}
+        <Link
+          to="/courses"
+          className="group inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-[#0b1528] px-6 text-xs font-bold text-white shadow-sm transition hover:bg-blue-600"
+        >
+          <span>Explore All 20+ Courses</span>
+          <i className="ti ti-arrow-right text-xs transition-transform group-hover:translate-x-1" />
+        </Link>
+      </div>
     </div>
-  </div>;
+  );
 }
 
 function ModernLearnerStories({ testimonials = [] }) {
@@ -1647,7 +1805,7 @@ export default function Home() {
   const courses = useMemo(() => data?.categories?.flatMap((category) => category.courses || []) || [], [data]);
   const featured = useMemo(() => {
     if (!courses.length) return [];
-    // Prioritize flagship career tracks: Full Stack, AI / Python, Cloud / DevOps, Cybersecurity, Data Science
+    // Prioritize Simatrix flagship career tracks: Full Stack (MERN, MEAN, Python, Java), AI & Data Science, Cloud & DevOps
     const flagshipRank = (c) => {
       const slug = (c.slug || "").toLowerCase();
       const title = (c.title || "").toLowerCase();
@@ -1659,7 +1817,7 @@ export default function Home() {
       if (c.featured || c.is_featured) return 6;
       return 10;
     };
-    return [...courses].sort((a, b) => flagshipRank(a) - flagshipRank(b)).slice(0, 6);
+    return [...courses].sort((a, b) => flagshipRank(a) - flagshipRank(b)).slice(0, 8);
   }, [courses]);
 
   const testimonials = data?.testimonials?.length ? data.testimonials : STORIES;

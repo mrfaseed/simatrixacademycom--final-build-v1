@@ -18,13 +18,28 @@ class DatabaseSeeder extends Seeder
             ['Job Placement Assistance','Resume building, mock interviews and placement drives.','briefcase'],
         ];
         foreach ($features as $i=>$f) DB::table('features')->updateOrInsert(['title'=>$f[0]],['description'=>$f[1],'icon'=>$f[2],'order'=>$i]);
+        $courseImages = [
+            'MERN Full Stack' => '/courses/FullStackDevelopmentCourseWithAiTools310.webp',
+            'MEAN Full Stack' => '/courses/FullStackDevelopmentCourseWithAiTools310.webp',
+            'Python Full Stack' => '/courses/GenAiSoftwareDevelopmentProgramCertifiedByMongodbIitmPravartak334.webp',
+            'Java Full Stack' => '/courses/FullStackDevelopmentCourseWithAiTools310.webp',
+            'Data Science with Python' => '/courses/MasterDataScienceCourseWithIitmPravartakCertification310.webp',
+            'Machine Learning' => '/courses/ArtificialIntelligenceMachineLearningCertifiedByIntelIitmPravartak334.webp',
+            'Data Analytics' => '/courses/MasterDataScienceCourseWithIitmPravartakCertification310.webp',
+            'DevOps' => '/courses/DevopsCourse310.webp',
+            'AWS Solutions Architect' => '/courses/DevopsCourse310.webp',
+            'Digital Marketing' => '/courses/BusinessAndMarketingAnalyticsWithAiTools310.webp',
+            'Flutter Development' => '/courses/UiuxDesignCourse310.webp',
+            'Android Development' => '/courses/UiuxDesignCourse310.webp',
+        ];
+
         $catalog = [
-            'programming'=>['Programming Languages','code',['Java Programming','Python Programming','C & C++ Programming','PHP Development','.NET Development']],
             'full-stack'=>['Full Stack Development','layers',['MERN Full Stack','MEAN Full Stack','Python Full Stack','Java Full Stack']],
+            'data-science'=>['Data Science & AI','chart',['Data Science with Python','Machine Learning','Data Analytics']],
+            'programming'=>['Programming Languages','code',['Java Programming','Python Programming','C & C++ Programming','PHP Development','.NET Development']],
             'mobile-app'=>['Mobile App Development','smartphone',['Android Development','iOS Development','Flutter Development','React Native']],
             'cybersecurity'=>['Cybersecurity & Networking','shield',['CCNA Certification','CCNP Certification','Ethical Hacking','CompTIA Security+']],
             'database'=>['Database Management','database',['MySQL','Oracle Database','Microsoft SQL Server']],
-            'data-science'=>['Data Science & AI','chart',['Data Science with Python','Machine Learning','Data Analytics']],
             'cloud'=>['Cloud Computing','cloud',['AWS Solutions Architect','Microsoft Azure','Google Cloud Platform','DevOps']],
             'sap'=>['SAP Modules','boxes',['SAP FICO','SAP MM','SAP ABAP']],
             'testing'=>['Software Testing','check',['Manual Testing','Selenium Automation','API Testing']],
@@ -36,8 +51,10 @@ class DatabaseSeeder extends Seeder
             $categoryId=DB::table('course_categories')->where('slug',$slug)->value('id');
             foreach ($cat[2] as $i=>$title) {
                 $content = $this->courseContent($title, $slug);
+                $courseImg = $courseImages[$title] ?? null;
                 DB::table('courses')->updateOrInsert(['slug'=>Str::slug($title)],[
                     'category_id'=>$categoryId,'title'=>$title,
+                    'image'=>$courseImg,
                     'summary'=>'Hands-on '.$title.' training with guided labs and industry-oriented projects.',
                     'description'=>'Build practical '.$title.' skills from core concepts through advanced workflows, testing, deployment, portfolio projects, and interview preparation.',
                     'duration'=>'3 Months','level'=>'Beginner to Advanced','tier'=>'classic',
